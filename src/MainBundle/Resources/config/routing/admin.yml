@@ -1,0 +1,14 @@
+admin_home:
+    path: /
+    defaults:
+        _controller: MainBundle:Admin:home
+
+admin_validateSerie:
+    path: /validate
+    defaults:
+        _controller: MainBundle:Admin:validate
+
+admin_updateUser:
+    path: /updateUser
+    defaults:
+        _controller: MainBundle:Admin:updateUser

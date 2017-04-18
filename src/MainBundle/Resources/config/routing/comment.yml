@@ -1,0 +1,18 @@
+comment_post:
+    path: /
+    defaults:
+        _controller: MainBundle:Comment:post
+
+comment_update:
+    path: /update/{idComment}
+    defaults:
+        _controller: MainBundle:Comment:update
+    requirements:
+        idComment: \d+
+
+comment_delete:
+    path: /delete/{idComment}
+    defaults:
+        _controller: MainBundle:Comment:delete
+    requirements:
+        idComment: \d+

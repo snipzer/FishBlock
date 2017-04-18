@@ -1,0 +1,26 @@
+main_home:
+    path:     /
+    defaults:
+        _controller: MainBundle:Main:home
+
+main_wall:
+    path:     /wall
+    defaults:
+        _controller: MainBundle:Main:wall
+
+main_favoris:
+    path:     /favoris
+    defaults:
+        _controller: MainBundle:Main:favoris
+
+serie:
+    resource: "routing/serie.yml"
+    prefix: /serie
+
+admin:
+    resource: "routing/admin.yml"
+    prefix: /admin
+
+comment:
+    resource: "routing/comment.yml"
+    prefix: /comment
