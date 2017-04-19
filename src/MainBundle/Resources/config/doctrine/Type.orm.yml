@@ -1,0 +1,22 @@
+MainBundle\Entity\Type:
+    type: entity
+    table: null
+    repositoryClass: MainBundle\Repository\TypeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '25'
+    oneToMany:
+        serieTypes:
+            targetEntity: MainBundle\Entity\SerieType
+            mappedBy: type
+        serieTypeTemps:
+            targetEntity: MainBundle\Entity\SerieTypeTemp
+            mappedBy: type
+    lifecycleCallbacks: {  }

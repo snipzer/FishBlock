@@ -1,0 +1,39 @@
+MainBundle\Entity\Serie:
+    type: entity
+    table: null
+    repositoryClass: MainBundle\Repository\SerieRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: '100'
+        description:
+            type: text
+        poster:
+            type: string
+            length: '255'
+    oneToMany:
+        critics:
+            targetEntity: MainBundle\Entity\Critic
+            mappedBy: serie
+        serieTemps:
+            targetEntity: MainBundle\Entity\SerieTemp
+            mappedBy: serie
+        episodes:
+            targetEntity: MainBundle\Entity\Episode
+            mappedBy: serie
+        serieActors:
+            targetEntity: MainBundle\Entity\SerieActor
+            mappedBy: serie
+        serieTypes:
+            targetEntity: MainBundle\Entity\SerieType
+            mappedBy: serie
+        favoris:
+            targetEntity: MainBundle\Entity\Favoris
+            mappedBy: serie
+    lifecycleCallbacks: {  }

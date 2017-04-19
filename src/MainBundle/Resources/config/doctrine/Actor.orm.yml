@@ -1,0 +1,25 @@
+MainBundle\Entity\Actor:
+    type: entity
+    table: null
+    repositoryClass: MainBundle\Repository\ActorRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        lastName:
+            type: string
+            length: '25'
+        firstName:
+            type: string
+            length: '25'
+    oneToMany:
+        serieActors:
+            targetEntity: MainBundle\Entity\SerieActor
+            mappedBy: actor
+        serieActorTemps:
+            targetEntity: MainBundle\Entity\SerieActorTemp
+            mappedBy: actor
+    lifecycleCallbacks: {  }

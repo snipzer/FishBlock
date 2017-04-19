@@ -1,0 +1,18 @@
+MainBundle\Entity\SerieActorTemp:
+    type: entity
+    table: null
+    repositoryClass: MainBundle\Repository\SerieActorTempRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        actor:
+            targetEntity: MainBundle\Entity\Actor
+            inversedBy: serieActorTemps
+        serieTemp:
+            targetEntity: MainBundle\Entity\SerieTemp
+            inversedBy: serieActorTemps
+    lifecycleCallbacks: {  }

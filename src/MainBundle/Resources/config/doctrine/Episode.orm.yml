@@ -1,0 +1,24 @@
+MainBundle\Entity\Episode:
+    type: entity
+    table: null
+    repositoryClass: MainBundle\Repository\EpisodeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: '50'
+        description:
+            type: text
+        episodeNumber:
+            type: string
+            length: '15'
+    manyToOne:
+        serie:
+            targetEntity: MainBundle\Entity\Serie
+            inversedBy: episodes
+    lifecycleCallbacks: {  }

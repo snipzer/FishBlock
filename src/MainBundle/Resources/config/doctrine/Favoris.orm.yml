@@ -1,0 +1,18 @@
+MainBundle\Entity\Favoris:
+    type: entity
+    table: null
+    repositoryClass: MainBundle\Repository\FavorisRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        user:
+            targetEntity: MainBundle\Entity\User
+            inversedBy: favoris
+        serie:
+            targetEntity: MainBundle\Entity\Serie
+            inversedBy: favoris
+    lifecycleCallbacks: {  }

@@ -1,0 +1,29 @@
+MainBundle\Entity\Critic:
+    type: entity
+    table: null
+    repositoryClass: MainBundle\Repository\CriticRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        score:
+            type: float
+        content:
+            type: text
+        likeNumber:
+            type: integer
+        dislikeNumber:
+            type: integer
+        isValid:
+            type: boolean
+    manyToOne:
+        serie:
+            targetEntity: MainBundle\Entity\Serie
+            inversedBy: critics
+        user:
+            targetEntity: MainBundle\Entity\User
+            inversedBy: critics
+    lifecycleCallbacks: {  }

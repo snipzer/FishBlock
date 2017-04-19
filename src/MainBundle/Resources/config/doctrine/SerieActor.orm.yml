@@ -1,0 +1,18 @@
+MainBundle\Entity\SerieActor:
+    type: entity
+    table: null
+    repositoryClass: MainBundle\Repository\SerieActorRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        actor:
+            targetEntity: MainBundle\Entity\Actor
+            inversedBy: serieActors
+        serie:
+            targetEntity: MainBundle\Entity\Serie
+            inversedBy: serieActors
+    lifecycleCallbacks: {  }
