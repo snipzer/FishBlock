@@ -41,6 +41,11 @@ class Critic
 
     private $serie;
 
+    public function __construct()
+    {
+        $this->isValid = false;
+    }
+
     /**
      * @return mixed
      */
