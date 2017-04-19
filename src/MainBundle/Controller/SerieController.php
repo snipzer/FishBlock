@@ -22,6 +22,9 @@ class SerieController extends Controller
         return $this->render("MainBundle:Serie:search.html.twig");
     }
 
+    /**
+     * Appeler quand l'utilisateur veux afficher le détail d'une série
+     */
     public function showAction(Request $request)
     {
         return $this->render("MainBundle:Serie:show.html.twig");
