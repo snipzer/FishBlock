@@ -1,6 +1,8 @@
 <?php
 
 namespace MainBundle\Entity;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Critic
@@ -32,6 +34,46 @@ class Critic
      */
     private $dislikeNumber;
 
+    private $title;
+
+    private $postedThe;
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     **/
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPostedThe()
+    {
+        return $this->postedThe;
+    }
+
+    /**
+     * @param mixed $postedThe
+     **/
+    public function setPostedThe(DateTime $postedThe)
+    {
+        $this->postedThe = $postedThe;
+        return $this;
+    }
+
+
+
     /**
      * @var bool
      */
@@ -44,6 +86,7 @@ class Critic
     public function __construct()
     {
         $this->isValid = false;
+        $this->postedThe = new Date();
     }
 
     /**

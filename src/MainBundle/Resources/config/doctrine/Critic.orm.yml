@@ -17,6 +17,11 @@ MainBundle\Entity\Critic:
             type: integer
         dislikeNumber:
             type: integer
+        title:
+            type: string
+            length: '255'
+        postedThe:
+            type: datetime
         isValid:
             type: boolean
     manyToOne:
