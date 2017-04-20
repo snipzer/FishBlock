@@ -58,7 +58,7 @@ serie_update_episode:
         idEpisode: \d+
 
 serie_delete_episode:
-    path: /{idSerie}/{isEpisode}/delete
+    path: /{idSerie}/{idEpisode}/delete
     defaults:
         _controller: MainBundle:Episode:delete
     requirements:
