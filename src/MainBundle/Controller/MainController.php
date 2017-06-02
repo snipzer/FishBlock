@@ -33,7 +33,6 @@ class MainController extends Controller
         return $this->render("MainBundle:Main:favoris.html.twig");
     }
 
-
     /**
      * Serie
      */
