@@ -24,6 +24,8 @@ class Actor
      */
     private $firstName;
 
+    private $picture;
+
     private $serieActors;
 
     private $serieActorTemps;
@@ -33,6 +35,19 @@ class Actor
     {
         $this->serieActors = new ArrayCollection();
         $this->serieActorTemps = new ArrayCollection();
+    }
+
+
+
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+        return $this;
     }
 
     /**

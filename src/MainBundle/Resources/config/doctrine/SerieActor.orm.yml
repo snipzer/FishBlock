@@ -8,6 +8,10 @@ MainBundle\Entity\SerieActor:
             id: true
             generator:
                 strategy: AUTO
+    fields:
+        role:
+            type: string
+            length: '25'
     manyToOne:
         actor:
             targetEntity: MainBundle\Entity\Actor

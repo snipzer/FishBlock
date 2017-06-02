@@ -18,6 +18,25 @@ class SerieActor
 
     private $serie;
 
+    private $role;
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     **/
+    public function setRole($role)
+    {
+        $this->role = $role;
+        return $this;
+    }
+
     /**
      * @return ArrayCollection
      */

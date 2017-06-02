@@ -10,9 +10,7 @@ class MainController extends Controller
 {
 
     /**
-     * Fonction qui affiche la page d'accueil
-     * Elle demande a l'utilisateur de se logger pour pouvoir continuer
-     * Elle permet aussi de créer un compte
+     * Page d'accueil
      */
     public function homeAction(Request $request)
     {
@@ -20,8 +18,7 @@ class MainController extends Controller
     }
 
     /**
-     * Si l'utilisateur est connecter, il peut voir sont wall
-     * Le wall est constitué de l'ensembles des nouvelles critique arrivé sur les séries que l'utilisateur à en favoris
+     * Wall
      */
     public function wallAction(Request $request)
     {
@@ -34,6 +31,15 @@ class MainController extends Controller
     public function favorisAction(Request $request)
     {
         return $this->render("MainBundle:Main:favoris.html.twig");
+    }
+
+
+    /**
+     * Serie
+     */
+    public function serieAction(Request $request)
+    {
+        return $this->render("MainBundle:Main:serie.html.twig");
     }
 
 }

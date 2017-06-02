@@ -15,6 +15,9 @@ MainBundle\Entity\Actor:
         firstName:
             type: string
             length: '25'
+        picture:
+            type: string
+            length: '50'
     oneToMany:
         serieActors:
             targetEntity: MainBundle\Entity\SerieActor

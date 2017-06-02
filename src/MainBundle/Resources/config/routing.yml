@@ -13,14 +13,11 @@ main_favoris:
     defaults:
         _controller: MainBundle:Main:favoris
 
-serie:
-    resource: "routing/serie.yml"
-    prefix: /serie
+main_serie:
+    path:   /serie
+    defaults:
+        _controller: MainBundle:Main:serie
 
 admin:
     resource: "routing/admin.yml"
     prefix: /admin
-
-comment:
-    resource: "routing/comment.yml"
-    prefix: /comment
