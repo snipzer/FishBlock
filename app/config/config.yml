@@ -47,8 +47,8 @@ doctrine:
         host: '%env(SYMFONY__DATABASE__HOST)%'
         port: '%env(SYMFONY__DATABASE__PORT)%'
         dbname: '%env(SYMFONY__DATABASE__NAME)%'
-        user: '%env(SYMFONY__DATABASE__PASSWORD)%'
-        password: '%env(SYMFONY__DATABASE__USER)%'
+        user: '%env(SYMFONY__DATABASE__USER)%'
+        password: '%env(SYMFONY__DATABASE__PASSWORD)%'
         charset: UTF8
         types:
             uuid:  Ramsey\Uuid\Doctrine\UuidType
