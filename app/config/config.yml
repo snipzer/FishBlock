@@ -44,11 +44,11 @@ twig:
 doctrine:
     dbal:
         driver: pdo_mysql
-        host: '%env(SYMFONY__DATABASE__HOST)%'
-        port: '%env(SYMFONY__DATABASE__PORT)%'
-        dbname: '%env(SYMFONY__DATABASE__NAME)%'
-        user: '%env(SYMFONY__DATABASE__USER)%'
-        password: '%env(SYMFONY__DATABASE__PASSWORD)%'
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
         charset: UTF8
         types:
             uuid:  Ramsey\Uuid\Doctrine\UuidType
