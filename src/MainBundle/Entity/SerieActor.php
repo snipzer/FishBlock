@@ -20,6 +20,37 @@ class SerieActor
 
     private $role;
 
+    private $creationDate;
+    private $modificationDate;
+
+    public function __construct()
+    {
+        $this->creationDate = new \DateTime();
+        $this->modificationDate = new \DateTime();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getModificationDate()
+    {
+        return $this->modificationDate;
+    }
+
+    public function setModificationDate()
+    {
+        $this->modificationDate = new \DateTime();
+        return $this;
+    }
+
     /**
      * @return mixed
      */
