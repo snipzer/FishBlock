@@ -18,6 +18,40 @@ class SerieType
 
     private $serie;
 
+    private $creationDate;
+    private $modificationDate;
+
+    public function __construct()
+    {
+        $this->creationDate = new \DateTime();
+        $this->modificationDate = new \DateTime();
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getModificationDate()
+    {
+        return $this->modificationDate;
+    }
+
+    /**
+     * @param \DateTime $modificationDate
+     **/
+    public function setModificationDate()
+    {
+        $this->modificationDate = new \DateTime();
+        return $this;
+    }
+
     /**
      * @return ArrayCollection
      */

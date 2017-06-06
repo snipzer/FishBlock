@@ -21,28 +21,9 @@ class Type
 
     private $serieTypes;
 
-    private $serieTypeTemps;
-
     public function __construct()
     {
         $this->serieTypes = new ArrayCollection();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSerieTypeTemps()
-    {
-        return $this->serieTypeTemps;
-    }
-
-    /**
-     * @param mixed $serieTypeTemps
-     **/
-    public function setSerieTypeTemps(SerieTypeTemp $serieTypeTemps)
-    {
-        $this->serieTypeTemps = $serieTypeTemps;
-        return $this;
     }
 
     /**

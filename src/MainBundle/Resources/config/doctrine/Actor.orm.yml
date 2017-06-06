@@ -22,7 +22,4 @@ MainBundle\Entity\Actor:
         serieActors:
             targetEntity: MainBundle\Entity\SerieActor
             mappedBy: actor
-        serieActorTemps:
-            targetEntity: MainBundle\Entity\SerieActorTemp
-            mappedBy: actor
     lifecycleCallbacks: {  }
