@@ -4,10 +4,12 @@ MainBundle\Entity\Serie:
     repositoryClass: MainBundle\Repository\SerieRepository
     id:
         id:
-            type: integer
+            type: uuid
             id: true
             generator:
-                strategy: AUTO
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
     fields:
         title:
             type: string
@@ -17,12 +19,24 @@ MainBundle\Entity\Serie:
         poster:
             type: string
             length: '255'
+            nullable: true
+        airsDayOfWeek:
+            type: string
+            length: '255'
+            nullable: true
+        airsTime:
+            type: string
+            length: '255'
+            nullable: true
+        creationDate:
+            type: datetime
+        modificationDate:
+            type: datetime
+        isValid:
+            type: boolean
     oneToMany:
         critics:
             targetEntity: MainBundle\Entity\Critic
-            mappedBy: serie
-        serieTemps:
-            targetEntity: MainBundle\Entity\SerieTemp
             mappedBy: serie
         episodes:
             targetEntity: MainBundle\Entity\Episode

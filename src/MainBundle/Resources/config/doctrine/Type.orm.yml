@@ -4,10 +4,12 @@ MainBundle\Entity\Type:
     repositoryClass: MainBundle\Repository\TypeRepository
     id:
         id:
-            type: integer
+            type: uuid
             id: true
             generator:
-                strategy: AUTO
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
     fields:
         name:
             type: string
@@ -15,8 +17,5 @@ MainBundle\Entity\Type:
     oneToMany:
         serieTypes:
             targetEntity: MainBundle\Entity\SerieType
-            mappedBy: type
-        serieTypeTemps:
-            targetEntity: MainBundle\Entity\SerieTypeTemp
             mappedBy: type
     lifecycleCallbacks: {  }
