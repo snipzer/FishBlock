@@ -8,16 +8,24 @@ main_wall:
     defaults:
         _controller: MainBundle:Main:wall
 
+main_unloggedWall:
+    path:     /unWall
+    defaults:
+        _controller: MainBundle:Main:unloggedWall
+
+main_search:
+    path:     /search
+    defaults:
+        _controller: MainBundle:Main:search
+
 main_favoris:
     path:     /favoris
     defaults:
         _controller: MainBundle:Main:favoris
 
 main_serie:
-    path:   /serie
+    path:     /serie/{idSerie}
     defaults:
         _controller: MainBundle:Main:serie
-
-admin:
-    resource: "routing/admin.yml"
-    prefix: /admin
+    requirements:
+        page: '[a-zA-Z0-9]+'
