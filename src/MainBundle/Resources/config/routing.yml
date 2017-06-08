@@ -1,31 +1,42 @@
 main_home:
-    path:     /
+    path:     /{_locale}
     defaults:
         _controller: MainBundle:Main:home
+    requirements:
+        _locale: en|fr
 
 main_wall:
-    path:     /wall
+    path:     /{_locale}/wall
     defaults:
         _controller: MainBundle:Main:wall
+    requirements:
+        _locale: en|fr
 
 main_unloggedWall:
-    path:     /unWall
+    path:     /{_locale}/unWall
     defaults:
         _controller: MainBundle:Main:unloggedWall
+    requirements:
+        _locale: en|fr
 
 main_search:
-    path:     /search
+    path:     /{_locale}/search
     defaults:
         _controller: MainBundle:Main:search
+    requirements:
+        _locale: en|fr
 
 main_favoris:
-    path:     /favoris
+    path:     /{_locale}/favoris
     defaults:
         _controller: MainBundle:Main:favoris
+    requirements:
+        _locale: en|fr
 
 main_serie:
-    path:     /serie/{idSerie}
+    path:     /{_locale}/serie/{idSerie}
     defaults:
         _controller: MainBundle:Main:serie
     requirements:
         page: '[a-zA-Z0-9]+'
+        _locale: en|fr

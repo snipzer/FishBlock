@@ -12,7 +12,7 @@ class MainController extends Controller
     /**
      * Page d'accueil
      */
-    public function accueilAction(Request $request)
+    public function homeAction(Request $request)
     {
         /**
          * TODO:
@@ -22,7 +22,11 @@ class MainController extends Controller
          * Switch de la langue
          */
 
-        return $this->render("MainBundle::home.html.twig");
+        //return $this->render("MainBundle::home.html.twig");
+
+        $translated = $this->get('translator')->trans('Symfony is great');
+
+        return new Response($translated);
     }
 
     public function wallAction(Request $request)

@@ -71,3 +71,8 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+framework:
+    default_locale: en
+    translator:
+        fallbacks: [en]
