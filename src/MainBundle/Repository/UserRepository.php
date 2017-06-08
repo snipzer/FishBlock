@@ -10,4 +10,6 @@ namespace MainBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    // Bannis l'utilisateur
+    public function banUser($userId) {}
 }

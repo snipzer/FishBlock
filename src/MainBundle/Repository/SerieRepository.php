@@ -26,7 +26,20 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
     public function getSerieNotation($serieId) {}
 
     // Renvois tout les épisodes pour une série
-    public function getEpisodeFromSerie($serieId) {}
+    public function getEpisodesFromSerie($serieId) {}
 
+    // Renvois toutes les critiques valider pour une série
+    public function getValidatedCriticsFromSerie($serieId) {}
 
+    // Renvois toutes les critiques non valider pour une série
+    public function getNonValidatedCriticFromSerie($serieId) {}
+
+    // Renvois toutes les modification de séries en attente de validation
+    public function getModifSeries() {}
+
+    // Renvois les séries qui n'ont pas de doublon au niveau de l'uuid et qui sont non validée
+    public function getNewSeries() {}
+
+    // Suppression d'une série
+    public function deleteSerie($serieId) {}
 }
