@@ -97,6 +97,7 @@ class MainController extends Controller
          * Récupérer les types (TypeRepository)
          * Récupérer une/plusieurs série en fonction d'un submit utilisateur (SerieRepository)
          * Récupérer les épisodes d'une série (EpisodeRepository)
+         * Récupérer les informations d'un épidose (EpisodeRepository)
          * Créer une critique en fonction d'un submit utilisateur (EntityManager)
          * Modification d'une série avec un submit utilisateur (SerieRepository)
          * Système de like/dislike (CriticNotationRepository)
@@ -107,6 +108,20 @@ class MainController extends Controller
          */
 
         return $this->render("MainBundle::serie.html.twig");
+    }
+
+    public function accountAction(Request $request)
+    {
+        /**
+         * TODO:
+         * Récupérer les informations de l'utilisateur
+         * Après soumission du formulaire enregistrer les nouvelles informations de l'utilisateur
+         * ATTENTION !
+         * Les mots de passe ne doivent pas être envoyer en clair !
+         * Suggestion de serie (SerieRepository)
+         */
+
+        return $this->render("MainBundle::account.html.twig");
     }
 
 }

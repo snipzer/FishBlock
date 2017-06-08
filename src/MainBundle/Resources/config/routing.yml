@@ -40,3 +40,31 @@ main_serie:
     requirements:
         page: '[a-zA-Z0-9]+'
         _locale: en|fr
+
+main_account:
+    path:     /{_locale}/account
+    defaults:
+        _controller: MainBundle:Main:account
+    requirements:
+        _locale: en|fr
+
+admin_modifSerie:
+    path:     /{_locale}/admin/modifSerie
+    defaults:
+        _controller: MainBundle:Admin:modifSerie
+    requirements:
+            _locale: en|fr
+
+admin_submitSerie:
+    path:     /{_locale}/admin/submitSerie
+    defaults:
+        _controller: MainBundle:Admin:submitSerie
+    requirements:
+            _locale: en|fr
+
+admin_validCritic:
+    path:     /{_locale}/admin/validCritic
+    defaults:
+        _controller: MainBundle:Admin:validCritic
+    requirements:
+            _locale: en|fr
