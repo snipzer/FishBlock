@@ -23,8 +23,8 @@ class MainController extends Controller
          */
 
         //return $this->render("MainBundle::home.html.twig");
-
-        $translated = $this->get('translator')->trans('Symfony is great');
+        $this->get('translator')->setLocale('fr');
+        $translated = $this->get('translator')->trans('english');
 
         return new Response($translated);
     }
