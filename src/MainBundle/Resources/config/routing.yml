@@ -53,18 +53,25 @@ admin_modifSerie:
     defaults:
         _controller: MainBundle:Admin:modifSerie
     requirements:
-            _locale: en|fr
+        _locale: en|fr
 
 admin_submitSerie:
     path:     /{_locale}/admin/submitSerie
     defaults:
         _controller: MainBundle:Admin:submitSerie
     requirements:
-            _locale: en|fr
+        _locale: en|fr
 
 admin_validCritic:
     path:     /{_locale}/admin/validCritic
     defaults:
         _controller: MainBundle:Admin:validCritic
     requirements:
-            _locale: en|fr
+        _locale: en|fr
+
+admin_userManager:
+    path:     /{_locale}/admin/userManager
+    defaults:
+        _controller: MainBundle:Admin:userManager
+    requirements:
+        _locale: en|fr
