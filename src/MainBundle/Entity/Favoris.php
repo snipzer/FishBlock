@@ -9,11 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Favoris
 {
-    /**
-     * @var int
-     */
     private $id;
-
 
     private $user;
 

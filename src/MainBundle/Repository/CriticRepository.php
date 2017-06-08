@@ -10,4 +10,6 @@ namespace MainBundle\Repository;
  */
 class CriticRepository extends \Doctrine\ORM\EntityRepository
 {
+    // Récupère les dernière critique publier qui sont valider
+    public function getLastUploadeAndValidatedCritics() {}
 }

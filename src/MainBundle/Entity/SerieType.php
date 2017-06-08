@@ -9,9 +9,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class SerieType
 {
-    /**
-     * @var int
-     */
     private $id;
 
     private $type;
@@ -19,6 +16,7 @@ class SerieType
     private $serie;
 
     private $creationDate;
+
     private $modificationDate;
 
     public function __construct()

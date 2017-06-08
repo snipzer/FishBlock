@@ -44,4 +44,7 @@ MainBundle\Entity\User:
         favoris:
             targetEntity: MainBundle\Entity\Favoris
             mappedBy: user
+        criticNotations:
+            targetEntity: MainBundle\Entity\CriticNotation
+            mappedBy: user
     lifecycleCallbacks: {  }

@@ -7,24 +7,12 @@ namespace MainBundle\Entity;
  */
 class Episode
 {
-    /**
-     * @var int
-     */
     private $id;
 
-    /**
-     * @var string
-     */
     private $title;
 
-    /**
-     * @var string
-     */
     private $description;
 
-    /**
-     * @var string
-     */
     private $episodeNumber;
 
     private $serie;
