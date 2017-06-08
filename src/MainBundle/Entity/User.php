@@ -3,16 +3,18 @@
 namespace MainBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Model\User as BaseUser;
+
 
 /**
  * User
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -28,11 +30,6 @@ class User
      * @var string
      */
     private $userName;
-
-    /**
-     * @var string
-     */
-    private $password;
 
     /**
      * @var string
@@ -76,6 +73,7 @@ class User
 
     public function __construct()
     {
+        parent::__construct();
         $this->critics = new ArrayCollection();
         $this->favoris = new ArrayCollection();
     }

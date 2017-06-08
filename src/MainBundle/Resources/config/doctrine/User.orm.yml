@@ -1,6 +1,6 @@
 MainBundle\Entity\User:
     type: entity
-    table: null
+    table: fos_user
     repositoryClass: MainBundle\Repository\UserRepository
     id:
         id:
@@ -20,9 +20,6 @@ MainBundle\Entity\User:
         userName:
             type: string
             length: '25'
-        password:
-            type: string
-            length: '50'
         mail:
             type: string
             length: '50'
