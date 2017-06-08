@@ -1,31 +1,70 @@
 main_home:
-    path:     /
+    path:     /{_locale}
     defaults:
         _controller: MainBundle:Main:home
+    requirements:
+        _locale: en|fr
 
 main_wall:
-    path:     /wall
+    path:     /{_locale}/wall
     defaults:
         _controller: MainBundle:Main:wall
+    requirements:
+        _locale: en|fr
 
 main_unloggedWall:
-    path:     /unWall
+    path:     /{_locale}/unWall
     defaults:
         _controller: MainBundle:Main:unloggedWall
+    requirements:
+        _locale: en|fr
 
 main_search:
-    path:     /search
+    path:     /{_locale}/search
     defaults:
         _controller: MainBundle:Main:search
+    requirements:
+        _locale: en|fr
 
 main_favoris:
-    path:     /favoris
+    path:     /{_locale}/favoris
     defaults:
         _controller: MainBundle:Main:favoris
+    requirements:
+        _locale: en|fr
 
 main_serie:
-    path:     /serie/{idSerie}
+    path:     /{_locale}/serie/{idSerie}
     defaults:
         _controller: MainBundle:Main:serie
     requirements:
         page: '[a-zA-Z0-9]+'
+        _locale: en|fr
+
+main_account:
+    path:     /{_locale}/account
+    defaults:
+        _controller: MainBundle:Main:account
+    requirements:
+        _locale: en|fr
+
+admin_modifSerie:
+    path:     /{_locale}/admin/modifSerie
+    defaults:
+        _controller: MainBundle:Admin:modifSerie
+    requirements:
+            _locale: en|fr
+
+admin_submitSerie:
+    path:     /{_locale}/admin/submitSerie
+    defaults:
+        _controller: MainBundle:Admin:submitSerie
+    requirements:
+            _locale: en|fr
+
+admin_validCritic:
+    path:     /{_locale}/admin/validCritic
+    defaults:
+        _controller: MainBundle:Admin:validCritic
+    requirements:
+            _locale: en|fr
