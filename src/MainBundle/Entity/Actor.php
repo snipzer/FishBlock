@@ -9,27 +9,15 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Actor
 {
-    /**
-     * @var int
-     */
     private $id;
 
-    /**
-     * @var string
-     */
     private $lastName;
 
-    /**
-     * @var string
-     */
     private $firstName;
 
     private $picture;
 
     private $serieActors;
-
-    private $serieActorTemps;
-
 
     public function __construct()
     {
@@ -47,23 +35,6 @@ class Actor
     public function setPicture($picture)
     {
         $this->picture = $picture;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSerieActorTemps()
-    {
-        return $this->serieActorTemps;
-    }
-
-    /**
-     * @param mixed $serieActorTemps
-     **/
-    public function setSerieActorTemps(SerieActorTemp $serieActorTemps)
-    {
-        $this->serieActorTemps = $serieActorTemps;
         return $this;
     }
 

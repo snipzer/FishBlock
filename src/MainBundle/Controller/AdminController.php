@@ -21,7 +21,7 @@ class AdminController extends Controller
          *      bannir un utilisateur
          * Récupérer toute les noms de série (a mettre dans le select) (SerieRepository)
          */
-        return $this->render("MainBundle::adminBoard.html.twig");
+        return $this->render("MainBundle::admin.html.twig");
     }
 
     public function submitSerieAction(Request $request)
@@ -34,12 +34,31 @@ class AdminController extends Controller
          * Bannir l'utilisateur (UserRepository)
          * Service de notification
          */
-        return $this->render("MainBundle::adminBoard.html.twig");
+        return $this->render("MainBundle::admin.html.twig");
     }
 
     public function validCriticAction(Request $request)
     {
+        /**
+         * TODO:
+         * Récupération des série dans le select (SerieRepository)
+         * Récupération des critiques non valider pour la série selectionner (CriticRepository)
+         * Récupération du formulaire (CriticRepository)
+         *      Si accepter passer isValid en true
+         *      Si refuser supprime la critique
+         * Service de notification (Service)
+         */
+        return $this->render("MainBundle::admin.html.twig");
+    }
 
-        return $this->render("MainBundle::adminBoard.html.twig");
+    public function userManagerAction(Request $request)
+    {
+        /**
+         * TODO:
+         * Récupération des informations utilisateurs (UserRepository)
+         * Récupération du formulaire
+         *      Proumouvoir/bannir utilisateur
+         */
+        return $this->render("MainBundle::admin.html.twig");
     }
 }

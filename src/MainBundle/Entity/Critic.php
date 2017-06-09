@@ -1,6 +1,7 @@
 <?php
 
 namespace MainBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -9,34 +10,47 @@ use Symfony\Component\Validator\Constraints\DateTime;
  */
 class Critic
 {
-    /**
-     * @var int
-     */
     private $id;
 
-    /**
-     * @var float
-     */
-    private $score;
+    private $note;
 
-    /**
-     * @var string
-     */
     private $content;
-
-    /**
-     * @var int
-     */
-    private $likeNumber;
-
-    /**
-     * @var int
-     */
-    private $dislikeNumber;
 
     private $title;
 
     private $postedThe;
+
+    private $isValid;
+
+    private $user;
+
+    private $serie;
+
+    private $criticNotations;
+
+    public function __construct()
+    {
+        $this->criticNotations = new ArrayCollection();
+        $this->isValid = false;
+        $this->postedThe = new Date();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCriticNotations()
+    {
+        return $this->criticNotations;
+    }
+
+    /**
+     * @param ArrayCollection $criticNotations
+     **/
+    public function setCriticNotations($criticNotations)
+    {
+        $this->criticNotations = $criticNotations;
+        return $this;
+    }
 
     /**
      * @return mixed
@@ -70,23 +84,6 @@ class Critic
     {
         $this->postedThe = $postedThe;
         return $this;
-    }
-
-
-
-    /**
-     * @var bool
-     */
-    private $isValid;
-
-    private $user;
-
-    private $serie;
-
-    public function __construct()
-    {
-        $this->isValid = false;
-        $this->postedThe = new Date();
     }
 
     /**
@@ -134,27 +131,26 @@ class Critic
     }
 
     /**
-     * Set score
+     * Set note
      *
-     * @param float $score
+     * @param int $note
      *
      * @return Critic
      */
-    public function setScore($score)
+    public function setNote($note)
     {
-        $this->score = $score;
-
+        $this->note = $note;
         return $this;
     }
 
     /**
-     * Get score
+     * Get note
      *
-     * @return float
+     * @return int
      */
     public function getScore()
     {
-        return $this->score;
+        return $this->note;
     }
 
     /**
@@ -179,54 +175,6 @@ class Critic
     public function getContent()
     {
         return $this->content;
-    }
-
-    /**
-     * Set likeNumber
-     *
-     * @param integer $likeNumber
-     *
-     * @return Critic
-     */
-    public function setLikeNumber($likeNumber)
-    {
-        $this->likeNumber = $likeNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get likeNumber
-     *
-     * @return int
-     */
-    public function getLikeNumber()
-    {
-        return $this->likeNumber;
-    }
-
-    /**
-     * Set dislikeNumber
-     *
-     * @param integer $dislikeNumber
-     *
-     * @return Critic
-     */
-    public function setDislikeNumber($dislikeNumber)
-    {
-        $this->dislikeNumber = $dislikeNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get dislikeNumber
-     *
-     * @return int
-     */
-    public function getDislikeNumber()
-    {
-        return $this->dislikeNumber;
     }
 
     /**

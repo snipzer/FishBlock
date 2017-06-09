@@ -3,81 +3,65 @@
 namespace MainBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Model\User as BaseUser;
+
 
 /**
  * User
  */
-class User
+class User extends BaseUser
 {
-    /**
-     * @var int
-     */
-    private $id;
+    protected $id;
 
-    /**
-     * @var string
-     */
     private $lastName;
 
-    /**
-     * @var string
-     */
     private $firstName;
 
-    /**
-     * @var string
-     */
     private $userName;
 
-    /**
-     * @var string
-     */
-    private $password;
-
-    /**
-     * @var string
-     */
     private $mail;
 
-    /**
-     * @var \DateTime
-     */
     private $birthdate;
 
-    /**
-     * @var string
-     */
     private $profilePicture;
 
-    /**
-     * @var int
-     */
     private $criticNumber;
 
-    /**
-     * @var bool
-     */
     private $isModo;
 
-    /**
-     * @var bool
-     */
     private $isAdmin;
 
-    /**
-     * @var bool
-     */
     private $isValid;
-
 
     private $favoris;
 
     private $critics;
 
+    private $criticNotations;
+
     public function __construct()
     {
+        parent::__construct();
         $this->critics = new ArrayCollection();
         $this->favoris = new ArrayCollection();
+        $this->criticNotations = new ArrayCollection();
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCriticNotations()
+    {
+        return $this->criticNotations;
+    }
+
+    /**
+     * @param ArrayCollection $criticNotations
+     **/
+    public function setCriticNotations($criticNotations)
+    {
+        $this->criticNotations = $criticNotations;
+        return $this;
     }
 
     /**

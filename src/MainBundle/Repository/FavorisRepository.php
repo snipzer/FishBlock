@@ -10,4 +10,9 @@ namespace MainBundle\Repository;
  */
 class FavorisRepository extends \Doctrine\ORM\EntityRepository
 {
+    // Ajout d'une série au favoris
+    public function addSerie($userId, $serieId) {}
+
+    // Retirer la série des favoris
+    public function deleteSerie($userId, $serieId) {}
 }

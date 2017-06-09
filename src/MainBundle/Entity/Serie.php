@@ -11,18 +11,31 @@ use Ramsey\Uuid\Uuid;
 class Serie
 {
     private $id;
+
     private $title;
+
     private $description;
+
     private $poster;
+
     private $serieActors;
+
     private $favoris;
+
     private $critics;
+
     private $serieTypes;
+
     private $episodes;
+
     private $airsDayOfWeek;
+
     private $airsTime;
+
     private $creationDate;
+
     private $modificationDate;
+
     private $isValid;
 
     public function __construct()
