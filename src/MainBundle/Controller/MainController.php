@@ -97,7 +97,6 @@ class MainController extends Controller
          * Récupérer les types (TypeRepository)
          * Récupérer une/plusieurs série en fonction d'un submit utilisateur (SerieRepository)
          * Récupérer les épisodes d'une série (EpisodeRepository)
-         * Récupérer les informations d'un épidose (EpisodeRepository)
          * Créer une critique en fonction d'un submit utilisateur (EntityManager)
          * Modification d'une série avec un submit utilisateur (SerieRepository)
          * Système de like/dislike (CriticNotationRepository)
@@ -105,6 +104,16 @@ class MainController extends Controller
          * Ajout de la série en favoris (FavorisRepository)
          * Récupération de la note d'une série (SerieRepository)
          * Notification (Service)
+         */
+
+        return $this->render("MainBundle::serie.html.twig");
+    }
+
+    public function episodeAction(Request $request)
+    {
+        /**
+         * TODO:
+         * Récupérer les informations d'un épidose (EpisodeRepository)
          */
 
         return $this->render("MainBundle::serie.html.twig");
