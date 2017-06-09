@@ -10,4 +10,12 @@ namespace MainBundle\Repository;
  */
 class CriticRepository extends \Doctrine\ORM\EntityRepository
 {
+    // Récupère les dernières critique publier qui sont valider
+    public function getLastUploadedAndValidatedCritics() {}
+
+    // Supprime une critique
+    public function deleteCritic($criticId) {}
+
+    // Valide une critique
+    public function validCritic($criticId) {}
 }

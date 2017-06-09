@@ -9,14 +9,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Type
 {
-    /**
-     * @var int
-     */
     private $id;
 
-    /**
-     * @var string
-     */
     private $name;
 
     private $serieTypes;

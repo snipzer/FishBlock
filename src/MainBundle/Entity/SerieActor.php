@@ -9,9 +9,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class SerieActor
 {
-    /**
-     * @var int
-     */
     private $id;
 
     private $actor;
@@ -21,6 +18,7 @@ class SerieActor
     private $role;
 
     private $creationDate;
+
     private $modificationDate;
 
     public function __construct()

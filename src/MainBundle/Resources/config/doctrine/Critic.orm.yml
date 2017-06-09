@@ -11,14 +11,10 @@ MainBundle\Entity\Critic:
             customIdGenerator:
                 class: Ramsey\Uuid\Doctrine\UuidGenerator
     fields:
-        score:
-            type: float
+        note:
+            type: integer
         content:
             type: text
-        likeNumber:
-            type: integer
-        dislikeNumber:
-            type: integer
         title:
             type: string
             length: '255'
@@ -33,4 +29,8 @@ MainBundle\Entity\Critic:
         user:
             targetEntity: MainBundle\Entity\User
             inversedBy: critics
+    oneToMany:
+        criticNotations:
+            targetEntity: MainBundle\Entity\CriticNotation
+            mappedBy: critic
     lifecycleCallbacks: {  }

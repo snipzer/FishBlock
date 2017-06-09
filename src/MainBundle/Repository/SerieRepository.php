@@ -10,4 +10,36 @@ namespace MainBundle\Repository;
  */
 class SerieRepository extends \Doctrine\ORM\EntityRepository
 {
+    // Renvois toutes les séries en base
+    public function getSeries() {}
+
+    // Renvois les informations d'une série grâce a sont uuid
+    public function getSerieWithId($serieId) {}
+
+    // Renvois le dernier épisode d'une série choisie avec l'uuid
+    public function getLastEpisodeFromSerie($serieId) {}
+
+    // Renvois les dernières séries publier
+    public function getSeriesSortByDate() {}
+
+    // Calcule et renvois la note de la série en fonction de la moyenne des notes de ces critiques
+    public function getSerieNotation($serieId) {}
+
+    // Renvois tout les épisodes pour une série
+    public function getEpisodesFromSerie($serieId) {}
+
+    // Renvois toutes les critiques valider pour une série
+    public function getValidatedCriticsFromSerie($serieId) {}
+
+    // Renvois toutes les critiques non valider pour une série
+    public function getNonValidatedCriticFromSerie($serieId) {}
+
+    // Renvois toutes les modification de séries en attente de validation
+    public function getModifSeries() {}
+
+    // Renvois les séries qui n'ont pas de doublon au niveau de l'uuid et qui sont non validée
+    public function getNewSeries() {}
+
+    // Suppression d'une série
+    public function deleteSerie($serieId) {}
 }
