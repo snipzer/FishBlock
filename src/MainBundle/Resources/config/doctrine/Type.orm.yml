@@ -13,7 +13,7 @@ MainBundle\Entity\Type:
     fields:
         name:
             type: string
-            length: '25'
+            length: '255'
     oneToMany:
         serieTypes:
             targetEntity: MainBundle\Entity\SerieType

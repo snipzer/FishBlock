@@ -20,10 +20,7 @@ class Actor
     public function __construct()
     {
         $this->serieActors = new ArrayCollection();
-        $this->serieActorTemps = new ArrayCollection();
     }
-
-
 
     public function getPicture()
     {
@@ -37,7 +34,7 @@ class Actor
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getSerieActors()
     {
@@ -45,11 +42,11 @@ class Actor
     }
 
     /**
-     * @param mixed $serieActors
+     * @param SerieActor $serieActor
      **/
-    public function setSerieActors(SerieActor $serieActors)
+    public function setSerieActors(SerieActor $serieActor)
     {
-        $this->serieActors = $serieActors;
+        $this->serieActors->add($serieActor);
         return $this;
     }
 

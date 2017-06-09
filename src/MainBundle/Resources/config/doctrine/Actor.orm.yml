@@ -11,10 +11,10 @@ MainBundle\Entity\Actor:
     fields:
         name:
             type: string
-            length: '50'
+            length: '255'
         picture:
             type: string
-            length: '50'
+            length: '255'
     oneToMany:
         serieActors:
             targetEntity: MainBundle\Entity\SerieActor

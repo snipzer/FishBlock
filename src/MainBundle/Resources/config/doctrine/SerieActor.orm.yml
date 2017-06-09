@@ -13,7 +13,7 @@ MainBundle\Entity\SerieActor:
     fields:
         role:
             type: string
-            length: '25'
+            length: '255'
         creationDate:
             type: datetime
         modificationDate:

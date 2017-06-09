@@ -13,3 +13,6 @@ services:
             $apiKey: %thetvdb_api_key%
             $username: %username%
             $userKey: %userkey%
+    SaveSerie:
+        class: MainBundle\Service\SaveSerie
+        arguments: ["@doctrine.orm.entity_manager", "@TvdbConnector"]

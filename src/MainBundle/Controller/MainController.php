@@ -2,19 +2,13 @@
 
 namespace MainBundle\Controller;
 
-use MainBundle\Entity\Actor;
-use MainBundle\Entity\Episode;
-use MainBundle\Entity\Serie;
-use MainBundle\Entity\SerieActor;
-use MainBundle\Entity\SerieType;
-use MainBundle\Entity\Type;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class MainController extends Controller
 {
-
     /**
      * Page d'accueil
      */
@@ -79,90 +73,7 @@ class MainController extends Controller
          *
          */
 
-        $manager = $this->getDoctrine()->getManager();
-        $tvdbClient = $this->get('tvdbconnector');
-
-        $results = $tvdbClient->searchSerieByName("stargate");
-
-
-        foreach($results as $result)
-        {
-            $serieId = $result->getId();
-            $serieFromApi = $tvdbClient->getSerieById($serieId);
-
-            $serie = new Serie();
-
-            $serie->setTitle($serieFromApi->getSeriesName())
-                ->setDescription($serieFromApi->getOverview())
-                ->setPoster($serieFromApi->getBanner())
-                ->setAirsDayOfWeek($serieFromApi->getAirsDayOfWeek())
-                ->setAirsTime($serieFromApi->getAirsTime())
-                ->setIsValid(true);
-
-
-            $genres = $serieFromApi->getGenre();
-
-            foreach($genres as $genre)
-            {
-                $type = new Type();
-                $type->setName($genre);
-
-                $serieType = new SerieType();
-                $serieType->setType($type)
-                        ->setSerie($serie);
-
-                $serie->setSerieTypes($serieType);
-
-                $manager->persist($serieType);
-
-                $manager->persist($type);
-
-
-            }
-
-            $actorsFromApi = $tvdbClient->getActeursFromSerie($serieId);
-
-            foreach($actorsFromApi as $actorFromApi)
-            {
-                $actor = new Actor();
-                $actor->setName($actorFromApi->getName())
-                      ->setPicture($actorFromApi->getImage());
-
-                $serieActor = new SerieActor();
-                $serieActor->setSerie($serie)
-                           ->setActor($actor)
-                           ->setRole($actorFromApi->getRole());
-
-                $serie->setSerieActors($serieActor);
-                $actor->setSerieActors($serieActor);
-
-                $manager->persist($actor);
-
-
-                $manager->persist($serieActor);
-
-            }
-
-            $episodesFromApi = $tvdbClient->getEpisodesFromSerie($serieId);
-
-            foreach($episodesFromApi as $episodeFromApi)
-            {
-                $episode = new Episode();
-                $episode->setTitle($episodeFromApi->getEpisodeName())
-                        ->setDescription($episodeFromApi->getOverview())
-                        ->setEpisodeNumber($episodeFromApi->getAiredEpisodeNumber())
-                        ->setSeasonNumber($episodeFromApi->getAiredSeason())
-                        ->setSerie($serie);
-
-                $serie->setEpisodes($episode);
-
-                $manager->persist($episode);
-
-            }
-
-            $manager->persist($serie);
-            $manager->flush();
-        }
+        $this->get("SaveSerie")->saveSerie("smallville");
 
         return $this->render("MainBundle::search.html.twig");
     }
