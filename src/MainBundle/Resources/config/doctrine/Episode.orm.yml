@@ -13,12 +13,13 @@ MainBundle\Entity\Episode:
     fields:
         title:
             type: string
-            length: '50'
+            length: '255'
         description:
             type: text
         episodeNumber:
-            type: string
-            length: '15'
+            type: integer
+        seasonNumber:
+            type: integer
     manyToOne:
         serie:
             targetEntity: MainBundle\Entity\Serie
