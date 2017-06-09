@@ -2,7 +2,6 @@
 
 namespace MainBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
@@ -32,7 +31,7 @@ class Critic
     {
         $this->criticNotations = new ArrayCollection();
         $this->isValid = false;
-        $this->postedThe = new Date();
+        $this->postedThe = new \DateTime();
     }
 
     /**
@@ -44,11 +43,11 @@ class Critic
     }
 
     /**
-     * @param ArrayCollection $criticNotations
+     * @param CriticNotation $criticNotation
      **/
-    public function setCriticNotations($criticNotations)
+    public function setCriticNotations(CriticNotation $criticNotation)
     {
-        $this->criticNotations = $criticNotations;
+        $this->criticNotations->add($criticNotation);
         return $this;
     }
 
@@ -148,7 +147,7 @@ class Critic
      *
      * @return int
      */
-    public function getScore()
+    public function getNote()
     {
         return $this->note;
     }

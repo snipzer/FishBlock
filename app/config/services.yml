@@ -8,8 +8,8 @@ services:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
     TvdbConnector:
-            class: MainBundle\Service\TvdbConnector
-            arguments:
-                $apiKey: %thetvdb_api_key%
-                $username: %username%
-                $userKey: %userkey%
+        class: MainBundle\Service\TvdbConnector
+        arguments:
+            $apiKey: %thetvdb_api_key%
+            $username: %username%
+            $userKey: %userkey%

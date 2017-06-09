@@ -19,6 +19,9 @@ MainBundle\Entity\Episode:
         episodeNumber:
             type: string
             length: '15'
+        seasonNumber:
+            type: string
+            length: '15'
     manyToOne:
         serie:
             targetEntity: MainBundle\Entity\Serie

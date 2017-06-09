@@ -9,12 +9,9 @@ MainBundle\Entity\Actor:
             generator:
                 strategy: AUTO
     fields:
-        lastName:
+        name:
             type: string
-            length: '25'
-        firstName:
-            type: string
-            length: '25'
+            length: '50'
         picture:
             type: string
             length: '50'

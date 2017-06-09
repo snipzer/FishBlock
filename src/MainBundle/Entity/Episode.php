@@ -15,7 +15,26 @@ class Episode
 
     private $episodeNumber;
 
+    private $seasonNumber;
+
     private $serie;
+
+    /**
+     * @return mixed
+     */
+    public function getSeasonNumber()
+    {
+        return $this->seasonNumber;
+    }
+
+    /**
+     * @param mixed $seasonNumber
+     **/
+    public function setSeasonNumber($seasonNumber)
+    {
+        $this->seasonNumber = $seasonNumber;
+        return $this;
+    }
 
     /**
      * @return mixed

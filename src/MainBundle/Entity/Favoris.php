@@ -16,7 +16,7 @@ class Favoris
     private $serie;
 
     /**
-     * @return ArrayCollection
+     * @return User
      */
     public function getUser()
     {
@@ -24,7 +24,7 @@ class Favoris
     }
 
     /**
-     * @param ArrayCollection $user
+     * @param User $user
      **/
     public function setUser(User $user)
     {
@@ -33,7 +33,7 @@ class Favoris
     }
 
     /**
-     * @return ArrayCollection
+     * @return Serie
      */
     public function getSerie()
     {
@@ -41,15 +41,13 @@ class Favoris
     }
 
     /**
-     * @param ArrayCollection $serie
+     * @param Serie $serie
      **/
     public function setSerie(Serie $serie)
     {
         $this->serie = $serie;
         return $this;
     }
-
-
 
     /**
      * Get id
