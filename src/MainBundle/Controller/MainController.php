@@ -22,11 +22,7 @@ class MainController extends Controller
          * Switch de la langue
          */
 
-        //return $this->render("MainBundle::home.html.twig");
-
-        $translated = $this->get('translator')->trans('english');
-
-        return new Response($translated);
+        return $this->render("MainBundle:App:home.html.twig");
     }
 
     public function wallAction(Request $request)
@@ -41,7 +37,7 @@ class MainController extends Controller
          * Système de like/dislike (CriticNotationRepository)
          */
 
-        return $this->render("MainBundle::wall.html.twig");
+        return $this->render("MainBundle:App:wall.html.twig");
     }
 
     public function unloggedWallAction(Request $request)
@@ -55,7 +51,7 @@ class MainController extends Controller
          * Récupération des dernières critiques (CriticRepository)
          */
 
-        return $this->render("MainBundle::unloggedWall.html.twig");
+        return $this->render("MainBundle:App:unloggedWall.html.twig");
     }
 
 
@@ -88,7 +84,7 @@ class MainController extends Controller
          * Récupération de la note de la série (SerieRepository)
          */
 
-        return $this->render("MainBundle::favoris.html.twig");
+        return $this->render("MainBundle:App:favoris.html.twig");
     }
 
     public function serieAction(Request $request)
@@ -108,7 +104,7 @@ class MainController extends Controller
          * Notification (Service)
          */
 
-        return $this->render("MainBundle::serie.html.twig");
+        return $this->render("MainBundle:App:serie.html.twig");
     }
 
     public function episodeAction(Request $request)
@@ -118,7 +114,7 @@ class MainController extends Controller
          * Récupérer les informations d'un épidose (EpisodeRepository)
          */
 
-        return $this->render("MainBundle::serie.html.twig");
+        return $this->render("MainBundle:App:serie.html.twig");
     }
 
     public function accountAction(Request $request)
@@ -132,7 +128,7 @@ class MainController extends Controller
          * Suggestion de serie (SerieRepository)
          */
 
-        return $this->render("MainBundle::account.html.twig");
+        return $this->render("MainBundle:App:account.html.twig");
     }
 
 }
