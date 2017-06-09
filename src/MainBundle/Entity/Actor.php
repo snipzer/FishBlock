@@ -11,9 +11,7 @@ class Actor
 {
     private $id;
 
-    private $lastName;
-
-    private $firstName;
+    private $name;
 
     private $picture;
 
@@ -22,10 +20,7 @@ class Actor
     public function __construct()
     {
         $this->serieActors = new ArrayCollection();
-        $this->serieActorTemps = new ArrayCollection();
     }
-
-
 
     public function getPicture()
     {
@@ -39,7 +34,7 @@ class Actor
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getSerieActors()
     {
@@ -47,11 +42,11 @@ class Actor
     }
 
     /**
-     * @param mixed $serieActors
+     * @param SerieActor $serieActor
      **/
-    public function setSerieActors(SerieActor $serieActors)
+    public function setSerieActors(SerieActor $serieActor)
     {
-        $this->serieActors = $serieActors;
+        $this->serieActors->add($serieActor);
         return $this;
     }
 
@@ -66,51 +61,20 @@ class Actor
     }
 
     /**
-     * Set lastName
-     *
-     * @param string $lastName
-     *
-     * @return Actor
+     * @return mixed
      */
-    public function setLastName($lastName)
+    public function getName()
     {
-        $this->lastName = $lastName;
+        return $this->name;
+    }
 
+    /**
+     * @param mixed $name
+     **/
+    public function setName($name)
+    {
+        $this->name = $name;
         return $this;
-    }
-
-    /**
-     * Get lastName
-     *
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * Set firstName
-     *
-     * @param string $firstName
-     *
-     * @return Actor
-     */
-    public function setFirstName($firstName)
-    {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    /**
-     * Get firstName
-     *
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->firstName;
     }
 }
 

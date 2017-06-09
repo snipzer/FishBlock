@@ -56,11 +56,11 @@ class User extends BaseUser
     }
 
     /**
-     * @param ArrayCollection $criticNotations
+     * @param CriticNotation $criticNotation
      **/
-    public function setCriticNotations($criticNotations)
+    public function setCriticNotations($criticNotation)
     {
-        $this->criticNotations = $criticNotations;
+        $this->criticNotations->add($criticNotation);
         return $this;
     }
 
@@ -73,17 +73,16 @@ class User extends BaseUser
     }
 
     /**
-     * @param ArrayCollection $critics
+     * @param Critic $critic
      **/
-    public function setCritics(Critic $critics)
+    public function setCritics(Critic $critic)
     {
-        $this->critics = $critics;
+        $this->critics->add($critic);
         return $this;
     }
 
-
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getFavoris()
     {
@@ -91,11 +90,11 @@ class User extends BaseUser
     }
 
     /**
-     * @param mixed $favoris
+     * @param Favoris $favoris
      **/
     public function setFavoris(Favoris $favoris)
     {
-        $this->favoris = $favoris;
+        $this->favoris->add($favoris);
         return $this;
     }
 
@@ -373,4 +372,3 @@ class User extends BaseUser
         return $this->isValid;
     }
 }
-

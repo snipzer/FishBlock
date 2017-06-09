@@ -2,13 +2,13 @@
 
 namespace MainBundle\Controller;
 
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class MainController extends Controller
 {
-
     /**
      * Page d'accueil
      */
@@ -69,7 +69,9 @@ class MainController extends Controller
          *
          */
 
-        return $this->render("MainBundle:App:search.html.twig");
+        $this->get("SaveSerie")->saveSerie("smallville");
+
+        return $this->render("MainBundle::search.html.twig");
     }
 
     public function favorisAction(Request $request)

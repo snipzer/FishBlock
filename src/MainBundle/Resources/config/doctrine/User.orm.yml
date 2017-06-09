@@ -13,16 +13,16 @@ MainBundle\Entity\User:
     fields:
         lastName:
             type: string
-            length: '25'
+            length: '255'
         firstName:
             type: string
-            length: '25'
+            length: '255'
         userName:
             type: string
-            length: '25'
+            length: '255'
         mail:
             type: string
-            length: '50'
+            length: '255'
             unique: true
         birthdate:
             type: datetime

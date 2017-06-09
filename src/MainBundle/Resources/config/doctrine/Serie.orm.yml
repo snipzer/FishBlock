@@ -13,7 +13,7 @@ MainBundle\Entity\Serie:
     fields:
         title:
             type: string
-            length: '100'
+            length: '255'
         description:
             type: text
         poster:
