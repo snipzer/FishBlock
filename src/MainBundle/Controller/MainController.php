@@ -22,11 +22,7 @@ class MainController extends Controller
          * Switch de la langue
          */
 
-        //return $this->render("MainBundle::home.html.twig");
-
-        $translated = $this->get('translator')->trans('english');
-
-        return new Response($translated);
+        return $this->render("MainBundle::home.html.twig");
     }
 
     public function wallAction(Request $request)

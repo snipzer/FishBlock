@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-</head>
-<body>
+{# src/MainBundle/Resources/views/home.html.twig #}
 
+{% include "MainBundle:Layout:head.html.twig" %}
 
-</body>
-</html>
+{% block title %}
+    FishBlock - {{ parent() }}
+{% endblock title %}
+
+{% block body %}
+
+ <h1>FishbLock</h1>
+
+    <hr>
+{% endblock body %}
