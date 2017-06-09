@@ -1,14 +1,45 @@
-{# src/MainBundle/Resources/views/home.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exemple</title>
+    <meta http-equiv="Content-Type"
+          content="text/html;charset=utf-8">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
 
-{% include "MainBundle:Layout:head.html.twig" %}
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-{% block title %}
-    FishBlock - {{ parent() }}
-{% endblock title %}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-{% block body %}
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
- <h1>FishbLock</h1>
+    <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet" type="text/css">
 
-    <hr>
-{% endblock body %}
+    <link href="https://fonts.googleapis.com/css?family=Almendra|Megrim" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="home.css">
+</head>
+<body>
+<!-- Création d'une barre de navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse"
+                    data-target="#maNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">FishBlock</a>
+        </div>
+        <div class="collapse navbar_collapse" id="maNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#titre1" class="scroll">Menu 1</a></li>
+                <li><a href="#aaa" class="scroll">Menu 2</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>
