@@ -1,5 +1,5 @@
 <?php
-namespace TestBundle\Service;
+namespace MainBundle\Service;
 
 /**
  * Class TvdbConnector

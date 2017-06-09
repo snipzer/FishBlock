@@ -21,7 +21,7 @@ class Type
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getSerieTypes()
     {
@@ -29,11 +29,11 @@ class Type
     }
 
     /**
-     * @param mixed $serieTypes
+     * @param SerieType $serieType
      **/
-    public function setSerieTypes(SerieType $serieTypes)
+    public function setSerieTypes(SerieType $serieType)
     {
-        $this->serieTypes = $serieTypes;
+        $this->serieTypes->add($serieType);
         return $this;
     }
 

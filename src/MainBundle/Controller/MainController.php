@@ -2,13 +2,13 @@
 
 namespace MainBundle\Controller;
 
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class MainController extends Controller
 {
-
     /**
      * Page d'accueil
      */
@@ -72,6 +72,8 @@ class MainController extends Controller
          * Ajout de série en favoris (FavorisRepository)
          *
          */
+
+        $this->get("SaveSerie")->saveSerie("smallville");
 
         return $this->render("MainBundle::search.html.twig");
     }

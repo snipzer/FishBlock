@@ -126,11 +126,12 @@ class Serie
     }
 
     /**
-     * @param ArrayCollection $episodes
+     * @param Episode $episode
      **/
-    public function setEpisodes(Episode $episodes)
+    public function setEpisodes(Episode $episode)
     {
-        $this->episodes = $episodes;
+        $this->episodes->add($episode);
+
         return $this;
     }
 
@@ -147,7 +148,7 @@ class Serie
      **/
     public function setSerieTypes(SerieType $serieTypes)
     {
-        $this->serieTypes = $serieTypes;
+        $this->serieTypes->add($serieTypes);
         return $this;
     }
 
@@ -160,11 +161,11 @@ class Serie
     }
 
     /**
-     * @param ArrayCollection $critics
+     * @param ArrayCollection $critic
      **/
-    public function setCritics(Critic $critics)
+    public function setCritics(Critic $critic)
     {
-        $this->critics = $critics;
+        $this->critics->add($critic);
         return $this;
     }
 
@@ -181,7 +182,7 @@ class Serie
      **/
     public function setFavoris(Favoris $favoris)
     {
-        $this->favoris = $favoris;
+        $this->favoris->add($favoris);
         return $this;
     }
 
@@ -197,9 +198,9 @@ class Serie
     /**
      * @param mixed $serieActors
      **/
-    public function setSerieActors(SerieActor $serieActors)
+    public function setSerieActors(SerieActor $serieActor)
     {
-        $this->serieActors = $serieActors;
+        $this->serieActors->add($serieActor);
         return $this;
     }
 
