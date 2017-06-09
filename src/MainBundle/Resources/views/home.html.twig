@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Exemple</title>
-    <meta http-equiv="Content-Type"
-          content="text/html;charset=utf-8">
+
+    <meta charset="UTF-8">
+
+    <title>Portfolio- Noah Dymen</title>
+
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
             integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
             crossorigin="anonymous"></script>
@@ -17,12 +19,213 @@
     <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet" type="text/css">
 
     <link href="https://fonts.googleapis.com/css?family=Almendra|Megrim" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Megrim', cursive;
+            font-family: 'Almendra', serif;
+            font-size: 18px;
+        }
 
-    <link rel="stylesheet" type="text/css" href="home.css">
+        .background-image {
+            background-image: linear-gradient(60deg, #DB4437, rgba(50, 123,
+            242, 0.5)), url("img/9.jpg");
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1, h2, h3, h5, h6 {
+            font-family: 'Megrim', cursive;
+        }
+        .p80 {
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+
+        .p30 {
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+
+        .w500 {
+            max-width: 500px;
+        }
+
+        .white {
+            color: #ffffff;
+        }
+
+        .btn {
+            margin-top: 10px;
+            border-radius: 0;
+            transition: 0.5s;
+        }
+
+        .btn-custom {
+            border: 2px solid white;
+            background-color: transparent;
+        }
+
+        .btn-custom:hover {
+            color: #1d1d1d;
+            /*background-color: white;*/
+        }
+
+        .degrade {
+            background: linear-gradient(60deg, #DB4437, rgba(50, 123, 242, 0.5));
+        }
+
+        .fa-snapchat {
+            color: #ff0;
+        }
+
+        .fa-youtube {
+            color: #ee1c1b;
+        }
+
+        .dernier-aaa {
+            /*background-color: #ee1c1b;*/
+            /*background-image: linear-gradient(60deg, #DB4437, rgba(50, 123,
+                242, 0.5)), url("img/9.jpg");*/
+            background-attachment: fixed;
+            background-image: radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)),
+            url("img/9.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .list-group-item {
+            border: none;
+            padding-bottom: 0;
+        }
+
+        .list-group-item a {
+            color: #1d1d1d;
+        }
+
+        .list-group-item a:hover {
+            text-decoration: none;
+            color: red;
+        }
+
+        .list-header {
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: #eee;
+        }
+
+        .navbar {
+            margin-bottom: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Bounce To Right */
+        .hvr-bounce-to-right {
+            display: inline-block;
+            vertical-align: middle;
+            -webkit-transform: perspective(1px) translateZ(0);
+            transform: perspective(1px) translateZ(0);
+            box-shadow: 0 0 1px transparent;
+            position: relative;
+            -webkit-transition-property: color;
+            transition-property: color;
+            -webkit-transition-duration: 0.5s;
+            transition-duration: 0.5s;
+        }
+        .hvr-bounce-to-right:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            -webkit-transform: scaleX(0);
+            transform: scaleX(0);
+            -webkit-transform-origin: 0 50%;
+            transform-origin: 0 50%;
+            -webkit-transition-property: transform;
+            transition-property: transform;
+            -webkit-transition-duration: 0.5s;
+            transition-duration: 0.5s;
+            -webkit-transition-timing-function: ease-out;
+            transition-timing-function: ease-out;
+        }
+        .hvr-bounce-to-right:hover:before, .hvr-bounce-to-right:focus:before, .hvr-bounce-to-right:active:before {
+            -webkit-transform: scaleX(1);
+            transform: scaleX(1);
+            -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+            transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+        }
+
+        /* partie positionnement et déco */
+        #menu a {
+            display:block;
+            color: #fff;
+            text-decoration:none;
+        }
+        #menu > li,
+        #menu > li li {
+            position: relative;
+            display:inline-block;
+            width: 110px;
+            padding: 6px 15px;
+            background-color: #777;
+            background-image: linear-gradient(#aaa, #888 50%, #777 50%,#999);
+        }
+        #menu > li li { background: transparent none; }
+        #menu > li li a { color: #444; }
+        #menu > li li:hover { background:#eee; }
+        #menu > li:first-child {
+            border-right: 1px solid #777;
+            border-radius: 8px 0 0 8px;
+        }
+        #menu > li + li {
+            border-left: 1px solid #aaa;
+            border-right: 1px solid #777;
+        }
+        #menu > li:last-child {
+            border-right: 0;
+            border-left: 1px solid #aaa;
+            border-radius: 0 8px 8px 0 ;
+        }
+        #menu > li:hover {
+            background-color: #999;
+            background-image: linear-gradient(#ccc, #aaa 50%, #999 50%,#bbb);
+        }
+        /* (presque) fin de la partie positionnement/déco */
+        /* dans cette déclaration, on fixe le max-height */
+        #menu ul {
+            position: absolute;
+            top: 2em; left: 0;
+            max-height:0em;
+            margin: 0; padding: 0;
+            background-color: #ddd;
+            background-image: linear-gradient(#fff,#ddd);
+            overflow: hidden;
+            transition: 1s max-height 0.3s;
+            border-radius: 0 0 8px 8px;
+        }
+        /* ici on change la valeur de max-height au :hover */
+        #menu > li:hover ul {
+            /* à adapter, le minimum est le meilleur mais voyez large 😉 */
+            max-height: 13em;
+        }
+
+    </style>
 </head>
 <body>
+<!-- Partie images ou En-tête... Pas lu par le navigateur -->
+
 <!-- Création d'une barre de navigation -->
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
             <button class="navbar-toggle" data-toggle="collapse"
@@ -33,13 +236,134 @@
             </button>
             <a href="#" class="navbar-brand">FishBlock</a>
         </div>
-        <div class="collapse navbar_collapse" id="maNavbar">
-            <ul class="nav navbar-nav">
-                <li><a href="#titre1" class="scroll">Menu 1</a></li>
-                <li><a href="#aaa" class="scroll">Menu 2</a></li>
-            </ul>
+    </div>
+
+    <div class="container-fluid background-image">
+        <div class="container p80 text-center white w600">
+            <h1>Project FishBlock DL20 </h1>
+            <h2>Nous contacter :</h2>
+            <!-- Création formulaire du site -->
+            <form>
+                <input type="text" class="form-control" placeholder="Votre e-mail">
+                <button class="btn btn-danger btn-lg btn-block">Envoyer</button>
+            </form>
         </div>
     </div>
 </nav>
+
+<ul id="menu">
+    <li><a href="#">Menu 1</a>
+        <ul>
+            <li><a href="#">Level 1.1</a></li>
+            <li><a href="#">Level 1.2</a></li>
+        </ul>
+    </li><li><a href="#">Menu 2</a>
+        <ul>
+            <li><a href="#">Level 2.1</a></li>
+            <li><a href="#">Level 2.2</a></li>
+            <li><a href="#">Level 2.3</a></li>
+            <li><a href="#">Level 2.4</a></li>
+        </ul>
+    </li><li><a href="#">Menu 3</a>
+        <ul>
+            <li><a href="#">Level 3.1</a></li>
+            <li><a href="#">Level 3.2</a></li>
+            <li><a href="#">Level 3.3</a></li>
+        </ul>
+    </li>
+</ul>
+
+
+<hr>
+<!-- Partie Création liens réseaux sociaux -->
+<div class="container text-center p80">
+    <h1>Réseaux sociaux</h1>
+    <p><a href="https://www.facebook.com/login.php?login_attempt=1&lwv=110">Rejoignez-nous ! :</a></p>
+    <div class="row">
+        <div id="snapchat" class="col-xs-4"><a href="https://www.snapchat.com/l/fr-fr/download"><i class="fa fa-snapchat fa-5x"></i></a></div>
+        <div id="twitter" class="col-xs-4"><a href="https://twitter.com/ElJefemendy"><i class="fa fa-twitter  fa-5x"></i></a></div>
+        <div id="tube" class="col-xs-4"><a href="https://www.youtube.com/channel/UCiJGyqkf3_mObzDRP24MpbQ"><i class="fa fa-youtube fa-5x"></i></a></div>
+    </div>
+</div>
+<hr />
+<!-- Partie textes -->
+<div class="container text-center">
+    <div class="row p30">
+        <div class="col-sm-6">
+            <h3 id="titre1">Title</h3>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <!--div class="col-sm-6"><img src="img/1.jpg" class="img-responsive"></div-->
+    </div>
+    <div class="row p30">
+        <div class="col-sm-6 col-sm-push-6">
+            <h3>Title</h3>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <!--div class="col-sm-6 col-sm-pull-6"><img src="
+			 	img/2.jpg" class="img-responsive"></div-->
+    </div>
+    <div class="row p30">
+        <div class="col-sm-6">
+            <h3>Title</h3>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+        <!--div class="col-sm-6"><img src="img/3.jpg" class="img-responsive"></div-->
+    </div>
+</div>
+<hr>
+<!-- Dernier Appel A Action AAA -->
+<div id="aaa" class="container-fluid dernier-aaa">
+    <div class="container p30 text-center white w500">
+        <h1>N'oubliez pas de nous contacter</h1>
+        <form>
+            <input type="text" class="form-control" placeholder="Votre e-mail">
+            <button class="btn btn-custom hvr-bounce-to-right btn-lg btn-block">Envoyer</button>
+        </form>
+    </div>
+</div>
+<hr />
+<!-- Footer numéro 1 -->
+<!div class="container text-center p30">
+    <div class="row">
+        <div class="col-sm-4">
+            <ul class="list-group">
+                <li class="list-group-item list-header">Show</li>
+                <li class="list-group-item"><a href="#">Contact</a></li>
+                <li class="list-group-item"><a href="#">CGV</a></li>
+                <li class="list-group-item"><a href="#">Infos légales</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-4">
+            <ul class="list-group">
+                <li class="list-group-item list-header">Noah</li>
+                <li class="list-group-item"><a href="#">Trucs & Astuces</a></li>
+                <li class="list-group-item"><a href="#">Conseils</a></li>
+                <li class="list-group-item"><a href="#">Pratique</a></li>
+                <li class="list-group-item"><a href="#">Tests</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-4">
+            <ul class="list-group">
+                <li class="list-group-item list-header">Dymen</li>
+                <li class="list-group-item"><a href="#">Facebook</a></li>
+                <li class="list-group-item"><a href="#">Twitter</a></li>
+                <li class="list-group-item"><a href="#">YouTube</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<hr />
+<!-- Footer numéro 2 -->
+<div class="container-fluid footer p30 text-center">
+    <div class="container">
+        <p>Copyright © DL20 2017</p>
+    </div>
+</div>
+
 </body>
 </html>
+
+
+
+
+
+
+
