@@ -4,6 +4,7 @@ namespace MainBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,6 +22,8 @@ class MainController extends Controller
          * Recupération des séries populaires (SerieRepository)
          * Switch de la langue
          */
+
+
 
         return $this->render("MainBundle:App:home.html.twig");
     }
@@ -69,9 +72,9 @@ class MainController extends Controller
          *
          */
 
-        $this->get("SaveSerie")->saveSerie("smallville");
+        $this->get("SaveSerie")->saveSerie("stargate");
 
-        return $this->render("MainBundle::search.html.twig");
+        return $this->render("MainBundle:App:search.html.twig");
     }
 
     public function favorisAction(Request $request)
