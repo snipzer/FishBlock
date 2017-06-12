@@ -24,7 +24,6 @@ class MainController extends Controller
          */
 
 
-
         return $this->render("MainBundle:App:home.html.twig");
     }
 
@@ -107,7 +106,12 @@ class MainController extends Controller
          * Notification (Service)
          */
 
-        return $this->render("MainBundle:App:serie.html.twig");
+        $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
+        $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
+
+        $episodes = $EpisodeRepository->getEpisodesFromSerie($SerieRepository->getSerieWithId("340ceadd-8af1-43d8-b646-a2ee0d251ae1"));
+
+        return $this->render("MainBundle:App:serie.html.twig", ["episodes" => $episodes]);
     }
 
     public function episodeAction(Request $request)

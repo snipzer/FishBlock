@@ -50,13 +50,17 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
     }
 
     // Renvois les dernières séries publier
-    public function getSeriesSortByDate() {}
+    public function getSeriesSortByDate()
+    {
+        return $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select("s")
+            ->from("MainBundle:Serie", "s")
+            ->orderBy('s.creationDate', "ASC")->getQuery()->getResult();
+    }
 
     // Calcule et renvois la note de la série en fonction de la moyenne des notes de ces critiques
     public function getSerieNotation($serieId) {}
-
-    // Renvois tout les épisodes pour une série
-    public function getEpisodesFromSerie($serieId) {}
 
     // Renvois toutes les critiques valider pour une série
     public function getValidatedCriticsFromSerie($serieId) {}
@@ -71,5 +75,11 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
     public function getNewSeries() {}
 
     // Suppression d'une série
-    public function deleteSerie($serieId) {}
+    public function deleteSerie($serieId)
+    {
+        $serie = $this->getSerieWithId($serieId);
+
+        $this->getEntityManager()->remove($serie);
+        $this->getEntityManager()->flush();
+    }
 }
