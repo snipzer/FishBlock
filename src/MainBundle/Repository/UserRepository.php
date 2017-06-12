@@ -1,6 +1,7 @@
 <?php
 
 namespace MainBundle\Repository;
+use MainBundle\Entity\User;
 
 /**
  * UserRepository
@@ -10,6 +11,39 @@ namespace MainBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getUsers()
+    {
+        return $this->findAll();
+    }
+
+    public function getUserById($userId)
+    {
+        return $this->findOneBy(["id" => $userId]);
+    }
+
+    public function createUser($email, $password, $userName, $firstName, $lastName, $role)
+    {
+        $user = new User();
+        $user->setEmail($email)
+            ->setUsernameCanonical($userName)
+            ->setUsername($userName)
+            ->setLastName($lastName)
+            ->setFirstName($firstName)
+            ->setPlainPassword($password)
+            ->setRoles([$role])
+            ->setBirthdate(new \DateTime());
+
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+    }
+
     // Bannis l'utilisateur
-    public function banUser($userId) {}
+    public function banUser($userId)
+    {
+        $user = $this->getUserById($userId);
+        $user->setIsValid(false);
+
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+    }
 }

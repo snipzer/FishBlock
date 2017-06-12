@@ -2,6 +2,8 @@
 
 namespace MainBundle\Repository;
 
+use MainBundle\Entity\Critic;
+
 /**
  * CriticRepository
  *
@@ -10,12 +12,95 @@ namespace MainBundle\Repository;
  */
 class CriticRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getCriticByCriticId($criticId)
+    {
+        return $this->findOneBy(["id" => $criticId]);
+    }
+
+    public function postCritic($title, $content, $note, $userId, $serieId)
+    {
+        $user = $this->getEntityManager()->getRepository("MainBundle:User")->getUserById($userId);
+        $serie = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSerieWithId($serieId);
+
+        $critic = new Critic();
+        $critic->setTitle($title)
+            ->setContent($content)
+            ->setSerie($serie)
+            ->setUser($user)
+            ->setNote($note);
+
+        $this->getEntityManager()->persist($critic);
+        $this->getEntityManager()->flush();
+    }
+
+    public function getCriticsFromSerie($serieId)
+    {
+        $serie = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSerieWithId($serieId);
+
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("c")
+            ->from("MainBundle:Critic", "c")
+            ->where("c.serie = :id")
+            ->setParameter(":id", $serie)
+            ->getQuery()->getResult();
+    }
+
     // Récupère les dernières critique publier qui sont valider
-    public function getLastUploadedAndValidatedCritics() {}
+    public function getLastUploadedAndValidatedCritics()
+    {
+        return $this->getEntityManager()->createQuery(
+            'SELECT c
+              FROM MainBundle\Entity\Critic c
+              WHERE c.isValid = true
+              ORDER BY c.postedThe DESC'
+        )->setMaxResults(1)->getResult();
+    }
 
     // Supprime une critique
-    public function deleteCritic($criticId) {}
+    public function deleteCritic($criticId)
+    {
+        $critic = $this->findOneBy(["id" => $criticId]);
+
+        $this->getEntityManager()->remove($critic);
+        $this->getEntityManager()->flush();
+    }
 
     // Valide une critique
-    public function validCritic($criticId) {}
+    public function validCritic($criticId)
+    {
+        $critic = $this->findOneBy(["id" => $criticId]);
+
+        $critic->setIsValid(true);
+
+        $this->getEntityManager()->persist($critic);
+        $this->getEntityManager()->flush();
+    }
+
+    // Renvois toutes les critiques valider pour une série
+    public function getValidatedCriticsFromSerie($serieId)
+    {
+        $serie = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSerieWithId($serieId);
+
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("c")
+            ->from("MainBundle:Critic", "c")
+            ->where("c.serie = :id")
+            ->andWhere("c.isValid = true")
+            ->setParameter(":id", $serie)
+            ->getQuery()->getResult();
+    }
+
+    // Renvois toutes les critiques non valider pour une série
+    public function getNonValidatedCriticFromSerie($serieId)
+    {
+        $serie = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSerieWithId($serieId);
+
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("c")
+            ->from("MainBundle:Critic", "c")
+            ->where("c.serie = :id")
+            ->andWhere("c.isValid = false")
+            ->setParameter(":id", $serie)
+            ->getQuery()->getResult();
+    }
 }
