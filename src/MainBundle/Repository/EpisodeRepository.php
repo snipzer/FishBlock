@@ -20,7 +20,13 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
         $serieRepository = $this->getEntityManager()->getRepository("MainBundle:Serie");
         $serie = $serieRepository->getSerieWithId($serieId);
 
-        return $serie->getEpisodes();
+        return $this->getEntityManager()->createQuery(
+            'SELECT e
+              FROM MainBundle\Entity\Episode e
+              JOIN MainBundle\entity\Serie s
+              WHERE e.serie = :serie
+              ORDER BY e.episodeNumber ASC, e.seasonNumber ASC'
+        )->setParameter('serie', $serie)->getResult();
     }
 
     // Renvois le dernier épisode d'une série choisie avec l'uuid
@@ -29,6 +35,12 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
         $serieRepository = $this->getEntityManager()->getRepository("MainBundle:Serie");
         $serie = $serieRepository->getSerieWithId($serieId);
 
-        return $this->findBy(["serie" => $serie]);
+        return $this->getEntityManager()->createQuery(
+            'SELECT e
+              FROM MainBundle\Entity\Episode e
+              JOIN MainBundle\entity\Serie s
+              WHERE e.serie = :serie
+              ORDER BY e.episodeNumber DESC'
+        )->setParameter('serie', $serie)->setMaxResults(1)->getResult();
     }
 }

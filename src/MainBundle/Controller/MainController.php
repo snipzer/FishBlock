@@ -23,22 +23,6 @@ class MainController extends Controller
          * Switch de la langue
          */
 
-        $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
-        $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
-
-        $Serie = $SerieRepository->getSerieWithId("022c6310-a040-4da4-b5e5-ed49339b1762");
-
-        $Episodes = $EpisodeRepository->getEpisodesFromSerie($Serie->getId());
-
-        foreach($Episodes as $Episode)
-        {
-            echo "Title ".$Episode->getTitle()."<br>";
-            echo "Episode number ". $Episode->getEpisodeNumber()."<br>";
-            echo "Season number ". $Episode->getSeasonNumber()."<br>";
-            echo "<br>";
-        }
-
-
 
         return $this->render("MainBundle:App:home.html.twig");
     }
@@ -122,7 +106,12 @@ class MainController extends Controller
          * Notification (Service)
          */
 
-        return $this->render("MainBundle:App:serie.html.twig");
+        $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
+        $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
+
+        $episodes = $EpisodeRepository->getEpisodesFromSerie($SerieRepository->getSerieWithId("340ceadd-8af1-43d8-b646-a2ee0d251ae1"));
+
+        return $this->render("MainBundle:App:serie.html.twig", ["episodes" => $episodes]);
     }
 
     public function episodeAction(Request $request)
