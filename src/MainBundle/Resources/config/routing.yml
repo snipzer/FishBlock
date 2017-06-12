@@ -48,6 +48,13 @@ main_account:
     requirements:
         _locale: en|fr
 
+main_legal:
+    path:     /{_locale}/legal
+    defaults:
+        _controller: MainBundle:Main:legal
+    requirements:
+        _locale: en|fr
+
 admin_modifSerie:
     path:     /{_locale}/admin/modifSerie
     defaults:

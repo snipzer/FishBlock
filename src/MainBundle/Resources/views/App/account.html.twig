@@ -1,11 +1,24 @@
 {% extends 'MainBundle::base.html.twig' %}
 
-
 {% block include %}
     {% include "MainBundle:Layout:accountBlock.html.twig" %}
     {% include "MainBundle:Layout:menu.html.twig" %}
     {% include "MainBundle:Layout:suggest.html.twig" %}
 {% endblock %}
 
+{% block title %}Account{% endblock %}
 
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %} {% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
 

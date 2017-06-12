@@ -109,7 +109,6 @@ class MainController extends Controller
          * Récupération de la note d'une série (SerieRepository)
          * Notification (Service)
          */
-
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
 
@@ -145,6 +144,16 @@ class MainController extends Controller
          */
 
         return $this->render("MainBundle:App:account.html.twig");
+    }
+
+    public function legalAction(Request $request)
+    {
+        /**
+         * TODO:
+         * Afficher les mentions légales du site
+         */
+
+        return $this->render("MainBundle:App:legal.html.twig");
     }
 
 }
