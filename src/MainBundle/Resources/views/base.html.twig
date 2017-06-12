@@ -5,24 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {#<link rel="icon" href="/favicon.ico">#}
-    <title>{% block title 'FishBlock' %}</title> {% endblock %}
+    <title>{% block title 'FishBlock' %}</title>
 
     {% block stylesheets %}
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-        <link href="{{ asset('bundles/app/css/bootstrap.min.css') }}" rel="stylesheet">
+        {#<link href="{{ asset('bundles/app/css/bootstrap.min.css') }}" rel="stylesheet">#}
     {% endblock stylesheets %}
 
 </head>
 
 <body>
-{% block include %}
-    {% include "MainBundle:Layout:navbar.html.twig" %}
-    {% include "MainBundle:Layout:flashes.html.twig" %}
-{% endblock %}
 
 {% block body %}{% endblock %}
 
-{% block footer %}{% endblock %}
+{% block footer %}
+    {% include "MainBundle:Layout:footer.html.twig" %}
+{% endblock %}
 
 {% block javascript %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
