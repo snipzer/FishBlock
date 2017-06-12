@@ -11,8 +11,12 @@
     {% endblock %}
 
     {% block stylesheets %}
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% stylesheets 'bundle/app/css/'
+        filter='cssrewrite' output='css/compiled/app.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+        {#<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">#}
+        {#<link rel="stylesheet" href="{{ asset('css/style.css') }}">#}
     {% endblock %}
 </head>
 <body>
