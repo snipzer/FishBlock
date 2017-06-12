@@ -7,16 +7,13 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/x-icon" href="./../../../../web/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     {% endblock %}
 
     {% block stylesheets %}
-        {% stylesheets 'bundle/app/css/'
-        filter='cssrewrite' output='css/compiled/app.css' %}
-        <link rel="stylesheet" href="{{ asset_url }}"/>
-        {% endstylesheets %}
-        {#<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">#}
-        {#<link rel="stylesheet" href="{{ asset('css/style.css') }}">#}
+        <link rel="stylesheet" href="{{ asset('public/css/style.css') }}"/>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     {% endblock %}
 </head>
 <body>
