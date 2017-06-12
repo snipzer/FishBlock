@@ -22,3 +22,5 @@ parameters:
     thetvdb_api_key: ~
     username: ~
     userkey: ~
+
+    app_webmaster: snipzer

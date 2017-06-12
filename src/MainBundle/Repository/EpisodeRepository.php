@@ -10,4 +10,25 @@ namespace MainBundle\Repository;
  */
 class EpisodeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getEpisodes()
+    {
+        return $this->findAll();
+    }
+
+    public function getEpisodesFromSerie($serieId)
+    {
+        $serieRepository = $this->getEntityManager()->getRepository("MainBundle:Serie");
+        $serie = $serieRepository->getSerieWithId($serieId);
+
+        return $serie->getEpisodes();
+    }
+
+    // Renvois le dernier épisode d'une série choisie avec l'uuid
+    public function getLastEpisodeFromSerie($serieId)
+    {
+        $serieRepository = $this->getEntityManager()->getRepository("MainBundle:Serie");
+        $serie = $serieRepository->getSerieWithId($serieId);
+
+        return $this->findBy(["serie" => $serie]);
+    }
 }

@@ -4,6 +4,7 @@ namespace MainBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,6 +22,23 @@ class MainController extends Controller
          * Recupération des séries populaires (SerieRepository)
          * Switch de la langue
          */
+
+        $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
+        $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
+
+        $Serie = $SerieRepository->getSerieWithId("022c6310-a040-4da4-b5e5-ed49339b1762");
+
+        $Episodes = $EpisodeRepository->getEpisodesFromSerie($Serie->getId());
+
+        foreach($Episodes as $Episode)
+        {
+            echo "Title ".$Episode->getTitle()."<br>";
+            echo "Episode number ". $Episode->getEpisodeNumber()."<br>";
+            echo "Season number ". $Episode->getSeasonNumber()."<br>";
+            echo "<br>";
+        }
+
+
 
         return $this->render("MainBundle:App:home.html.twig");
     }
@@ -69,9 +87,9 @@ class MainController extends Controller
          *
          */
 
-        $this->get("SaveSerie")->saveSerie("smallville");
+        $this->get("SaveSerie")->saveSerie("stargate");
 
-        return $this->render("MainBundle::search.html.twig");
+        return $this->render("MainBundle:App:search.html.twig");
     }
 
     public function favorisAction(Request $request)
