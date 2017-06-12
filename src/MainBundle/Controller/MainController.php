@@ -137,4 +137,14 @@ class MainController extends Controller
         return $this->render("MainBundle:App:account.html.twig");
     }
 
+    public function legalAction(Request $request)
+    {
+        /**
+         * TODO:
+         * Afficher les mentions légales du site
+         */
+
+        return $this->render("MainBundle:App:legal.html.twig");
+    }
+
 }
