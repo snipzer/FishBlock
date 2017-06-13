@@ -4,7 +4,6 @@
     {% include "MainBundle:Layout:accountBlock.html.twig" %}
     {% include "MainBundle:Layout:menu.html.twig" %}
     {% include "MainBundle:Layout:detailSerie.html.twig" %}
-    {% include "MainBundle:Layout:listSeason.html.twig" %}
 {% endblock %}
 
 {% block title %}{{ 'Series'|trans }}{% endblock %}
@@ -19,15 +18,8 @@
 {% endblock %}
 
 {% block content %}
-    <div class="listSeason">
-        <ul>
-            {% for episode in episodes %}
-                <li> {{ episode.title }}</li>
-            {% else %}
-                <li>{{ 'Episodes not found'|trans }}</li>
-            {% endfor %}
-        </ul>
-    </div>
+    {% include "MainBundle:Layout:listSeason.html.twig" %}
+
 {% endblock %}
 
 {% block footer %}

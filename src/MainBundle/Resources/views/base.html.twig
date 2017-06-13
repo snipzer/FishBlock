@@ -12,18 +12,24 @@
 
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('public/css/style.css') }}"/>
-        <link rel="stylesheet" ="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     {% endblock %}
 </head>
 <body>
     {% block content %} {% endblock %}
 
-    {% block footer %}
-        {% include "MainBundle:Layout:footer.html.twig" %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    {% endblock %}
+{% block header %}
+    {% include "MainBundle:Layout:loginHead.html.twig" %}
+{% endblock %}
+
+{% block content %} {% endblock %}
+
+{% block footer %}
+    {% include "MainBundle:Layout:footer.html.twig" %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+{% endblock %}
+
 </body>
 </html>
 

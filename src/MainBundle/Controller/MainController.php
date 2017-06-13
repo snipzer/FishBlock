@@ -113,7 +113,7 @@ class MainController extends Controller
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
         $CritiqueRepository = $this->getDoctrine()->getRepository("MainBundle:Critic");
 
-        $serie = $SerieRepository->getSerieWithId("340ceadd-8af1-43d8-b646-a2ee0d251ae1");
+        $serie = $SerieRepository->getSerieWithId("3d4bc83d-dcda-4835-94f7-b17cceaa417a");
         $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serie->getId());
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serie->getId());
 
