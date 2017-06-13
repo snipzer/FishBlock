@@ -44,16 +44,26 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
         )->setParameter('serie', $serie)->setMaxResults(1)->getResult();
     }
 
-    public function CheckIfEpisodeAlreadyHere($episodeName, $episodeNumber, $seasonNumber)
+    public function checkIfEpisodeAlreadyHere($episodeName, $episodeNumber, $seasonNumber)
     {
-        if($this->findBy([
-            "title" => $episodeName,
-            "episodeNumber" => $episodeNumber,
-            "seasonNumber" => $seasonNumber
-        ]))
-        {
-            return true;
-        }
-        return false;
+        $isHereOrNot = $this->getEntityManager()->createQueryBuilder()
+            ->select("e")
+            ->from("MainBundle:Episode", "e")
+            ->where("e.title = :eTitle")
+            ->andWhere("e.episodeNumber = :eEpisodeNumber")
+            ->andWhere("e.seasonNumber = :eSeasonNumber")
+            ->setParameters([
+                ":eTitle" => $episodeName,
+                ":eEpisodeNumber" => $episodeNumber,
+                ":eSeasonNumber" => $seasonNumber
+                ])
+            ->getQuery()
+            ->getResult();
+
+
+        if(count($isHereOrNot))
+            return false;
+
+        return true;
     }
 }
