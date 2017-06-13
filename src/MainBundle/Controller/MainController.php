@@ -22,6 +22,9 @@ class MainController extends Controller
          * ~~Recupération des séries populaires (SerieRepository)
          */
 
+
+
+
         $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
 
@@ -113,7 +116,7 @@ class MainController extends Controller
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
         $CritiqueRepository = $this->getDoctrine()->getRepository("MainBundle:Critic");
 
-        $serie = $SerieRepository->getSerieWithId("3d4bc83d-dcda-4835-94f7-b17cceaa417a");
+        $serie = $SerieRepository->getSerieWithId("4d438326-4762-47ec-ba4e-f15f9f0a2af6");
         $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serie->getId());
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serie->getId());
 

@@ -7,3 +7,10 @@ body {
     background-color: black;
     text-decoration: underline;
 }
+
+.form-inline {
+    background-color: #5eb5e0;
+}
+.border {
+    border: 5px solid black;
+}
