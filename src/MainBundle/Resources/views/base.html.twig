@@ -16,9 +16,9 @@
     {% endblock %}
 </head>
 <body>
-    {% block content %} {% endblock %}
 
 {% block header %}
+    {% include "head.html.twig" %}
     {% include "MainBundle:Layout:loginHead.html.twig" %}
 {% endblock %}
 
