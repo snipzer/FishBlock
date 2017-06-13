@@ -10,4 +10,20 @@ namespace MainBundle\Repository;
  */
 class TypeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function checkIfTypeAlreadyHere($typeName)
+    {
+        $isHereOrNot = $this->getEntityManager()->createQueryBuilder()
+            ->select("t")
+            ->from("MainBundle:Type", "t")
+            ->where("t.name = :tName")
+            ->setParameter(":tName", $typeName)
+            ->getQuery()
+            ->getResult();
+
+
+        if(count($isHereOrNot))
+            return false;
+
+        return true;
+    }
 }
