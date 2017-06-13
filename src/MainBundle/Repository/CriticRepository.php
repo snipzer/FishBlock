@@ -103,4 +103,72 @@ class CriticRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter(":id", $serie)
             ->getQuery()->getResult();
     }
+
+    public function getValidatedCritics()
+    {
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("c")
+            ->from("MainBundle:Critic", "c")
+            ->where("c.isValid = true")
+            ->getQuery()->getResult();
+    }
+
+    public function getPopularSerie()
+    {
+        $validatedCritics = $this->getValidatedCritics();
+
+        $array = [];
+
+        foreach($validatedCritics as $validatedCritic)
+        {
+            $idSerie = $validatedCritic->getSerie()->getId()->__toString();
+
+            if(is_string($idSerie))
+            {
+                if(array_key_exists($idSerie, $array))
+                    $array[$idSerie]++;
+
+                $array[$idSerie] = 1;
+            }
+        }
+
+        asort($array);
+
+        $result = [];
+        foreach($array as $key => $value)
+        {
+            $serie = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSerieWithId($key);
+
+            $result[] = $serie;
+        }
+
+        return $result;
+    }
+
+    public function TempFakeCritic($userId1, $userId2, $serieId1, $serieId2)
+    {
+        for($i = 0; $i < 35; $i++)
+        {
+            if($i%2 === 0)
+            {
+                $userId = $userId1;
+                $serieId = $serieId1;
+            }
+            else
+            {
+                $userId = $userId2;
+                $serieId = $serieId2;
+            }
+
+            $array = [
+                "title" => "Title ".$i,
+                "content" => "Tolkien ipsum uilos lanthir taniquetil gwaihir mardil. Lameth elendil yavanna pelargir celon bandobras thalion formenos treebeard curunir.",
+                "note" => 5,
+                "userId" => $userId,
+                "serieId" => $serieId
+            ];
+
+            $this->postCritic($array["title"], $array["content"], $array["note"], $array["userId"], $array["serieId"]);
+        }
+    }
 }
