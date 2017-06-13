@@ -23,6 +23,7 @@ class MainController extends Controller
          * Switch de la langue
          */
 
+        $this->get("SaveSerie")->saveSerie("stargate");
 
         return $this->render("MainBundle:App:home.html.twig");
     }
@@ -95,7 +96,6 @@ class MainController extends Controller
          * TODO:
          * Récupérer les acteurs (ActorRepository)
          * Récupérer les types (TypeRepository)
-         * Récupérer une/plusieurs série en fonction d'un submit utilisateur (SerieRepository)
          * Récupérer les épisodes d'une série (EpisodeRepository)
          * Créer une critique en fonction d'un submit utilisateur (EntityManager)
          * Modification d'une série avec un submit utilisateur (SerieRepository)
@@ -107,10 +107,17 @@ class MainController extends Controller
          */
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
+        $CritiqueRepository = $this->getDoctrine()->getRepository("MainBundle:Critic");
 
-        $episodes = $EpisodeRepository->getEpisodesFromSerie($SerieRepository->getSerieWithId("340ceadd-8af1-43d8-b646-a2ee0d251ae1"));
+        $serie = $SerieRepository->getSerieWithId("340ceadd-8af1-43d8-b646-a2ee0d251ae1");
+        $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serie->getId());
+        $episodes = $EpisodeRepository->getEpisodesFromSerie($serie->getId());
 
-        return $this->render("MainBundle:App:serie.html.twig", ["episodes" => $episodes]);
+        return $this->render("MainBundle:App:serie.html.twig", [
+            "episodes" => $episodes,
+            "serie" => $serie,
+            "critics" => $critics
+            ]);
     }
 
     public function episodeAction(Request $request)

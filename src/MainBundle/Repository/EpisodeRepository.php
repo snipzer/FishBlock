@@ -43,4 +43,17 @@ class EpisodeRepository extends \Doctrine\ORM\EntityRepository
               ORDER BY e.episodeNumber DESC'
         )->setParameter('serie', $serie)->setMaxResults(1)->getResult();
     }
+
+    public function CheckIfEpisodeAlreadyHere($episodeName, $episodeNumber, $seasonNumber)
+    {
+        if($this->findBy([
+            "title" => $episodeName,
+            "episodeNumber" => $episodeNumber,
+            "seasonNumber" => $seasonNumber
+        ]))
+        {
+            return true;
+        }
+        return false;
+    }
 }

@@ -60,19 +60,30 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
     }
 
     // Calcule et renvois la note de la série en fonction de la moyenne des notes de ces critiques
-    public function getSerieNotation($serieId) {}
+    public function getSerieNotation($serieId)
+    {
+        $critics = $this->getEntityManager()->getRepository("MainBundle:Critic")->getValidatedCriticsFromSerie($serieId);
+        $Notes = [];
+        foreach($critics as $critic)
+        {
+            array_push($Notes, $critic->getNote());
+        }
 
-    // Renvois toutes les critiques valider pour une série
-    public function getValidatedCriticsFromSerie($serieId) {}
-
-    // Renvois toutes les critiques non valider pour une série
-    public function getNonValidatedCriticFromSerie($serieId) {}
+        return round((array_sum($Notes)/count($Notes)));
+    }
 
     // Renvois toutes les modification de séries en attente de validation
     public function getModifSeries() {}
 
     // Renvois les séries qui n'ont pas de doublon au niveau de l'uuid et qui sont non validée
-    public function getNewSeries() {}
+    public function getNewSeries()
+    {
+        return $this->getEntityManager()->createQuery(
+            'SELECT s
+              FROM MainBundle\Entity\Serie s
+              ORDER BY s.creationDate DESC'
+        )->setMaxResults(10)->getResult();
+    }
 
     // Suppression d'une série
     public function deleteSerie($serieId)
@@ -81,5 +92,10 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
 
         $this->getEntityManager()->remove($serie);
         $this->getEntityManager()->flush();
+    }
+
+    public function checkIfSerieAlreadyHere($serieTitle)
+    {
+        return $this->findBy(["title" => $serieTitle]);
     }
 }

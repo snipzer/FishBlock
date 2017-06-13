@@ -2,6 +2,8 @@
 
 namespace MainBundle\Repository;
 
+use MainBundle\Entity\CriticNotation;
+
 /**
  * CriticNotationRepository
  *
@@ -10,4 +12,56 @@ namespace MainBundle\Repository;
  */
 class CriticNotationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getNotationByCriticId($criticId)
+    {
+        $critic = $this->getEntityManager()->getRepository("MainBundle:Critic")->getCriticByCriticId($criticId);
+
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("cn")
+            ->from("MainBundle:CriticNotation", "cn")
+            ->where("cn.critic = :critic")
+            ->setParameter(":critic", $critic)
+            ->getQuery()->getSingleScalarResult();
+
+    }
+
+    public function getLikedByCriticId($criticId)
+    {
+        $critic = $this->getEntityManager()->getRepository("MainBundle:Critic")->getCriticByCriticId($criticId);
+
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("cn")
+            ->from("MainBundle:CriticNotation", "cn")
+            ->where("cn.critic = :critic")
+            ->andWhere("cn.isLike = true")
+            ->setParameter(":critic", $critic)
+            ->getQuery()->getSingleScalarResult();
+
+    }
+
+    public function getUnLikedByCriticId($criticId)
+    {
+        $critic = $this->getEntityManager()->getRepository("MainBundle:Critic")->getCriticByCriticId($criticId);
+
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("cn")
+            ->from("MainBundle:CriticNotation", "cn")
+            ->where("cn.critic = :critic")
+            ->andWhere("cn.isLike = false")
+            ->setParameter(":critic", $critic)
+            ->getQuery()->getSingleScalarResult();
+
+    }
+
+    public function addNotation($criticId, $userId, $liked)
+    {
+        $critic = $this->getEntityManager()->getRepository("MainBundle:Critic")->getCriticByCriticId($criticId);
+        $user = $this->getEntityManager()->getRepository("MainBundle:User")->getUserById($userId);
+
+        $notation = new CriticNotation();
+        $notation->setUser($user)->setCritic($critic)->setIsLike($liked);
+
+        $this->getEntityManager()->persist($notation);
+        $this->getEntityManager()->flush();
+    }
 }
