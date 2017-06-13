@@ -38,13 +38,16 @@ class MainController extends Controller
          * Note série (SerieRepository)
          * Ajout série en favoris (FavoriteRepository)
          * Suggestion de série (SerieRepository)
-         * Afficher les critiques des séries que l'utilisateur à en favoris (Service)
+         * ~~Afficher les critiques des séries que l'utilisateur à en favoris (Service)
          * Système de like/dislike (CriticNotationRepository)
          */
-        $toto = $this->getDoctrine()->getRepository("MainBundle:Favoris")->wall("ded4a698-d81a-49ed-a9ab-0cba024ef1f4");
+        $userId = "ded4a698-d81a-49ed-a9ab-0cba024ef1f4";
 
+        $wallInfo = $this->getDoctrine()->getRepository("MainBundle:Favoris")->wall($userId);
 
-        return $this->render("MainBundle:App:wall.html.twig");
+        return $this->render("MainBundle:App:wall.html.twig", [
+            "wallInfo" => $wallInfo
+        ]);
     }
 
     public function unloggedWallAction(Request $request)
@@ -58,7 +61,22 @@ class MainController extends Controller
          * Récupération des dernières critiques (CriticRepository)
          */
 
-        return $this->render("MainBundle:App:unloggedWall.html.twig");
+        $serieId = "a5b03c48-4370-4e09-bced-13f157357510";
+
+        $trendingSerie = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
+
+        $lastPublishedEpisode = $this->getDoctrine()->getRepository("MainBundle:Episode")->getLastEpisodeFromSerie($serieId);
+
+        $lastPublishedSerie = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
+
+        $lastPublishedCritics = $this->getDoctrine()->getRepository("MainBundle:Critic")->getLastUploadedAndValidatedCritics();
+
+        return $this->render("MainBundle:App:unloggedWall.html.twig", [
+            "trendingSerie" => $trendingSerie,
+            "lastPublishedSerie" => $lastPublishedSerie,
+            "lastPublishedEpisode" => $lastPublishedEpisode,
+            "lastPublishedCritics" => $lastPublishedCritics
+        ]);
     }
 
 
@@ -76,9 +94,11 @@ class MainController extends Controller
          *
          */
 
-        $this->get("SaveSerie")->saveSerie("stargate");
+        $series = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
 
-        return $this->render("MainBundle:App:search.html.twig");
+        return $this->render("MainBundle:App:search.html.twig", [
+            "series" => $series
+        ]);
     }
 
     public function favorisAction(Request $request)
@@ -91,36 +111,50 @@ class MainController extends Controller
          * Récupération de la note de la série (SerieRepository)
          */
 
-        return $this->render("MainBundle:App:favoris.html.twig");
+        $userId = "ded4a698-d81a-49ed-a9ab-0cba024ef1f4";
+
+        $favoris = $this->getDoctrine()->getRepository("MainBundle:Favoris")->getFavorisByUserId($userId);
+
+        return $this->render("MainBundle:App:favoris.html.twig", [
+            "favoris" => $favoris
+        ]);
     }
 
     public function serieAction(Request $request)
     {
         /**
          * TODO:
-         * Récupérer les acteurs (ActorRepository)
-         * Récupérer les types (TypeRepository)
-         * Récupérer les épisodes d'une série (EpisodeRepository)
+         * ~~Récupérer les acteurs (ActorRepository)
+         * ~~Récupérer les types (TypeRepository)
+         * ~~Récupérer les épisodes d'une série (EpisodeRepository)
          * Créer une critique en fonction d'un submit utilisateur (EntityManager)
          * Modification d'une série avec un submit utilisateur (SerieRepository)
          * Système de like/dislike (CriticNotationRepository)
-         * Récupération de toutes les critiques d'une série (CriticRepository)
+         * ~~Récupération de toutes les critiques d'une série (CriticRepository)
          * Ajout de la série en favoris (FavorisRepository)
          * Récupération de la note d'une série (SerieRepository)
          * Notification (Service)
          */
+        $serieId = "a5b03c48-4370-4e09-bced-13f157357510";
+
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
         $CritiqueRepository = $this->getDoctrine()->getRepository("MainBundle:Critic");
+        $ActorRepository = $this->getDoctrine()->getRepository("MainBundle:Actor");
+        $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:Type");
 
-        $serie = $SerieRepository->getSerieWithId("3d4bc83d-dcda-4835-94f7-b17cceaa417a");
+        $serie = $SerieRepository->getSerieWithId($serieId);
         $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serie->getId());
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serie->getId());
+        $actors = $ActorRepository->getActors();
+        $types = $TypeRepository->getTypes();
 
         return $this->render("MainBundle:App:serie.html.twig", [
             "episodes" => $episodes,
             "serie" => $serie,
-            "critics" => $critics
+            "critics" => $critics,
+            "actors" => $actors,
+            "types" => $types
             ]);
     }
 
@@ -128,10 +162,33 @@ class MainController extends Controller
     {
         /**
          * TODO:
+         * Pareil que serieAction
          * Récupérer les informations d'un épidose (EpisodeRepository)
          */
+        $serieId = "a5b03c48-4370-4e09-bced-13f157357510";
+        $episodeId = "6f75f97d-011d-4a97-ae2d-0d007663f84f";
 
-        return $this->render("MainBundle:App:serie.html.twig");
+        $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
+        $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
+        $CritiqueRepository = $this->getDoctrine()->getRepository("MainBundle:Critic");
+        $ActorRepository = $this->getDoctrine()->getRepository("MainBundle:Actor");
+        $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:Type");
+
+
+        $serie = $SerieRepository->getSerieWithId($serieId);
+        $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
+        $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
+        $actors = $ActorRepository->getActors();
+        $types = $TypeRepository->getTypes();
+        $episode = $EpisodeRepository->getEpisode($episodeId);
+
+        return $this->render("MainBundle:App:serie.html.twig", [
+            "episodes" => $episodes,
+            "serie" => $serie,
+            "critics" => $critics,
+            "actors" => $actors,
+            "types" => $types
+        ]);
     }
 
     public function accountAction(Request $request)
@@ -144,8 +201,11 @@ class MainController extends Controller
          * Les mots de passe ne doivent pas être envoyer en clair !
          * Suggestion de serie (SerieRepository)
          */
+        $user = $this->getDoctrine()->getRepository("MainBundle:User");
 
-        return $this->render("MainBundle:App:account.html.twig");
+        return $this->render("MainBundle:App:account.html.twig", [
+            "user" => $user
+        ]);
     }
 
     public function legalAction(Request $request)
