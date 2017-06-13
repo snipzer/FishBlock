@@ -1,35 +1,21 @@
 
-<img src="{{ asset('public/img/logoFishblock.svg') }}" width="200">
+<header class="site_header">
 
-<div class="container-fluid" class="border">
-    <div class="col-md-12" class="border">
-        <div class="row" class="border">
-            <form class="form-inline" class="border">
-                <div class="form-group">
-                    <div class="col-sm-2">
-                        <input type="email" class="form-control" id="email" placeholder="Enter email">
-                    </div>
-                </div><br/>
-                <div class="form-group">
-                    <div class="col-sm-4">
-                        <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-6 col-md-1">
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </div>
-                </div>
-            </form>
+    <div class="block_header">
+        <img src="{{ asset('public/img/logoFishblock.svg') }}">
+
+        <div class="block_account">
+            <div class="user_name">
+                username
+            </div>
+            <div class="notification_account">
+                <a>{{ "Notifications"|trans }}</a>
+                <a>{{ "Account"|trans }}</a>
+            </div>
         </div>
     </div>
-</div>
 
-<div>
-    <div>
-        <img src="{{ asset('public/img/logoFishblock.svg') }}" width="200">
+    <div class="separation_bar">
     </div>
-    <div>
 
-    </div>
-</div>
+</header>

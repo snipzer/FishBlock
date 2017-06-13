@@ -22,7 +22,9 @@
     {% include "MainBundle:Layout:loginHead.html.twig" %}
 {% endblock %}
 
-{% block content %} {% endblock %}
+{% block content %}
+    {% include "MainBundle:Layout:menu.html.twig" %}
+{% endblock %}
 
 {% block footer %}
     {% include "MainBundle:Layout:footer.html.twig" %}
