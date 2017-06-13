@@ -116,7 +116,7 @@ class MainController extends Controller
         return $this->render("MainBundle:App:serie.html.twig", [
             "episodes" => $episodes,
             "serie" => $serie,
-            "critiques" => $critics
+            "critics" => $critics
             ]);
     }
 
