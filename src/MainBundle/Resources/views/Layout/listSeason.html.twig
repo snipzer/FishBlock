@@ -1,7 +1,8 @@
 <div class="listSeason">
+    <h2>{{ serie.title }}</h2>
     <ul>
-        {% for seasonNumber in seasons %}
-            <li> {{ seasonNumber.title }}</li>
+        {% for episode in episodes%}
+            <li> {{ episode.title }}</li>
         {% else %}
             <li>Episodes not found</li>
         {% endfor %}

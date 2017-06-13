@@ -96,6 +96,17 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
 
     public function checkIfSerieAlreadyHere($serieTitle)
     {
-        return $this->findBy(["title" => $serieTitle]);
+        $isHereOrNot = $this->getEntityManager()->createQueryBuilder()
+            ->select("s")
+            ->from("MainBundle:Serie", "s")
+            ->where("s.title = :sTitle")
+            ->setParameter(":sTitle", $serieTitle)
+            ->getQuery()
+            ->getResult();
+
+        if(count($isHereOrNot))
+            return false;
+
+        return true;
     }
 }
