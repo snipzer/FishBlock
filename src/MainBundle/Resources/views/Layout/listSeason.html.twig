@@ -1,0 +1,9 @@
+<div class="listSeason">
+    <ul>
+        {% for seasonNumber in seasons %}
+            <li> {{ seasonNumber.title }}</li>
+        {% else %}
+            <li>Episodes not found</li>
+        {% endfor %}
+    </ul>
+</div>

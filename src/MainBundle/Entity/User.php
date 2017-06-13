@@ -17,19 +17,11 @@ class User extends BaseUser
 
     private $firstName;
 
-    private $userName;
-
-    private $mail;
-
     private $birthdate;
 
     private $profilePicture;
 
     private $criticNumber;
-
-    private $isModo;
-
-    private $isAdmin;
 
     private $isValid;
 
@@ -45,6 +37,8 @@ class User extends BaseUser
         $this->critics = new ArrayCollection();
         $this->favoris = new ArrayCollection();
         $this->criticNotations = new ArrayCollection();
+        $this->criticNumber = 0;
+        $this->isValid = true;
     }
 
     /**
@@ -157,30 +151,6 @@ class User extends BaseUser
     }
 
     /**
-     * Set userName
-     *
-     * @param string $userName
-     *
-     * @return User
-     */
-    public function setUserName($userName)
-    {
-        $this->userName = $userName;
-
-        return $this;
-    }
-
-    /**
-     * Get userName
-     *
-     * @return string
-     */
-    public function getUserName()
-    {
-        return $this->userName;
-    }
-
-    /**
      * Set password
      *
      * @param string $password
@@ -202,30 +172,6 @@ class User extends BaseUser
     public function getPassword()
     {
         return $this->password;
-    }
-
-    /**
-     * Set mail
-     *
-     * @param string $mail
-     *
-     * @return User
-     */
-    public function setMail($mail)
-    {
-        $this->mail = $mail;
-
-        return $this;
-    }
-
-    /**
-     * Get mail
-     *
-     * @return string
-     */
-    public function getMail()
-    {
-        return $this->mail;
     }
 
     /**
@@ -299,55 +245,6 @@ class User extends BaseUser
     {
         return $this->criticNumber;
     }
-
-    /**
-     * Set isModo
-     *
-     * @param boolean $isModo
-     *
-     * @return User
-     */
-    public function setIsModo($isModo)
-    {
-        $this->isModo = $isModo;
-
-        return $this;
-    }
-
-    /**
-     * Get isModo
-     *
-     * @return bool
-     */
-    public function getIsModo()
-    {
-        return $this->isModo;
-    }
-
-    /**
-     * Set isAdmin
-     *
-     * @param boolean $isAdmin
-     *
-     * @return User
-     */
-    public function setIsAdmin($isAdmin)
-    {
-        $this->isAdmin = $isAdmin;
-
-        return $this;
-    }
-
-    /**
-     * Get isAdmin
-     *
-     * @return bool
-     */
-    public function getIsAdmin()
-    {
-        return $this->isAdmin;
-    }
-
     /**
      * Set isValid
      *
