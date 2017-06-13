@@ -10,6 +10,11 @@ namespace MainBundle\Repository;
  */
 class TypeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getTypes()
+    {
+        return $this->findAll();
+    }
+
     public function checkIfTypeAlreadyHere($typeName)
     {
         $isHereOrNot = $this->getEntityManager()->createQueryBuilder()
