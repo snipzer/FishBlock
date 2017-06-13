@@ -19,13 +19,15 @@ class MainController extends Controller
          * TODO:
          * Login (UserRepository)
          * New User (EntityManager)
-         * Recupération des séries populaires (SerieRepository)
-         * Switch de la langue
+         * ~~Recupération des séries populaires (SerieRepository)
          */
 
-        $this->get("SaveSerie")->saveSerie("stargate");
+        $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
-        return $this->render("MainBundle:App:home.html.twig");
+
+        return $this->render("MainBundle:App:home.html.twig", [
+            "popularSeries" => $popularSeries
+        ]);
     }
 
     public function wallAction(Request $request)
@@ -39,6 +41,8 @@ class MainController extends Controller
          * Afficher les critiques des séries que l'utilisateur à en favoris (Service)
          * Système de like/dislike (CriticNotationRepository)
          */
+        $toto = $this->getDoctrine()->getRepository("MainBundle:Favoris")->wall("ded4a698-d81a-49ed-a9ab-0cba024ef1f4");
+
 
         return $this->render("MainBundle:App:wall.html.twig");
     }
