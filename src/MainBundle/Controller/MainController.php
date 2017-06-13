@@ -23,11 +23,7 @@ class MainController extends Controller
          * Switch de la langue
          */
 
-        $SerieRepo = $this->getDoctrine()->getRepository("MainBundle:Serie");
-
-        $inter = $SerieRepo->getSerieNotation("340ceadd-8af1-43d8-b646-a2ee0d251ae1");
-
-        var_dump($inter);
+        $this->get("SaveSerie")->saveSerie("stargate");
 
         return $this->render("MainBundle:App:home.html.twig");
     }
@@ -111,14 +107,16 @@ class MainController extends Controller
          */
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
+        $CritiqueRepository = $this->getDoctrine()->getRepository("MainBundle:Critic");
 
         $serie = $SerieRepository->getSerieWithId("340ceadd-8af1-43d8-b646-a2ee0d251ae1");
-
+        $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serie->getId());
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serie->getId());
 
         return $this->render("MainBundle:App:serie.html.twig", [
             "episodes" => $episodes,
-            "serie" => $serie
+            "serie" => $serie,
+            "critics" => $critics
             ]);
     }
 

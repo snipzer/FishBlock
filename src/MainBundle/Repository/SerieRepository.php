@@ -93,4 +93,9 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
         $this->getEntityManager()->remove($serie);
         $this->getEntityManager()->flush();
     }
+
+    public function checkIfSerieAlreadyHere($serieTitle)
+    {
+        return $this->findBy(["title" => $serieTitle]);
+    }
 }
