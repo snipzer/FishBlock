@@ -7,7 +7,7 @@
     {% include "MainBundle:Layout:listSeason.html.twig" %}
 {% endblock %}
 
-{% block title %}Series{% endblock %}
+{% block title %}{{ 'Series'|trans }}{% endblock %}
 
 {% block head %}
     {{ parent() }}
@@ -24,7 +24,7 @@
             {% for episode in episodes %}
                 <li> {{ episode.title }}</li>
             {% else %}
-                <li>Episodes not found</li>
+                <li>{{ 'Episodes not found'|trans }}</li>
             {% endfor %}
         </ul>
     </div>
