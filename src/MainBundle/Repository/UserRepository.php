@@ -46,4 +46,29 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
+
+    public function TempFakeUser()
+    {
+        $user1 = [
+            "email" => "toto@gmail.com",
+            "password" => "123456789",
+            "userName" => "TotoMaster",
+            "lastName" => "toto",
+            "firstName" => "master",
+            "role" => "ROLE_USER"
+        ];
+
+        $user2 = [
+            "email" => "snipzer@gmail.com",
+            "password" => "123456789",
+            "userName" => "Snipzer",
+            "lastName" => "snip",
+            "firstName" => "zer",
+            "role" => "ROLE_ADMIN"
+        ];
+
+        $this->createUser($user1["email"], $user1["password"], $user1["userName"], $user1["firstName"], $user1["lastName"], $user1["role"]);
+
+        $this->createUser($user2["email"], $user2["password"], $user2["userName"], $user2["firstName"], $user2["lastName"], $user2["role"]);
+    }
 }

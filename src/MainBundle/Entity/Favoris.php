@@ -24,9 +24,9 @@ class Favoris
     }
 
     /**
-     * @param User $user
+     * @param Object $user
      **/
-    public function setUser(User $user)
+    public function setUser($user)
     {
         $this->user = $user;
         return $this;
@@ -41,9 +41,9 @@ class Favoris
     }
 
     /**
-     * @param Serie $serie
+     * @param Object $serie
      **/
-    public function setSerie(Serie $serie)
+    public function setSerie($serie)
     {
         $this->serie = $serie;
         return $this;

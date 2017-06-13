@@ -28,8 +28,12 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
     // Ajout d'une série au favoris
     public function addSerie($userId, $serieId)
     {
+        $user = $this->getEntityManager()->getRepository("MainBundle:User")->getUserById($userId);
+
+        $serie = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSerieWithId($serieId);
+
         $favoris = new Favoris();
-        $favoris->setUser($userId)->setSerie($serieId);
+        $favoris->setUser($user)->setSerie($serie);
 
         $this->getEntityManager()->persist($favoris);
         $this->getEntityManager()->flush();
@@ -42,5 +46,27 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
 
         $this->getEntityManager()->remove($fav);
         $this->getEntityManager()->flush();
+    }
+
+    public function wall($userId)
+    {
+        $favs = $this->getFavorisByUserId($userId);
+
+        $DDArray = [];
+
+        foreach($favs as $fav)
+        {
+            $serie = $fav->getSerie();
+
+            $criticInArray = $this->getEntityManager()->getRepository("MainBundle:Critic")->getLastUploadedAndValidatedCriticFromSerie($serie);
+
+            $critic = $criticInArray[0];
+
+            $array = [$serie, $critic];
+
+            $DDArray[] = $array;
+        }
+
+        return $DDArray;
     }
 }
