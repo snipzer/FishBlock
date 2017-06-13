@@ -17,10 +17,18 @@ class ActorRepository extends \Doctrine\ORM\EntityRepository
 
     public function checkIfActorAlreadyHere($actorName)
     {
-        if($this->findBy(["name" => $actorName]))
-        {
-            return true;
-        }
-        return false;
+        $isHereOrNot = $this->getEntityManager()->createQueryBuilder()
+            ->select("a")
+            ->from("MainBundle:Actor", "a")
+            ->where("a.name = :aName")
+            ->setParameter(":aName", $actorName)
+            ->getQuery()
+            ->getResult();
+
+
+        if(count($isHereOrNot))
+            return false;
+
+        return true;
     }
 }
