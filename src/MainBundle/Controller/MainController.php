@@ -22,14 +22,21 @@ class MainController extends Controller
          * ~~Recupération des séries populaires (SerieRepository)
          */
 
-        $this->get("SuggestSerie")->getSuggestion("ded4a698-d81a-49ed-a9ab-0cba024ef1f4");
+        $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
+
+        $this->get("SuggestSerie")->getSuggestion("151e72a7-7084-4132-9416-2ce4c96dfbda");
 
 //        $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
 
+
         return $this->render("MainBundle:App:home.html.twig"/*, [
             "popularSeries" => $popularSeries
+
+        ]);
+
         ]*/);
+
     }
 
     public function wallAction(Request $request)
@@ -50,6 +57,7 @@ class MainController extends Controller
         return $this->render("MainBundle:App:wall.html.twig", [
             "wallInfo" => $wallInfo
         ]);
+
     }
 
     public function unloggedWallAction(Request $request)
@@ -101,6 +109,7 @@ class MainController extends Controller
         return $this->render("MainBundle:App:search.html.twig", [
             "series" => $series
         ]);
+
     }
 
     public function favorisAction(Request $request)
@@ -145,7 +154,9 @@ class MainController extends Controller
         $ActorRepository = $this->getDoctrine()->getRepository("MainBundle:Actor");
         $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:Type");
 
+
         $serie = $SerieRepository->getSerieWithId($serieId);
+
         $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serie->getId());
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serie->getId());
         $actors = $ActorRepository->getActors();
