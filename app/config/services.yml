@@ -16,3 +16,6 @@ services:
     SaveSerie:
         class: MainBundle\Service\SaveSerie
         arguments: ["@doctrine.orm.entity_manager", "@TvdbConnector"]
+    SuggestSerie:
+        class: MainBundle\Service\SuggestSerie
+        arguments: ["@doctrine.orm.entity_manager"]
