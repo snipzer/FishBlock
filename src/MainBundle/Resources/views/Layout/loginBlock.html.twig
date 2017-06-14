@@ -1,8 +1,7 @@
 <div class="loginBlock">
     <form>
         <div class="loginUsernamePassword">
-            <input/>
-            <input/>
+            {{ render(controller('FOSUserBundle:Security:login')) }}
         </div>
 
         <div class="loginConnectionForgot">
