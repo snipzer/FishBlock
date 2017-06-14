@@ -21,21 +21,11 @@ class MainController extends Controller
          * New User (EntityManager)
          * ~~Recupération des séries populaires (SerieRepository)
          */
-
-
-
-
-
         $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
-
-
-//        $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
-
-
-        return $this->render("MainBundle:App:home.html.twig"/*, [
+        return $this->render("MainBundle:App:home.html.twig", [
             "popularSeries" => $popularSeries
-        ]*/);
+        ]);
     }
 
     public function wallAction(Request $request)
@@ -51,10 +41,12 @@ class MainController extends Controller
          */
         $userId = "ded4a698-d81a-49ed-a9ab-0cba024ef1f4";
 
+        $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $wallInfo = $this->getDoctrine()->getRepository("MainBundle:Favoris")->wall($userId);
 
         return $this->render("MainBundle:App:wall.html.twig", [
-            "wallInfo" => $wallInfo
+            "wallInfo" => $wallInfo,
+            "serieSuggest" => $serieSuggest
         ]);
     }
 
@@ -121,10 +113,12 @@ class MainController extends Controller
 
         $userId = "ded4a698-d81a-49ed-a9ab-0cba024ef1f4";
 
+        $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $favoris = $this->getDoctrine()->getRepository("MainBundle:Favoris")->getFavorisByUserId($userId);
 
         return $this->render("MainBundle:App:favoris.html.twig", [
-            "favoris" => $favoris
+            "favoris" => $favoris,
+            "serieSuggest" => $serieSuggest
         ]);
     }
 
@@ -209,10 +203,15 @@ class MainController extends Controller
          * Les mots de passe ne doivent pas être envoyer en clair !
          * Suggestion de serie (SerieRepository)
          */
-        $user = $this->getDoctrine()->getRepository("MainBundle:User");
+
+        $userId = "ded4a698-d81a-49ed-a9ab-0cba024ef1f4";
+
+        $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
+        $user = $this->getDoctrine()->getRepository("MainBundle:User")->getUserById($userId);
 
         return $this->render("MainBundle:App:account.html.twig", [
-            "user" => $user
+            "user" => $user,
+            "serieSuggest" => $serieSuggest
         ]);
     }
 
