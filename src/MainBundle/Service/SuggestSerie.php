@@ -7,10 +7,6 @@ use Doctrine\ORM\EntityManager;
 
 class SuggestSerie extends  Controller
 {
-    // TODO: Récuperer l'ensemble des favoris d'un utilisateur
-    // TODO: Choisir une série aléatoire
-    // TODO: Récupérer sont type
-    // TODO: Faire une recherche de série avec ce type, en choisir deux et les renvoyer
     private $manager;
 
     public function __construct(EntityManager $em)
@@ -36,7 +32,7 @@ class SuggestSerie extends  Controller
         $chosenSerie = $array[array_rand($array)];
 
         // On stocke les informations de la série de départ
-        $result[] = $chosenSerie->getTitle();
+        $result[] = $chosenSerie;
 
         // On récupère les type de la série choisie
         $arraySerieTypes = $chosenSerie->getSerieTypes();
@@ -56,18 +52,11 @@ class SuggestSerie extends  Controller
         // Pour chaque sérieType
         foreach($serieTypes as $serieType)
         {
-
-            // On verifie que la série est différente de celle du début
-            if(!($serieType->getSerie() === $result[0]))
-                array_push($result, $serieType->getSerie()->getTitle());
+            if($serieType->getSerie() !== $chosenSerie)
+                array_push($result, $serieType->getSerie());
         }
-
-        echo "<pre>";
-        var_dump($result);
-        echo "</pre>";
 
         return $result;
     }
 }
-
 ?>
