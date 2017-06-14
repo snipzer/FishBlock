@@ -54,7 +54,7 @@ header {
     flex: 1;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
 
     width: 100%;
 }
@@ -64,7 +64,6 @@ header {
     align-items: center;
     justify-content: center;
 
-    height: 100%;
     width: 50%;
 
     color: #ffffff;
@@ -79,9 +78,10 @@ header {
 /* loginBlock.html.twig -----------------
 */
 .loginBlock {
-    display: flex;
+    display: none;
+    /*display: flex;*/
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
 
     width: 28em;
 
@@ -104,7 +104,6 @@ header {
     align-items: center;
     justify-content: center;
 
-    height: 100%;
     width: 50%;
 
     color: #ffffff;
@@ -120,9 +119,12 @@ header {
 */
 .separationBar {
     margin: 20px 0;
-    height: 1em;
     width: 100%;
     background-color: #686868;
+}
+
+.separationFat {
+    height: 1em;
 }
 
 /* Pour la version responsive -----------------
@@ -132,7 +134,7 @@ header {
         flex-direction: column;
     }
 
-    .header {
+    header {
         margin: 10px 20px ;
     }
 
@@ -182,7 +184,8 @@ Style pour le bloc menu du site
     align-items: center;
 
     width: 15%;
-    height: 650px;
+    height: 66vh;
+    min-width: 10em;
 
     background-color: #686868;
 
@@ -275,6 +278,19 @@ Style pour le bloc menu du site
     background-color: #ed3126;
 }
 
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 900px) {
+
+    .menuBlock {
+        position: fixed;
+        top: 0;
+        left: 80%;
+        height: 100vh;
+    }
+
+}
+
 /*----------------------------------------------------------------------------------
 Style pour la suggestion/recherche du site
 ----------------------------------------------------------------------------------*/
@@ -286,7 +302,7 @@ Style pour la suggestion/recherche du site
     align-items: center;
 
     width: 15%;
-    height: 650px;
+    height: 66vh;
 
     background-color: #686868;
     color: #ffffff;
@@ -296,11 +312,20 @@ Style pour la suggestion/recherche du site
 Style pour le footer du site
 ----------------------------------------------------------------------------------*/
 
+footer {
+    margin: 15px 50px;
+}
+
+.separationThin {
+    height: 0.3em;
+}
+
 .footerBlock {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    white-space: nowrap;
 
-    margin: 15px 50px;
 }
 
 .footerLegalNotice {
@@ -309,6 +334,7 @@ Style pour le footer du site
     height: 100%;
     border-right: solid 2px black;
     padding: 0 10px;
+    margin-bottom: 10px;
 }
 
 .footerLegalNotice a {
@@ -324,6 +350,7 @@ Style pour le footer du site
 
     height: 100%;
     padding: 0 10px;
+    margin-bottom: 10px;
 }
 
 .footerWebsitePlan a {
@@ -336,7 +363,24 @@ Style pour le footer du site
 .footerDevWeb {
     display: flex;
     flex-direction: column;
+    line-height: 0.8em;
 
-    width: 13%;
-    height: 100%;
+    padding: 0 10px;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 900px) {
+
+    footer {
+        margin: 10px 20px ;
+    }
+
+}
+
+/*@media screen and (max-width: 900px) and (min-width: 600px) {*/
+    /*.accountBlock {*/
+        /*width: 70%;*/
+        /*margin: auto;*/
+    /*}*/
 }
