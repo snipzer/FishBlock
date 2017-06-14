@@ -1,3 +1,10 @@
+#root:
+#    path: /
+#    defaults:
+#        _controller: FrameworkBundle:Redirect:urlRedirect
+#        route: main_home
+#        permanent: true
+
 main_home:
     path:     /{_locale}
     defaults:
@@ -45,6 +52,13 @@ main_account:
     path:     /{_locale}/account
     defaults:
         _controller: MainBundle:Main:account
+    requirements:
+        _locale: en|fr
+
+main_legal:
+    path:     /{_locale}/legal
+    defaults:
+        _controller: MainBundle:Main:legal
     requirements:
         _locale: en|fr
 

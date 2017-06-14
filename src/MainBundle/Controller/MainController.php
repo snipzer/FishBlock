@@ -4,6 +4,7 @@ namespace MainBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,11 +19,16 @@ class MainController extends Controller
          * TODO:
          * Login (UserRepository)
          * New User (EntityManager)
-         * Recupération des séries populaires (SerieRepository)
-         * Switch de la langue
+         * ~~Recupération des séries populaires (SerieRepository)
          */
 
-        return $this->render("MainBundle:App:home.html.twig");
+        $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
+        // var_dump($popularSeries); -> retourne tableau vide
+
+        return $this->render("MainBundle:App:home.html.twig", [
+            "popularSeries" => $popularSeries
+        ]);
+
     }
 
     public function wallAction(Request $request)
@@ -36,6 +42,8 @@ class MainController extends Controller
          * Afficher les critiques des séries que l'utilisateur à en favoris (Service)
          * Système de like/dislike (CriticNotationRepository)
          */
+        $toto = $this->getDoctrine()->getRepository("MainBundle:Favoris")->wall("ded4a698-d81a-49ed-a9ab-0cba024ef1f4");
+        // var_dump($toto); -> invisible
 
         return $this->render("MainBundle:App:wall.html.twig");
     }
@@ -69,9 +77,8 @@ class MainController extends Controller
          *
          */
 
-        $this->get("SaveSerie")->saveSerie("smallville");
-
-        return $this->render("MainBundle::search.html.twig");
+        $this->get("SaveSerie")->saveSerie("stargate");
+        return $this->render("MainBundle:App:search.html.twig");
     }
 
     public function favorisAction(Request $request)
@@ -93,7 +100,6 @@ class MainController extends Controller
          * TODO:
          * Récupérer les acteurs (ActorRepository)
          * Récupérer les types (TypeRepository)
-         * Récupérer une/plusieurs série en fonction d'un submit utilisateur (SerieRepository)
          * Récupérer les épisodes d'une série (EpisodeRepository)
          * Créer une critique en fonction d'un submit utilisateur (EntityManager)
          * Modification d'une série avec un submit utilisateur (SerieRepository)
@@ -103,8 +109,19 @@ class MainController extends Controller
          * Récupération de la note d'une série (SerieRepository)
          * Notification (Service)
          */
+        $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
+        $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
+        $CritiqueRepository = $this->getDoctrine()->getRepository("MainBundle:Critic");
 
-        return $this->render("MainBundle:App:serie.html.twig");
+        $serie = $SerieRepository->getSerieWithId("3d4bc83d-dcda-4835-94f7-b17cceaa417a");
+        $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serie->getId());
+        $episodes = $EpisodeRepository->getEpisodesFromSerie($serie->getId());
+
+        return $this->render("MainBundle:App:serie.html.twig", [
+            "episodes" => $episodes,
+            "serie" => $serie,
+            "critics" => $critics
+            ]);
     }
 
     public function episodeAction(Request $request)
@@ -129,6 +146,16 @@ class MainController extends Controller
          */
 
         return $this->render("MainBundle:App:account.html.twig");
+    }
+
+    public function legalAction(Request $request)
+    {
+        /**
+         * TODO:
+         * Afficher les mentions légales du site
+         */
+
+        return $this->render("MainBundle:App:legal.html.twig");
     }
 
 }

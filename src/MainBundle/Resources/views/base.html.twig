@@ -1,33 +1,34 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {#<link rel="icon" href="/favicon.ico">#}
-    <title>{% block title 'FishBlock' %}</title> {% endblock %}
+    <title>{% block title %} {% endblock %} - FishBlock</title>
+
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    {% endblock %}
 
     {% block stylesheets %}
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-        <link href="{{ asset('bundles/app/css/bootstrap.min.css') }}" rel="stylesheet">
-    {% endblock stylesheets %}
-
+        <link rel="stylesheet" href="{{ asset('public/css/style.css') }}"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    {% endblock %}
 </head>
-
 <body>
-{% block include %}
-    {% include "MainBundle:Layout:navbar.html.twig" %}
-    {% include "MainBundle:Layout:flashes.html.twig" %}
+
+{% block header %}
+    {% include "MainBundle:Layout:loginHead.html.twig" %}
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block content %} {% endblock %}
 
-{% block footer %}{% endblock %}
-
-{% block javascript %}
+{% block footer %}
+    {% include "MainBundle:Layout:footer.html.twig" %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 {% endblock %}
 
 </body>
 </html>
+

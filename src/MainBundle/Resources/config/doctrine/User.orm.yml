@@ -17,24 +17,14 @@ MainBundle\Entity\User:
         firstName:
             type: string
             length: '255'
-        userName:
-            type: string
-            length: '255'
-        mail:
-            type: string
-            length: '255'
-            unique: true
         birthdate:
             type: datetime
         profilePicture:
             type: string
             length: '255'
+            nullable: true
         criticNumber:
             type: integer
-        isModo:
-            type: boolean
-        isAdmin:
-            type: boolean
         isValid:
             type: boolean
     oneToMany:

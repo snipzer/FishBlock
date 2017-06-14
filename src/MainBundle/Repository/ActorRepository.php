@@ -10,4 +10,25 @@ namespace MainBundle\Repository;
  */
 class ActorRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getActors()
+    {
+        return $this->findAll();
+    }
+
+    public function checkIfActorAlreadyHere($actorName)
+    {
+        $isHereOrNot = $this->getEntityManager()->createQueryBuilder()
+            ->select("a")
+            ->from("MainBundle:Actor", "a")
+            ->where("a.name = :aName")
+            ->setParameter(":aName", $actorName)
+            ->getQuery()
+            ->getResult();
+
+
+        if(count($isHereOrNot))
+            return false;
+
+        return true;
+    }
 }
