@@ -1,9 +1,162 @@
-body {
+/*----------------------------------------------------------------------
+Style pour la base du site (base.html.twig)
+-----------------------------------------------------------------------*/
 
+.base_color {
+    background-color: #f3f2f0;
 }
 
-.background-image {
-    border: solid;
-    background-color: black;
-    text-decoration: underline;
+html {
+    background-color: #f3f2f0;
 }
+
+/*----------------------------------------------------------------------
+Style pour le header du site (header.html.twig)
+----------------------------------------------------------------------*/
+
+.site_header {
+    margin: 15px 50px;
+}
+
+.block_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.block_header >img {
+    height: 150px;
+    width: 300px;
+}
+
+/* accountBlock.html.twig -----------------
+*/
+.block_account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 28em;
+
+    color: #ffffff;
+    background-color: #ed3126;
+    font-weight: bolder;
+}
+
+.user_name {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.notification_account {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 100%;
+}
+
+.notification_account a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 50%;
+
+    color: #ffffff;
+}
+
+.notification_account a:hover {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #686868;
+}
+
+/* loginBlock.html.twig -----------------
+*/
+.block_login {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 28em;
+
+    color: #ffffff;
+    background-color: #ed3126;
+    font-weight: bolder;
+}
+
+.login_username_password {
+    display: flex;
+    flex-direction: column;
+}
+
+.login_connection_forgot a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 50%;
+
+    color: #ffffff;
+}
+
+.login_connection_forgot a:hover {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #686868;
+}
+
+/* Bar de séparation du header -----------------
+*/
+.separation_bar {
+    margin: 20px 0;
+    height: 1em;
+    width: 100%;
+    background-color: #686868;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 900px) {
+    .block_header {
+        flex-direction: column;
+    }
+
+    .site_header {
+        margin: 10px 20px ;
+    }
+
+    .block_header >img {
+        height: 125px;
+        width: 250px;
+    }
+
+    .block_account {
+        width: 100%;
+        min-height: 5em;
+    }
+
+    .notification_account a {
+        height: 2.5em;
+    }
+
+    .separation_bar {
+        margin: 10px 0;
+    }
+}
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+    .block_account {
+        width: 70%;
+        margin: auto;
+    }
+}
+
+/*----------------------------------------------------------------------------------
+Style pour le footer du site
+----------------------------------------------------------------------------------*/
