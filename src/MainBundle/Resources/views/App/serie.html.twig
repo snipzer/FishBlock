@@ -3,7 +3,6 @@
 {% block include %}
     {% include "MainBundle:Layout:accountBlock.html.twig" %}
     {% include "MainBundle:Layout:menu.html.twig" %}
-    {% include "MainBundle:Layout:detailSerie.html.twig" %}
 {% endblock %}
 
 {% block title %}{{ 'Series'|trans }}{% endblock %}
@@ -18,8 +17,8 @@
 {% endblock %}
 
 {% block content %}
-    {% include "MainBundle:Layout:listSeason.html.twig" %}
-
+    {#{% include "MainBundle:Layout:listSeason.html.twig" %}#}
+    {% include "MainBundle:Layout:detailSerie.html.twig" %}
 {% endblock %}
 
 {% block footer %}
