@@ -67,7 +67,7 @@ class SerieActor
     }
 
     /**
-     * @return ArrayCollection
+     * @return Actor
      */
     public function getActor()
     {
@@ -75,7 +75,7 @@ class SerieActor
     }
 
     /**
-     * @param ArrayCollection $actor
+     * @param Actor $actor
      **/
     public function setActor(Actor $actor)
     {
