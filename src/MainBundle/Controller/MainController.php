@@ -22,14 +22,22 @@ class MainController extends Controller
          * ~~Recupération des séries populaires (SerieRepository)
          */
 
+
+        $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
+
         $this->get("SuggestSerie")->getSuggestion("151e72a7-7084-4132-9416-2ce4c96dfbda");
 
 //        $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
 
+
         return $this->render("MainBundle:App:home.html.twig"/*, [
             "popularSeries" => $popularSeries
+
+        ]);
+
         ]*/);
+
     }
 
     public function wallAction(Request $request)
@@ -44,7 +52,7 @@ class MainController extends Controller
          * Système de like/dislike (CriticNotationRepository)
          */
         $toto = $this->getDoctrine()->getRepository("MainBundle:Favoris")->wall("ded4a698-d81a-49ed-a9ab-0cba024ef1f4");
-
+        // var_dump($toto); -> invisible
 
         return $this->render("MainBundle:App:wall.html.twig");
     }
@@ -79,7 +87,6 @@ class MainController extends Controller
          */
 
         $this->get("SaveSerie")->saveSerie("stargate");
-
         return $this->render("MainBundle:App:search.html.twig");
     }
 
