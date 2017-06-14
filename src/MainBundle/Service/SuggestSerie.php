@@ -72,13 +72,13 @@ class SuggestSerie extends  Controller
                         array_push($result, $serieType->getSerie());
                 }
 
-                if($result[1]->getPoster() === "undefined" || $result[2]->getPoster() === "undefined")
+
+                $bool = false;
+
+                foreach($result as $res)
                 {
-                    continue;
-                }
-                else
-                {
-                    $bool = false;
+                   if($res->getPoster() === "undefined")
+                       $bool = true;
                 }
             }
         }
