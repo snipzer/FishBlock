@@ -1,13 +1,10 @@
-
-<div class="block_login">
+<div class="loginBlock">
     <form>
-        <div class="login_username_password">
-            <input/>
-            <input/>
+        <div class="loginUsernamePassword">
+            {{ render(controller('FOSUserBundle:Security:login')) }}
         </div>
 
-        <div class="login_connection_forgot">
-            <button>{{ 'Connection'|trans }}</button>
+        <div class="loginConnectionForgot">
             <em><a>{{ 'Forgot your account\'s password ?'|trans }}</a></em>
         </div>
 
