@@ -10,4 +10,16 @@ namespace MainBundle\Repository;
  */
 class SerieTypeRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getSeriesTypeByType($typeName)
+    {
+        $type = $this->getEntityManager()->getRepository("MainBundle:Type")->getTypeByName($typeName);
+
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("st")
+            ->from("MainBundle:SerieType", "st")
+            ->where("st.type = :type")
+            ->setParameter(":type", $type)
+            ->getQuery()->getResult();
+    }
 }

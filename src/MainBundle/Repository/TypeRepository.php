@@ -10,6 +10,11 @@ namespace MainBundle\Repository;
  */
 class TypeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getTypes()
+    {
+        return $this->findAll();
+    }
+
     public function checkIfTypeAlreadyHere($typeName)
     {
         $isHereOrNot = $this->getEntityManager()->createQueryBuilder()
@@ -25,5 +30,15 @@ class TypeRepository extends \Doctrine\ORM\EntityRepository
             return false;
 
         return true;
+    }
+
+    public function getTypeByName($typeName)
+    {
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("t")
+            ->from("MainBundle:Type", "t")
+            ->where("t.name = :name")
+            ->setParameter(":name", $typeName)
+            ->getQuery()->getResult();
     }
 }

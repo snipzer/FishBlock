@@ -140,7 +140,14 @@ class Serie
      */
     public function getSerieTypes()
     {
-        return $this->serieTypes;
+        $array = [];
+
+        foreach($this->serieTypes as $result)
+        {
+            $array[] = $result;
+        }
+
+        return $array;
     }
 
     /**
