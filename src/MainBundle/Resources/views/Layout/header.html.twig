@@ -1,21 +1,18 @@
 
 <header>
-
     <div class="headerBlock">
         <img src="{{ asset('public/img/logoFishblock.svg') }}">
 
         {# Block du formulaire de connexion
          Il est appelé si l'utilisateur n'est pas connecté #}
-        {% include "MainBundle:layout:loginBlock.html.twig" %}
+        {% include "MainBundle:Layout:loginBlock.html.twig" %}
 
         {# Block du Username: Noctifications / Compte
          Il est appelé si l'utilisateur est connecté #}
-        {% include "MainBundle:layout:accountBlock.html.twig" %}
-
-
+        {% include "MainBundle:Layout:accountBlock.html.twig" %}
     </div>
 
-    <div class="separation_bar">
+    <div class="separationBar">
     </div>
 
 </header>
