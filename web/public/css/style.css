@@ -163,6 +163,16 @@ header {
 }
 
 /*----------------------------------------------------------------------------------
+Style pour le block content
+----------------------------------------------------------------------------------*/
+
+.contentBlock {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 50px;
+}
+
+/*----------------------------------------------------------------------------------
 Style pour le bloc menu du site
 ----------------------------------------------------------------------------------*/
 
@@ -172,13 +182,21 @@ Style pour le bloc menu du site
     align-items: center;
 
     width: 15%;
-    height: 500px;
-    margin-left: 50px;
+    height: 650px;
 
     background-color: #686868;
-    color: #ffffff;
+
     font-weight: bolder;
     font-size: larger;
+}
+
+.menuBlock a {
+    color: #ffffff;
+}
+
+.menuBlock a:hover {
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .menuBlockSearch {
@@ -263,12 +281,12 @@ Style pour la suggestion/recherche du site
 
 .searchSuggestBlock {
     display: flex;
+
     flex-direction: column;
     align-items: center;
 
     width: 15%;
-    height: 500px;
-    margin-right: 50px;
+    height: 650px;
 
     background-color: #686868;
     color: #ffffff;
@@ -277,3 +295,48 @@ Style pour la suggestion/recherche du site
 /*----------------------------------------------------------------------------------
 Style pour le footer du site
 ----------------------------------------------------------------------------------*/
+
+.footerBlock {
+    display: flex;
+    flex-direction: row;
+
+    margin: 15px 50px;
+}
+
+.footerLegalNotice {
+    display: flex;
+
+    height: 100%;
+    border-right: solid 2px black;
+    padding: 0 10px;
+}
+
+.footerLegalNotice a {
+    color: #000000;
+}
+.footerLegalNotice a:hover {
+    color: #000000;
+}
+
+.footerWebsitePlan {
+    display: flex;
+    flex: 1;
+
+    height: 100%;
+    padding: 0 10px;
+}
+
+.footerWebsitePlan a {
+    color: #000000;
+}
+.footerWebsitePlan a:hover {
+    color: #000000;
+}
+
+.footerDevWeb {
+    display: flex;
+    flex-direction: column;
+
+    width: 13%;
+    height: 100%;
+}
