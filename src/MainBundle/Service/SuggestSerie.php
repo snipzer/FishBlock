@@ -47,11 +47,9 @@ class SuggestSerie extends  Controller
             }
             else
             {
-                var_dump("Taille du tableau: ". count($arraySerieTypes));
-                echo "<br>";
                 $rand = array_rand($arraySerieTypes);
 
-                var_dump("Index choisie: ".$rand);
+
 
                 // On en choisie un au hazard
                 $chosenSerieType = $arraySerieTypes[$rand];
@@ -71,7 +69,15 @@ class SuggestSerie extends  Controller
                     if($serieType->getSerie() !== $chosenSerie)
                         array_push($result, $serieType->getSerie());
                 }
-                $bool = false;
+
+                if($result[1]->getPoster() === "undefined" || $result[2]->getPoster() === "undefined")
+                {
+                    continue;
+                }
+                else
+                {
+                    $bool = false;
+                }
             }
         }
 
