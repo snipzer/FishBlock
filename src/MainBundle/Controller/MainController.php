@@ -22,6 +22,9 @@ class MainController extends Controller
          * ~~Recupération des séries populaires (SerieRepository)
          */
 
+
+
+
         $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
         $this->get("SuggestSerie")->getSuggestion("151e72a7-7084-4132-9416-2ce4c96dfbda");
