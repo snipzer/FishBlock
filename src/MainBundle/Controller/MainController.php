@@ -52,7 +52,6 @@ class MainController extends Controller
          * Système de like/dislike (CriticNotationRepository)
          */
         $toto = $this->getDoctrine()->getRepository("MainBundle:Favoris")->wall("ded4a698-d81a-49ed-a9ab-0cba024ef1f4");
-        // var_dump($toto); -> invisible
 
         return $this->render("MainBundle:App:wall.html.twig");
     }
