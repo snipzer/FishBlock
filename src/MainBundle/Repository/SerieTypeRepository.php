@@ -20,6 +20,6 @@ class SerieTypeRepository extends \Doctrine\ORM\EntityRepository
             ->from("MainBundle:SerieType", "st")
             ->where("st.type = :type")
             ->setParameter(":type", $type)
-            ->setMaxResults(2)->getQuery()->getResult();
+            ->getQuery()->getResult();
     }
 }

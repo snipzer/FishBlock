@@ -35,28 +35,31 @@ class SuggestSerie extends  Controller
         // On sélectionne une série parmis toutes celles stocker
         $chosenSerie = $array[array_rand($array)];
 
+        // On stocke les informations de la série de départ
+        $result[] = $chosenSerie->getTitle();
 
-
-
-
+        // On récupère les type de la série choisie
         $arraySerieTypes = $chosenSerie->getSerieTypes();
 
+        // On en choisie un au hazard
         $chosenSerieType = $arraySerieTypes[array_rand($arraySerieTypes)];
 
+        // On récupère sont nom
         $typeName = $chosenSerieType->getType()->getName();
 
-        $series = $this->manager
+        // A partir du nom on récupère les sériesType qui ont le même type
+        $serieTypes = $this->manager
             ->getRepository("MainBundle:SerieType")
             ->getSeriesTypeByType($typeName);
 
 
-        $result[] = $chosenSerie->getTitle();
-
-
-
-        foreach($series as $serie)
+        // Pour chaque sérieType
+        foreach($serieTypes as $serieType)
         {
-            $result[] = $serie->getSerie()->getTitle();
+
+            // On verifie que la série est différente de celle du début
+            if(!($serieType->getSerie() === $result[0]))
+                array_push($result, $serieType->getSerie()->getTitle());
         }
 
         echo "<pre>";

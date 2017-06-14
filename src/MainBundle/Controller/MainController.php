@@ -24,6 +24,7 @@ class MainController extends Controller
 
         $this->get("SuggestSerie")->getSuggestion("ded4a698-d81a-49ed-a9ab-0cba024ef1f4");
 
+
 //        $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
 
