@@ -16,7 +16,19 @@
     {{ parent() }}
 {% endblock %}
 
-{% block content %} {% endblock %}
+{% block content %}
+    <div class="menuBlock">
+        <a class="menuBlockSearch">{{ 'Search'|trans }}</a>
+        <a class="menuBlockFavorites">{{ 'Favorites'|trans }}</a>
+        <a class="menuBlockWall">{{ 'Wall'|trans }}</a>
+        <a class="menuBlockChat">{{ 'Chat'|trans }}</a>
+        <a class="menuBlockAdmin">{{ 'Administration'|trans }}</a>
+    </div>
+
+    <div class="searchSuggestBlock">
+
+    </div>
+{% endblock %}
 
 {% block footer %}
     {{ parent() }}
