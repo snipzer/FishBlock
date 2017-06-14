@@ -15,6 +15,11 @@ class ActorRepository extends \Doctrine\ORM\EntityRepository
         return $this->findAll();
     }
 
+    public function getActorByName($name)
+    {
+        return $this->findOneBy(["name" => $name]);
+    }
+
     public function checkIfActorAlreadyHere($actorName)
     {
         $isHereOrNot = $this->getEntityManager()->createQueryBuilder()
