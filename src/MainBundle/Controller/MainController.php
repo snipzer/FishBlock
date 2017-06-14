@@ -39,7 +39,7 @@ class MainController extends Controller
          * ~~Afficher les critiques des séries que l'utilisateur à en favoris (Service)
          * Système de like/dislike (CriticNotationRepository)
          */
-        $userId = "ded4a698-d81a-49ed-a9ab-0cba024ef1f4";
+        $userId = "52fc83e7-59b2-45d3-94c2-c674385afdbe";
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $wallInfo = $this->getDoctrine()->getRepository("MainBundle:Favoris")->wall($userId);
@@ -61,7 +61,7 @@ class MainController extends Controller
          * Récupération des dernières critiques (CriticRepository)
          */
 
-        $serieId = "a5b03c48-4370-4e09-bced-13f157357510";
+        $serieId = "123f3c71-8462-4a24-9cb6-1c8152149edf";
 
         $trendingSerie = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
@@ -111,7 +111,7 @@ class MainController extends Controller
          * Récupération de la note de la série (SerieRepository)
          */
 
-        $userId = "ded4a698-d81a-49ed-a9ab-0cba024ef1f4";
+        $userId = "52fc83e7-59b2-45d3-94c2-c674385afdbe";
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $favoris = $this->getDoctrine()->getRepository("MainBundle:Favoris")->getFavorisByUserId($userId);
@@ -137,7 +137,7 @@ class MainController extends Controller
          * Récupération de la note d'une série (SerieRepository)
          * Notification (Service)
          */
-        $serieId = "a5b03c48-4370-4e09-bced-13f157357510";
+        $serieId = "123f3c71-8462-4a24-9cb6-1c8152149edf";
 
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
@@ -167,7 +167,7 @@ class MainController extends Controller
          * Pareil que serieAction
          * Récupérer les informations d'un épidose (EpisodeRepository)
          */
-        $serieId = "a5b03c48-4370-4e09-bced-13f157357510";
+        $serieId = "123f3c71-8462-4a24-9cb6-1c8152149edf";
         $episodeId = "6f75f97d-011d-4a97-ae2d-0d007663f84f";
 
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
@@ -204,7 +204,7 @@ class MainController extends Controller
          * Suggestion de serie (SerieRepository)
          */
 
-        $userId = "ded4a698-d81a-49ed-a9ab-0cba024ef1f4";
+        $userId = "52fc83e7-59b2-45d3-94c2-c674385afdbe";
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $user = $this->getDoctrine()->getRepository("MainBundle:User")->getUserById($userId);
