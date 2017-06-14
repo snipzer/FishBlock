@@ -14,7 +14,7 @@ html {
 Style pour le header du site (header.html.twig)
 ----------------------------------------------------------------------*/
 
-.header {
+header {
     margin: 15px 50px;
 }
 
@@ -43,7 +43,7 @@ Style pour le header du site (header.html.twig)
     font-weight: bolder;
 }
 
-.userName {
+.accountName {
     flex: 1;
     display: flex;
     align-items: center;
@@ -92,6 +92,10 @@ Style pour le header du site (header.html.twig)
 .loginUsernamePassword {
     display: flex;
     flex-direction: column;
+}
+
+.loginUsernamePassword div:nth-child(2) {
+    display: none;
 }
 
 .loginConnectionForgot a {
