@@ -1,13 +1,10 @@
 <div class="suggest">
     {# récupérer série aimée puis afficher deux autres séries #}
     <ul>
-        {% for serieSuggest in serieSuggests %}
-            <li> {{ serieSggest[0].title }}</li>
-            <li> {{ serieSggest[1].title }}</li>
-            <li> {{ serieSggest[2].title }}</li>
-        {% else %}
-            <li>Pas de suggestion disponible pour cette série</li>
-        {% endfor %}
+            <li> <img src="http://thetvdb.com/banners/_cache/"~ {{  }}></li>
+            <li> {{ serieSuggest[1].title }}</li>
+            <li> {{ serieSuggest[2].title }}</li>
+
     </ul>
 
 </div>
