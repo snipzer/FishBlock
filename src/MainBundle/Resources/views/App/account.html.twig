@@ -10,6 +10,20 @@
 
 {% block head %}
     {{ parent() }}
+    <div class="blockLogin">
+        <form>
+            <div class="loginUsernamePassword">
+                <input/>
+                <input/>
+            </div>
+
+            <div class="loginConnectionForgot">
+                <button>{{ 'Connection'|trans }}</button>
+                <em><a>{{ 'Forgot your account\'s password ?'|trans }}</a></em>
+            </div>
+
+        </form>
+    </div>
 {% endblock %}
 
 {% block stylesheets %}

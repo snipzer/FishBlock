@@ -2,7 +2,7 @@
 Style pour la base du site (base.html.twig)
 -----------------------------------------------------------------------*/
 
-.base_color {
+.baseColor {
     background-color: #f3f2f0;
 }
 
@@ -14,24 +14,24 @@ html {
 Style pour le header du site (header.html.twig)
 ----------------------------------------------------------------------*/
 
-.site_header {
+.header {
     margin: 15px 50px;
 }
 
-.block_header {
+.headerBlock {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.block_header >img {
+.headerBlock >img {
     height: 150px;
     width: 300px;
 }
 
 /* accountBlock.html.twig -----------------
 */
-.block_account {
+.blockAccount {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,13 +43,13 @@ Style pour le header du site (header.html.twig)
     font-weight: bolder;
 }
 
-.user_name {
+.userName {
     flex: 1;
     display: flex;
     align-items: center;
 }
 
-.notification_account {
+.notificationAccount {
     flex: 1;
     display: flex;
     flex-direction: row;
@@ -58,7 +58,7 @@ Style pour le header du site (header.html.twig)
     width: 100%;
 }
 
-.notification_account a {
+.notificationAccount a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,7 +69,7 @@ Style pour le header du site (header.html.twig)
     color: #ffffff;
 }
 
-.notification_account a:hover {
+.notificationAccount a:hover {
     color: #ffffff;
     text-decoration: none;
     background-color: #686868;
@@ -77,7 +77,7 @@ Style pour le header du site (header.html.twig)
 
 /* loginBlock.html.twig -----------------
 */
-.block_login {
+.blockLogin {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -89,12 +89,12 @@ Style pour le header du site (header.html.twig)
     font-weight: bolder;
 }
 
-.login_username_password {
+.loginUsernamePassword {
     display: flex;
     flex-direction: column;
 }
 
-.login_connection_forgot a {
+.loginConnectionForgot a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,7 +105,7 @@ Style pour le header du site (header.html.twig)
     color: #ffffff;
 }
 
-.login_connection_forgot a:hover {
+.loginConnectionForgot a:hover {
     color: #ffffff;
     text-decoration: none;
     background-color: #686868;
@@ -113,7 +113,7 @@ Style pour le header du site (header.html.twig)
 
 /* Bar de séparation du header -----------------
 */
-.separation_bar {
+.separationBar {
     margin: 20px 0;
     height: 1em;
     width: 100%;
@@ -123,35 +123,35 @@ Style pour le header du site (header.html.twig)
 /* Pour la version responsive -----------------
 */
 @media screen and (max-width: 900px) {
-    .block_header {
+    .headerBlock {
         flex-direction: column;
     }
 
-    .site_header {
+    .header {
         margin: 10px 20px ;
     }
 
-    .block_header >img {
+    .headerBlock >img {
         height: 125px;
         width: 250px;
     }
 
-    .block_account {
+    .blockAccount {
         width: 100%;
         min-height: 5em;
     }
 
-    .notification_account a {
+    .notificationAccount a {
         height: 2.5em;
     }
 
-    .separation_bar {
+    .separationBar {
         margin: 10px 0;
     }
 }
 
 @media screen and (max-width: 900px) and (min-width: 600px) {
-    .block_account {
+    .blockAccount {
         width: 70%;
         margin: auto;
     }
