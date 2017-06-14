@@ -68,7 +68,7 @@ class SerieType
     }
 
     /**
-     * @return ArrayCollection
+     * @return Serie
      */
     public function getSerie()
     {
@@ -76,7 +76,7 @@ class SerieType
     }
 
     /**
-     * @param ArrayCollection $serie
+     * @param Serie $serie
      **/
     public function setSerie(Serie $serie)
     {

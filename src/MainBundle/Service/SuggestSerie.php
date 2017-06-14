@@ -20,36 +20,49 @@ class SuggestSerie extends  Controller
 
     public function getSuggestion($userId)
     {
+        // Récupération des favoris de l'utilisateurs
         $userFavs = $this->manager->GetRepository("MainBundle:Favoris")->getFavorisByUserId($userId);
 
         $result = [];
         $array = [];
+
+        // Pour chaque objet favoris, on stocke les séries
         foreach($userFavs as $userFav)
         {
-            $array[] = $userFav->getSerie();
+            array_push($array, $userFav->getSerie());
         }
 
-        $chosenSerie = $array[rand(0, count($array)-1)];
+        // On sélectionne une série parmis toutes celles stocker
+        $chosenSerie = $array[array_rand($array)];
+
+
+
 
 
         $arraySerieTypes = $chosenSerie->getSerieTypes();
 
-        $chosenSerieType = $arraySerieTypes[rand(0, count($arraySerieTypes)-1)];
+        $chosenSerieType = $arraySerieTypes[array_rand($arraySerieTypes)];
 
         $typeName = $chosenSerieType->getType()->getName();
 
         $series = $this->manager
             ->getRepository("MainBundle:SerieType")
-            ->getSeriesByType($typeName);
+            ->getSeriesTypeByType($typeName);
 
 
-        $result[] = $chosenSerie->getPoster();
+        $result[] = $chosenSerie->getTitle();
+
+
 
         foreach($series as $serie)
         {
-            $result[] = $serie->getPoster();
+            $result[] = $serie->getSerie()->getTitle();
         }
+
+        echo "<pre>";
         var_dump($result);
+        echo "</pre>";
+
         return $result;
     }
 }
