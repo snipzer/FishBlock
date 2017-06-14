@@ -37,6 +37,7 @@ class MainController extends Controller
         ]);
 
         ]*/);
+
     }
 
     public function wallAction(Request $request)
