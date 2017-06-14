@@ -1,10 +1,9 @@
 <div class="searchSuggestBlock">
     {# récupérer série aimée puis afficher deux autres séries #}
     <ul>
-            <li> <img src="http://thetvdb.com/banners/_cache/" ~ {{ serieSuggest[0].poster }}></li>
-            <li> {{ serieSuggest[1].title }}</li>
-            <li> {{ serieSuggest[2].title }}</li>
-
+            <li> <img src={{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[0].poster }}/></li>
+            <li> <img src={{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[1].poster }}></li>
+            <li> <img src={{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[2].poster }}></li>
     </ul>
 
 </div>
