@@ -10,6 +10,11 @@ namespace MainBundle\Repository;
  */
 class EpisodeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getEpisode($episodeId)
+    {
+        return $this->findOneBy(["id" => $episodeId]);
+    }
+
     public function getEpisodes()
     {
         return $this->findAll();
