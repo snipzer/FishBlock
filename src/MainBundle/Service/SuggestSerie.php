@@ -47,11 +47,10 @@ class SuggestSerie extends  Controller
             }
             else
             {
-                var_dump("Taille du tableau: ". count($arraySerieTypes));
+
                 echo "<br>";
                 $rand = array_rand($arraySerieTypes);
 
-                var_dump("Index choisie: ".$rand);
 
                 // On en choisie un au hazard
                 $chosenSerieType = $arraySerieTypes[$rand];
