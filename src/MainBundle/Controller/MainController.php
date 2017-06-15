@@ -41,13 +41,15 @@ class MainController extends Controller
          */
 
         $userId = $this->getUser()->getId()->__toString();
+        $user = $this->getUser();
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $wallInfo = $this->getDoctrine()->getRepository("MainBundle:Favoris")->wall($userId);
 
         return $this->render("MainBundle:App:wall.html.twig", [
             "wallInfo" => $wallInfo,
-            "serieSuggest" => $serieSuggest
+            "serieSuggest" => $serieSuggest,
+            "user" => $user
         ]);
     }
 
@@ -114,6 +116,7 @@ class MainController extends Controller
 
         $serieId = $request->attributes->get("idSerie");
         $userId = $this->getUser()->getId()->__toString();
+        $user = $this->getUser();
 
         if($serieId)
         {
@@ -127,7 +130,8 @@ class MainController extends Controller
 
         return $this->render("MainBundle:App:favoris.html.twig", [
             "favoris" => $favoris,
-            "serieSuggest" => $serieSuggest
+            "serieSuggest" => $serieSuggest,
+            "user" => $user
         ]);
     }
 
