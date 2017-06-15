@@ -13,15 +13,6 @@ class MainController extends Controller
      */
     public function homeAction(Request $request)
     {
-        $boolTrue = $this->getDoctrine()
-            ->getRepository("MainBundle:Favoris")
-            ->checkIfSerieIsInFav("efc837fa-7e98-4543-bbde-df95bb4f8c41", "52fc83e7-59b2-45d3-94c2-c674385afdbe");
-
-        $boolFalse = $this->getDoctrine()
-            ->getRepository("MainBundle:Favoris")
-            ->checkIfSerieIsInFav("123f3c71-8462-4a24-9cb6-1c8152149edf", "52fc83e7-59b2-45d3-94c2-c674385afdbe");
-
-
         $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
         return $this->render("MainBundle:App:home.html.twig", [
@@ -50,6 +41,7 @@ class MainController extends Controller
 
         $trendingSerie = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
+        //TODO: FAIRE EN SORTE DE RECUPERER LES DERNIERS EPISODES SORTIES
         $lastPublishedEpisode = $this->getDoctrine()->getRepository("MainBundle:Episode")->getLastEpisodeFromSerie($serieId);
 
         $lastPublishedSerie = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
@@ -69,10 +61,14 @@ class MainController extends Controller
     {
         $user = $this->getUser();
         $series = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
+        $actors = $this->getDoctrine()->getRepository("MainBundle:Actor")->getActors();
+        $types = $this->getDoctrine()->getRepository("MainBundle:Type")->getTypes();
 
         return $this->render("MainBundle:App:search.html.twig", [
             "serie" => $series,
-            "user" => $user
+            "user" => $user,
+            "actors" => $actors,
+            "types" => $types
         ]);
     }
 
@@ -114,13 +110,15 @@ class MainController extends Controller
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
         $actors = $ActorRepository->getActorBySerieId($serieId);
         $types = $TypeRepository->getTypeBySerieId($serieId);
+        $user = $this->getUser();
 
         return $this->render("MainBundle:App:serie.html.twig", [
             "episodes" => $episodes,
             "serie" => $serie,
             "critics" => $critics,
             "actors" => $actors,
-            "types" => $types
+            "types" => $types,
+            "user" => $user
             ]);
     }
 
@@ -142,6 +140,7 @@ class MainController extends Controller
         $actors = $ActorRepository->getActorBySerieId($serieId);
         $types = $TypeRepository->getTypeBySerieId($serieId);
         $episode = $EpisodeRepository->getEpisode($episodeId);
+        $user = $this->getUser();
 
         return $this->render("MainBundle:App:serie.html.twig", [
             "episodes" => $episodes,
@@ -149,7 +148,8 @@ class MainController extends Controller
             "critics" => $critics,
             "actors" => $actors,
             "types" => $types,
-            "episode" => $episode
+            "episode" => $episode,
+            "user" => $user
         ]);
     }
 
