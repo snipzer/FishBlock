@@ -109,5 +109,4 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
 
         return true;
     }
-
 }

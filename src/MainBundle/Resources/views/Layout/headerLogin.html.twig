@@ -3,7 +3,7 @@
         <img src="{{ asset('public/img/logoFishblock.svg') }}">
 
         <div class="loginBlock">
-            <form>
+            <form action="{{ path("fos_user_security_check") }}" method="post">
                 <div class="loginUsernamePassword">
                     {{ render(controller('FOSUserBundle:Security:login')) }}
                 </div>
