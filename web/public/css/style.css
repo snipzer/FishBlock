@@ -200,8 +200,12 @@ Style pour le block content
 
     .contentBlock {
         margin: 10px 20px;
-        height: 66vh;
+        /*height: 66vh;*/
     }
+}
+
+.serieCard img {
+    max-width: 100%;
 }
 
 /*----------------------------------------------------------------------------------
@@ -610,14 +614,9 @@ footer {
 @media screen and (max-width: 900px) {
 
     footer {
+        position: relative;
         margin: 10px 20px ;
     }
 
 }
 
-/*@media screen and (max-width: 900px) and (min-width: 600px) {*/
-    /*.accountBlock {*/
-        /*width: 70%;*/
-        /*margin: auto;*/
-    /*}*/
-}
