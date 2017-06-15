@@ -16,7 +16,6 @@
 
 {% block content %}
     {% include "MainBundle:Layout:menu.html.twig" %}
-    {% include "MainBundle:Layout:suggest.html.twig" %}
     <ul>
         {% for result in wallInfo %}
             <li><h2>{{ result["serie"].title }}</h2></li>
@@ -24,6 +23,7 @@
             <p>{{ result["critic"].content }}</p>
         {% endfor %}
     </ul>
+    {% include "MainBundle:Layout:suggest.html.twig" %}
 {% endblock %}
 
 {% block footer %}
