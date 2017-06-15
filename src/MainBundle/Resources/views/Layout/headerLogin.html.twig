@@ -5,7 +5,18 @@
         <div class="loginBlock">
             <form action="{{ path("fos_user_security_check") }}" method="post">
                 <div class="loginUsernamePassword">
-                    {{ render(controller('FOSUserBundle:Security:login')) }}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="_username" value="" required="required" />
+
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="_password" required="required" />
+
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="" />
+                    <label for="remember_me">Remember me</label>
+
+                    <input type="submit" id="_submit" name="_submit" value="Log in" />
                 </div>
 
                 <div class="loginConnectionForgot">
