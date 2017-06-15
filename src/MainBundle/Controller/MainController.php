@@ -97,10 +97,12 @@ class MainController extends Controller
          *
          */
 
+        $user = $this->getUser();
         $series = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
 
         return $this->render("MainBundle:App:search.html.twig", [
-            "series" => $series
+            "serie" => $series,
+            "user" => $user
         ]);
     }
 

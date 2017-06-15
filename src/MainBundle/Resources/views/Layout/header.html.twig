@@ -9,7 +9,7 @@
             </div>
             <div class="accountNotification">
                 <a>{{ "Notifications"|trans }}</a>
-                <a>{{ "Account"|trans }}</a>
+                <a href="{{ path("main_account", {_locale: app.request.attributes.get('_locale')}) }}">{{ "Account"|trans }}</a>
             </div>
         </div>
     </div>
