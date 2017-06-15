@@ -47,7 +47,6 @@ class SuggestSerie extends  Controller
             }
             else
             {
-
                 $rand = array_rand($arraySerieTypes);
 
 

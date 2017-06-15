@@ -3,7 +3,6 @@
 {% block include %}
     {% include "MainBundle:Layout:accountBlock.html.twig" %}
     {% include "MainBundle:Layout:menu.html.twig" %}
-    {% include "MainBundle:Layout:serieCard.html.twig" %}
 {% endblock %}
 
 {% block title %}{{ 'Search'|trans }}{% endblock %}
@@ -16,7 +15,9 @@
     {{ parent() }}
 {% endblock %}
 
-{% block content %} {% endblock %}
+{% block content %}
+    {% include "MainBundle:Layout:serieCard.html.twig" %}
+{% endblock %}
 
 
 {% block footer %}

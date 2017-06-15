@@ -2,8 +2,6 @@
 
 {% block include %}
     {% include "MainBundle:Layout:accountBlock.html.twig" %}
-    {% include "MainBundle:Layout:menu.html.twig" %}
-    {% include "MainBundle:Layout:suggest.html.twig" %}
 {% endblock %}
 
 {% block title %}{{ 'Account'|trans }}{% endblock %}
@@ -17,6 +15,8 @@
 {% endblock %}
 
 {% block content %}
+    {% include "MainBundle:Layout:menu.html.twig" %}
+    {% include "MainBundle:Layout:suggest.html.twig" %}
     <div class="searchSuggestBlock">
 
     </div>
