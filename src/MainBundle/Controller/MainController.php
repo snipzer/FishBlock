@@ -43,7 +43,7 @@ class MainController extends Controller
          * ~~Afficher les critiques des séries que l'utilisateur à en favoris (Service)
          * Système de like/dislike (CriticNotationRepository)
          */
-        $userId = "52fc83e7-59b2-45d3-94c2-c674385afdbe";
+        $userId = $this->getUser()->getId()->__toString();
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $wallInfo = $this->getDoctrine()->getRepository("MainBundle:Favoris")->wall($userId);
@@ -115,8 +115,8 @@ class MainController extends Controller
          * Récupération de la note de la série (SerieRepository)
          */
 
-        $serieId = $request->attributes->get("serieId");
-        $userId = "52fc83e7-59b2-45d3-94c2-c674385afdbe";
+        $serieId = $request->attributes->get("idSerie");
+        $userId = $this->getUser()->getId()->__toString();
 
         if($serieId)
         {
@@ -151,7 +151,7 @@ class MainController extends Controller
          * Récupération de la note d'une série (SerieRepository)
          * Notification (Service)
          */
-        $serieId = "86f55cf8-e0b5-4c61-a893-e29d93ae9de9";
+        $serieId = $request->attributes->get("idSerie");
 
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
@@ -181,8 +181,8 @@ class MainController extends Controller
          * Pareil que serieAction
          * Récupérer les informations d'un épidose (EpisodeRepository)
          */
-        $serieId = "123f3c71-8462-4a24-9cb6-1c8152149edf";
-        $episodeId = "6f75f97d-011d-4a97-ae2d-0d007663f84f";
+        $serieId = $request->attributes->get("idSerie");
+        $episodeId = $request->attributes->get("idEpisode");
 
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
@@ -219,7 +219,7 @@ class MainController extends Controller
          * ~~Suggestion de serie (SerieRepository)
          */
 
-        $userId = "52fc83e7-59b2-45d3-94c2-c674385afdbe";
+        $userId = $this->getUser()->getId()->__toString();
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $user = $this->getDoctrine()->getRepository("MainBundle:User")->getUserById($userId);
@@ -239,4 +239,5 @@ class MainController extends Controller
 
         return $this->render("MainBundle:App:legal.html.twig");
     }
+
 }
