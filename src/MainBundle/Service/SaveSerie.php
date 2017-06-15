@@ -119,8 +119,8 @@ class SaveSerie extends Controller
                         $episode = new Episode();
                         $episode->setTitle(($episodeFromApi->getEpisodeName()) ? $episodeFromApi->getEpisodeName() : "undefined")
                             ->setDescription(($episodeFromApi->getOverview()) ? $episodeFromApi->getOverview() : "undefined")
-                            ->setEpisodeNumber(($episodeFromApi->getAiredEpisodeNumber()) ? $episodeFromApi->getAiredEpisodeNumber() : 9999)
-                            ->setSeasonNumber(($episodeFromApi->getAiredSeason()) ? $episodeFromApi->getAiredSeason() : 9999)
+                            ->setEpisodeNumber(($episodeFromApi->getAiredEpisodeNumber()) ? $episodeFromApi->getAiredEpisodeNumber() : 0)
+                            ->setSeasonNumber(($episodeFromApi->getAiredSeason()) ? $episodeFromApi->getAiredSeason() : 0)
                             ->setSerie($serie);
 
                         $serie->setEpisodes($episode);

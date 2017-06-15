@@ -4,11 +4,7 @@ namespace MainBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Security;
 
 class MainController extends Controller
 {
@@ -43,6 +39,7 @@ class MainController extends Controller
          * ~~Afficher les critiques des séries que l'utilisateur à en favoris (Service)
          * Système de like/dislike (CriticNotationRepository)
          */
+
         $userId = $this->getUser()->getId()->__toString();
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
@@ -124,8 +121,6 @@ class MainController extends Controller
                 ->getRepository("MainBundle:Favoris")
                 ->addSerie($userId, $serieId);
         }
-
-
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $favoris = $this->getDoctrine()->getRepository("MainBundle:Favoris")->getFavorisByUserId($userId);
