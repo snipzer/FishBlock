@@ -24,6 +24,15 @@ class SaveSerie extends Controller
         $this->tvdbClient = $tvdbConnector;
     }
 
+    public function genDataBase()
+    {
+        $users = $this->manager->getRepository("MainBundle:User")->TempFakeUser();
+
+        $this->manager->getRepository("MainBundle:Critic")->TempFakeCritic($users[0], $users[1]);
+
+        $this->manager->getRepository("MainBundle:Favoris")->TempFakeFav($users[0], $users[1]);
+    }
+
     public function saveSerie($serieName)
     {
 
@@ -52,7 +61,6 @@ class SaveSerie extends Controller
                     $typeIsHere = $this->manager->getRepository("MainBundle:Type")->checkIfTypeAlreadyHere($genre);
                     if ($typeIsHere)
                     {
-                        var_dump("toto");
                         $type = new Type();
                         $type->setName($genre);
                     }

@@ -17,8 +17,16 @@
 
 {% block content %}
     {% include "MainBundle:Layout:menu.html.twig" %}
-    {% include "MainBundle:Layout:listSeason.html.twig" %}
     {% include "MainBundle:Layout:detailSerie.html.twig" %}
+    <div>
+        {% for critic in critics %}
+            <div>
+                <p>{{ critic.title }}</p>
+                <p>{{ critic.content }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    {% include "MainBundle:Layout:listSeason.html.twig" %}
 {% endblock %}
 
 {% block footer %}
