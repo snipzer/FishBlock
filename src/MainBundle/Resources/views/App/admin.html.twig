@@ -1,13 +1,5 @@
 {% extends 'MainBundle::base.html.twig' %}
 
-{% block include %}
-    {% include "MainBundle:Layout:adminBoard.html.twig" %}
-    {% include "MainBundle:Layout:userManager.html.twig" %}
-    {% include "MainBundle:Layout:modifSerie.html.twig" %}
-    {% include "MainBundle:Layout:submitSerie.html.twig" %}
-    {% include "MainBundle:Layout:validCritic.html.twig" %}
-{% endblock %}
-
 {% block title %}{{ 'Admin'|trans }}{% endblock %}
 
 {% block head %}
@@ -24,6 +16,11 @@
 
 {% block content %}
     {% include "MainBundle:Layout:menu.html.twig" %}
+    {% include "MainBundle:Layout:adminBoard.html.twig" %}
+    {% include "MainBundle:Layout:userManager.html.twig" %}
+    {% include "MainBundle:Layout:modifSerie.html.twig" %}
+    {% include "MainBundle:Layout:submitSerie.html.twig" %}
+    {% include "MainBundle:Layout:validCritic.html.twig" %}
 {% endblock %}
 
 {% block footer %}
