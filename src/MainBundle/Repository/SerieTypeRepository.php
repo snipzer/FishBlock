@@ -22,4 +22,21 @@ class SerieTypeRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter(":type", $type)
             ->getQuery()->getResult();
     }
+
+    public function getTypeBySerieId($serieId)
+    {
+        $serie = $this->getEntityManager()
+            ->getRepository("MainBundle:Serie")->getSerieWithId($serieId);
+
+        $serieTypes = $this->findBy(["serie" => $serie]);
+
+        $Types = [];
+
+        foreach($serieTypes as $serieType)
+        {
+            $Types[] = $serieType->getType()->getName();
+        }
+
+        return $Types;
+    }
 }

@@ -1,11 +1,5 @@
 {% extends 'MainBundle::base.html.twig' %}
 
-{% block include %}
-    {% include "MainBundle:Layout:accountBlock.html.twig" %}
-    {% include "MainBundle:Layout:menu.html.twig" %}
-    {% include "MainBundle:Layout:detailSerie.html.twig" %}
-{% endblock %}
-
 {% block title %}{{ 'Series'|trans }}{% endblock %}
 
 {% block head %}
@@ -17,9 +11,14 @@
 
 {% endblock %}
 
-{% block content %}
-    {% include "MainBundle:Layout:listSeason.html.twig" %}
+{% block header %}
+    {% include "MainBundle:Layout:header.html.twig" %}
+{% endblock %}
 
+{% block content %}
+    {% include "MainBundle:Layout:menu.html.twig" %}
+    {% include "MainBundle:Layout:listSeason.html.twig" %}
+    {% include "MainBundle:Layout:detailSerie.html.twig" %}
 {% endblock %}
 
 {% block footer %}

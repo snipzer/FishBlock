@@ -1,0 +1,24 @@
+<header>
+    <div class="headerBlock">
+        <img src="{{ asset('public/img/logoFishblock.svg') }}">
+
+        <div class="loginBlock">
+            <form action="{{ path("fos_user_security_check") }}" method="post">
+                <div class="loginUsernamePassword">
+                    {{ render(controller('FOSUserBundle:Security:login')) }}
+                </div>
+
+                <div class="loginConnectionForgot">
+                    <em><a>{{ 'Forgot your account\'s password ?'|trans }}</a></em>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="separationBar separationFat">
+    </div>
+
+</header>
+
+

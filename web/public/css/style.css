@@ -29,7 +29,7 @@ header {
     width: 300px;
 }
 
-/* accountBlock.html.twig -----------------
+/* header.html.twig -----------------
 */
 .accountBlock {
     display: flex;
@@ -54,7 +54,7 @@ header {
     flex: 1;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
 
     width: 100%;
 }
@@ -64,7 +64,6 @@ header {
     align-items: center;
     justify-content: center;
 
-    height: 100%;
     width: 50%;
 
     color: #ffffff;
@@ -76,12 +75,12 @@ header {
     background-color: #686868;
 }
 
-/* loginBlock.html.twig -----------------
+/* headerLogin.html.twig -----------------
 */
 .loginBlock {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
 
     width: 28em;
 
@@ -104,7 +103,6 @@ header {
     align-items: center;
     justify-content: center;
 
-    height: 100%;
     width: 50%;
 
     color: #ffffff;
@@ -120,9 +118,12 @@ header {
 */
 .separationBar {
     margin: 20px 0;
-    height: 1em;
     width: 100%;
     background-color: #686868;
+}
+
+.separationFat {
+    height: 1em;
 }
 
 /* Pour la version responsive -----------------
@@ -132,7 +133,7 @@ header {
         flex-direction: column;
     }
 
-    .header {
+    header {
         margin: 10px 20px ;
     }
 
@@ -163,6 +164,26 @@ header {
 }
 
 /*----------------------------------------------------------------------------------
+Style pour le block content
+----------------------------------------------------------------------------------*/
+
+.contentBlock {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 50px;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 900px) {
+
+    .contentBlock {
+        margin: 10px 20px;
+        height: 66vh;
+    }
+}
+
+/*----------------------------------------------------------------------------------
 Style pour le bloc menu du site
 ----------------------------------------------------------------------------------*/
 
@@ -172,13 +193,22 @@ Style pour le bloc menu du site
     align-items: center;
 
     width: 15%;
-    height: 500px;
-    margin-left: 50px;
+    height: 66vh;
+    min-width: 10em;
 
     background-color: #686868;
-    color: #ffffff;
+
     font-weight: bolder;
     font-size: larger;
+}
+
+.menuBlock a {
+    color: #ffffff;
+}
+
+.menuBlock a:hover {
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .menuBlockSearch {
@@ -257,23 +287,121 @@ Style pour le bloc menu du site
     background-color: #ed3126;
 }
 
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 900px) {
+
+    .menuBlock {
+        position: fixed;
+        top: 0;
+        left: 100%;
+        height: 100vh;
+    }
+
+}
+
 /*----------------------------------------------------------------------------------
 Style pour la suggestion/recherche du site
 ----------------------------------------------------------------------------------*/
 
 .searchSuggestBlock {
     display: flex;
+
     flex-direction: column;
     align-items: center;
 
-    width: 15%;
-    height: 500px;
-    margin-right: 50px;
+    width: 16%;
+    height: 66vh;
+    min-width: 15em;
 
     background-color: #686868;
     color: #ffffff;
 }
 
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 1000px) {
+
+    .searchSuggestBlock {
+        display: none;
+    }
+
+
+}
+
 /*----------------------------------------------------------------------------------
 Style pour le footer du site
 ----------------------------------------------------------------------------------*/
+
+footer {
+    margin: 15px 50px;
+}
+
+.separationThin {
+    height: 0.3em;
+}
+
+.footerBlock {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    white-space: nowrap;
+
+}
+
+.footerLegalNotice {
+    display: flex;
+
+    height: 100%;
+    border-right: solid 2px black;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.footerLegalNotice a {
+    color: #000000;
+}
+.footerLegalNotice a:hover {
+    color: #000000;
+}
+
+.footerWebsitePlan {
+    display: flex;
+    flex: 1;
+
+    height: 100%;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.footerWebsitePlan a {
+    color: #000000;
+}
+.footerWebsitePlan a:hover {
+    color: #000000;
+}
+
+.footerDevWeb {
+    display: flex;
+    flex-direction: column;
+    line-height: 1em;
+
+    padding: 0 10px;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 900px) {
+
+    footer {
+        margin: 10px 20px ;
+    }
+
+}
+
+/*@media screen and (max-width: 900px) and (min-width: 600px) {*/
+    /*.accountBlock {*/
+        /*width: 70%;*/
+        /*margin: auto;*/
+    /*}*/
+}

@@ -1,10 +1,5 @@
 {% extends 'MainBundle::base.html.twig' %}
 
-{% block include %}
-    {% include "MainBundle:Layout:loginBlock.html.twig" %}
-    {% include "MainBundle:Layout:menu.html.twig" %}
-{% endblock %}
-
 {% block title %}{{ 'Unlogging'|trans }}{% endblock %}
 
 {% block head %}
@@ -15,7 +10,13 @@
     {{ parent() }}
 {% endblock %}
 
-{% block content %} {% endblock %}
+{% block header %}
+    {% include "MainBundle:Layout:headerLogin.html.twig" %}
+{% endblock %}
+
+{% block content %}
+    {% include "MainBundle:Layout:menu.html.twig" %}
+{% endblock %}
 
 {% block footer %}
     {{ parent() }}

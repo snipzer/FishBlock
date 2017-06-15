@@ -91,13 +91,7 @@ class CriticRepository extends \Doctrine\ORM\EntityRepository
     {
         $serie = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSerieWithId($serieId);
 
-        return $this->getEntityManager()->createQueryBuilder()
-            ->select("c")
-            ->from("MainBundle:Critic", "c")
-            ->where("c.serie = :id")
-            ->andWhere("c.isValid = true")
-            ->setParameter(":id", $serie)
-            ->getQuery()->getResult();
+        return $this->findBy(["serie" => $serie, "isValid" => true]);
     }
 
     // Renvois toutes les critiques non valider pour une série
