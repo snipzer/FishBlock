@@ -9,13 +9,13 @@
             {% endif %}
         </li>
         <li><p>{{ 'You will enjoy'|trans }} </p>
-            {% if serieSuggest[0].poster == 'undefined' %}
+            {% if serieSuggest[1].poster == 'undefined' %}
                 <img src={{ asset('public/img/undefined.jpg') }}>
             {% else %}
                 <img src={{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[1].poster }} />
             {% endif %}
 
-            {% if serieSuggest[0].poster == 'undefined' %}
+            {% if serieSuggest[2].poster == 'undefined' %}
                 <img src={{ asset('public/img/undefined.jpg') }}>
             {% else %}
                 <p><img src={{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[2].poster }}></p>
