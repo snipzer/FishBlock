@@ -5,7 +5,7 @@
             <li><h2>{{ serie.title }}</h2></li>
             <p><img src={{ 'http://thetvdb.com/banners/_cache/graphical/110381-g5.jpg'  }}/></p>
             <li><p>{{ serie.description }}></p></li>
-            <li><a href={{ path('main_add_favoris', {'_locale': app.request.attributes.get('_locale'), 'serieId': serie.Id.__toString}) }}><input type="button" class="btn btn-primary" value={{ "Favorites"|trans }}></a> </li>
+            <li><a href={{ path('main_add_favoris', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serie.Id.__toString}) }}><input type="button" class="btn btn-primary" value={{ "Favorites"|trans }}></a> </li>
         {% endfor %}
     </ul>
 </div>
