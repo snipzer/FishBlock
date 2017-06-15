@@ -1,0 +1,53 @@
+MainBundle\Entity\Serie:
+    type: entity
+    table: null
+    repositoryClass: MainBundle\Repository\SerieRepository
+    id:
+        id:
+            type: uuid
+            id: true
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        title:
+            type: string
+            length: '255'
+        description:
+            type: text
+        poster:
+            type: string
+            length: '255'
+            nullable: true
+        airsDayOfWeek:
+            type: string
+            length: '255'
+            nullable: true
+        airsTime:
+            type: string
+            length: '255'
+            nullable: true
+        creationDate:
+            type: datetime
+        modificationDate:
+            type: datetime
+        isValid:
+            type: boolean
+    oneToMany:
+        critics:
+            targetEntity: MainBundle\Entity\Critic
+            mappedBy: serie
+        episodes:
+            targetEntity: MainBundle\Entity\Episode
+            mappedBy: serie
+        serieActors:
+            targetEntity: MainBundle\Entity\SerieActor
+            mappedBy: serie
+        serieTypes:
+            targetEntity: MainBundle\Entity\SerieType
+            mappedBy: serie
+        favoris:
+            targetEntity: MainBundle\Entity\Favoris
+            mappedBy: serie
+    lifecycleCallbacks: {  }

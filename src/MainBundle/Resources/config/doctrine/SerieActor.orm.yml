@@ -1,0 +1,28 @@
+MainBundle\Entity\SerieActor:
+    type: entity
+    table: null
+    repositoryClass: MainBundle\Repository\SerieActorRepository
+    id:
+        id:
+            type: uuid
+            id: true
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        role:
+            type: string
+            length: '255'
+        creationDate:
+            type: datetime
+        modificationDate:
+            type: datetime
+    manyToOne:
+        actor:
+            targetEntity: MainBundle\Entity\Actor
+            inversedBy: serieActors
+        serie:
+            targetEntity: MainBundle\Entity\Serie
+            inversedBy: serieActors
+    lifecycleCallbacks: {  }

@@ -1,0 +1,36 @@
+MainBundle\Entity\Critic:
+    type: entity
+    table: null
+    repositoryClass: MainBundle\Repository\CriticRepository
+    id:
+        id:
+            type: uuid
+            id: true
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        note:
+            type: integer
+        content:
+            type: text
+        title:
+            type: string
+            length: '255'
+        postedThe:
+            type: datetime
+        isValid:
+            type: boolean
+    manyToOne:
+        serie:
+            targetEntity: MainBundle\Entity\Serie
+            inversedBy: critics
+        user:
+            targetEntity: MainBundle\Entity\User
+            inversedBy: critics
+    oneToMany:
+        criticNotations:
+            targetEntity: MainBundle\Entity\CriticNotation
+            mappedBy: critic
+    lifecycleCallbacks: {  }

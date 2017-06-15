@@ -1,0 +1,21 @@
+MainBundle\Entity\Type:
+    type: entity
+    table: null
+    repositoryClass: MainBundle\Repository\TypeRepository
+    id:
+        id:
+            type: uuid
+            id: true
+            generator:
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
+    fields:
+        name:
+            type: string
+            length: '255'
+    oneToMany:
+        serieTypes:
+            targetEntity: MainBundle\Entity\SerieType
+            mappedBy: type
+    lifecycleCallbacks: {  }
