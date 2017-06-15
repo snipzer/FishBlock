@@ -21,7 +21,7 @@ class SerieActorRepository extends \Doctrine\ORM\EntityRepository
 
         foreach($serieActors as $serieActor)
         {
-            $Actors[] = [$serieActor->getActor()->getName(), $serieActor->getRole()];
+            $Actors[] = ["name" => $serieActor->getActor()->getName(), "role" => $serieActor->getRole()];
         }
 
         return $Actors;
