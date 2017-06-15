@@ -47,9 +47,9 @@ class SuggestSerie extends  Controller
             }
             else
             {
-
-//                echo "<br>";
                 $rand = array_rand($arraySerieTypes);
+
+
 
 
                 // On en choisie un au hazard
@@ -70,7 +70,15 @@ class SuggestSerie extends  Controller
                     if($serieType->getSerie() !== $chosenSerie)
                         array_push($result, $serieType->getSerie());
                 }
+
+
                 $bool = false;
+
+                foreach($result as $res)
+                {
+                   if($res->getPoster() === "undefined")
+                       $bool = true;
+                }
             }
         }
 
