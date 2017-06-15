@@ -69,4 +69,25 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
 
         return $DDArray;
     }
+
+    public function checkIfSerieIsInFav($serieId, $userId)
+    {
+        $user = $this->getEntityManager()->getRepository("MainBundle:User")->getUserById($userId);
+        $serie = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSerieWithId($serieId);
+
+        $isHereOrNot = $this->getEntityManager()->createQueryBuilder()
+            ->select("f")
+            ->from("MainBundle:Favoris", "f")
+            ->where("f.serie = :serie")
+            ->andWhere("f.user = :user")
+            ->setParameter(":serie", $serie)
+            ->setParameter(":user", $user)
+            ->getQuery()
+            ->getResult();
+
+        if(count($isHereOrNot))
+            return true;
+
+        return false;
+    }
 }
