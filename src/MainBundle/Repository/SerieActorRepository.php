@@ -10,4 +10,20 @@ namespace MainBundle\Repository;
  */
 class SerieActorRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getActorBySerieId($serieId)
+    {
+        $serie = $this->getEntityManager()
+            ->getRepository("MainBundle:Serie")->getSerieWithId($serieId);
+
+        $serieActors = $this->findBy(["serie" => $serie]);
+
+        $Actors = [];
+
+        foreach($serieActors as $serieActor)
+        {
+            $Actors[] = [$serieActor->getActor()->getName(), $serieActor->getRole()];
+        }
+
+        return $Actors;
+    }
 }
