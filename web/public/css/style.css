@@ -79,7 +79,7 @@ header {
 */
 .loginBlock {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: stretch;
 
     width: 28em;
@@ -89,13 +89,34 @@ header {
     font-weight: bolder;
 }
 
+.loginBlock form {
+    display: flex;
+    flex: 1;
+}
+
 .loginUsernamePassword {
     display: flex;
     flex-direction: column;
+
 }
 
 .loginUsernamePassword div:nth-child(2) {
     display: none;
+}
+
+#username {
+    justify-content: center;
+    color: #000000;
+}
+#password {
+    color: #000000
+}
+
+.loginUsernamePassword label {
+    justify-content: center;
+}
+
+.loginConnectionForgot {
 }
 
 .loginConnectionForgot a {
@@ -103,7 +124,7 @@ header {
     align-items: center;
     justify-content: center;
 
-    width: 50%;
+    width: 100%;
 
     color: #ffffff;
 }
@@ -301,10 +322,10 @@ Style pour le bloc menu du site
 }
 
 /*----------------------------------------------------------------------------------
-Style pour la suggestion/recherche du site
+Style pour le bloc suggestion du site
 ----------------------------------------------------------------------------------*/
 
-.searchSuggestBlock {
+.suggestBlock {
     display: flex;
 
     flex-direction: column;
@@ -322,11 +343,175 @@ Style pour la suggestion/recherche du site
 */
 @media screen and (max-width: 1000px) {
 
-    .searchSuggestBlock {
+    .suggestBlock {
         display: none;
     }
 
+}
 
+/*----------------------------------------------------------------------------------
+Style pour le bloc recherche du site
+----------------------------------------------------------------------------------*/
+
+.searchBlock {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    width: 16%;
+    height: 66vh;
+    min-width: 15em;
+
+    background-color: #686868;
+    color: #ffffff;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 1000px) {
+
+    .searchBlock {
+        display: none;
+    }
+
+}
+
+/*----------------------------------------------------------------------------------
+Style pour la div register / visit
+----------------------------------------------------------------------------------*/
+
+.registerVisit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+
+    width: 100%;
+}
+
+/*----------------------------------------------------------------------------------
+Style pour le bloc register
+----------------------------------------------------------------------------------*/
+
+.registerBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 20%;
+    height: 66vh;
+    min-width: 22em;
+
+    margin: 0 0.5em;
+
+    background-color: #686868;
+    color: #ffffff;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 1000px) {
+
+    .registerBlock {
+
+    }
+
+}
+
+
+/*----------------------------------------------------------------------------------
+Style pour le bloc "visiter le site"
+----------------------------------------------------------------------------------*/
+
+.visitBlock {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 16%;
+    height: 66vh;
+    min-width: 10em;
+
+    margin-left: 0.5em;
+
+    background-color: #686868;
+    color: #ffffff;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.visitBlock a {
+    display: flex;
+    flex: 1;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    color: #ffffff;
+}
+
+.visitBlock a:hover {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #ef7a35;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 1000px) {
+
+    .visitBlock {
+
+    }
+
+}
+
+/*----------------------------------------------------------------------------------
+Style pour la page Mentions légales
+----------------------------------------------------------------------------------*/
+
+.legalContent {
+
+}
+
+.legalContent h1 {
+    color: #FFFFFF;
+    background-color: #686868;
+}
+
+.title2 {
+    width: 60vh;
+
+    color: #FFFFFF;
+    background-color: #00b6de;
+}
+.title3 {
+    width: 60vh;
+
+    color: #FFFFFF;
+    background-color: #ef7a35;
+}
+.title4 {
+    width: 60vh;
+
+    color: #FFFFFF;
+    background-color: #58bf94;
+}
+.title5 {
+    width: 60vh;
+
+    color: #FFFFFF;
+    background-color: #ed3126;
+}
+.title6 {
+    width: 60vh;
+
+    color: #FFFFFF;
+    background-color: #fdb515;
 }
 
 /*----------------------------------------------------------------------------------
