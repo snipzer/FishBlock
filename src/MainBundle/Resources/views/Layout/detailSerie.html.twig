@@ -1,5 +1,25 @@
 <div class="detailSerie">
 
-    {{ serie.title }}
+
+    <h2>{{ serie.title }}</h2>
+
+    {% for type in types %}
+        {#<p>{{ types.name }}</p>#}
+    {% endfor %}
+
+
+    {% for actor in actors %}
+        {#<p>{{ actors.name }}</p>#}
+        {% for serie_actor in serie_actor %}
+            <p>{{ serie_actor.role }}</p>
+        {% endfor %}
+    {% endfor %}
+
+
+    {% for critic in critics %}
+        <p>{{ critic.title }}</p>
+        <p>{{ critic.content }}</p>
+    {% endfor %}
+
 
 </div>
