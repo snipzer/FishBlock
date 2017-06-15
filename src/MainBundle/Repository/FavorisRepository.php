@@ -90,4 +90,24 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
 
         return false;
     }
+
+    public function TempFakeFav($userId1, $userId2)
+    {
+        $series = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSeries();
+
+        $i = 0;
+
+        foreach($series as $serie)
+        {
+            $i++;
+
+            if(rand(0, 100) > 60)
+            {
+                if($i%2 === 0)
+                    $this->addSerie($userId1, $serie->getId()->__toString());
+                else
+                    $this->addSerie($userId2, $serie->getId()->__toString());
+            }
+        }
+    }
 }
