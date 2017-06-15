@@ -29,7 +29,7 @@ header {
     width: 300px;
 }
 
-/* accountBlock.html.twig -----------------
+/* header.html.twig -----------------
 */
 .accountBlock {
     display: flex;
@@ -75,11 +75,10 @@ header {
     background-color: #686868;
 }
 
-/* loginBlock.html.twig -----------------
+/* headerLogin.html.twig -----------------
 */
 .loginBlock {
-    display: none;
-    /*display: flex;*/
+    display: flex;
     flex-direction: row;
     align-items: stretch;
 

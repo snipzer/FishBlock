@@ -1,11 +1,5 @@
 {% extends 'MainBundle::base.html.twig' %}
 
-{% block include %}
-    {% include "MainBundle:Layout:accountBlock.html.twig" %}
-    {% include "MainBundle:Layout:menu.html.twig" %}
-    {% include "MainBundle:Layout:serieCard.html.twig" %}
-{% endblock %}
-
 {% block title %}{{ 'Search'|trans }}{% endblock %}
 
 {% block head %}
@@ -16,7 +10,15 @@
     {{ parent() }}
 {% endblock %}
 
-{% block content %} {% endblock %}
+{% block header %}
+    {% include "MainBundle:Layout:header.html.twig" %}
+{% endblock %}
+
+{% block content %}
+    {% include "MainBundle:Layout:menu.html.twig" %}
+    {% include "MainBundle:Layout:serieCard.html.twig" %}
+    {% include "MainBundle:Layout:searchBlock.html.twig" %}
+{% endblock %}
 
 
 {% block footer %}

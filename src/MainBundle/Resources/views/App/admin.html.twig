@@ -1,8 +1,6 @@
 {% extends 'MainBundle::base.html.twig' %}
 
 {% block include %}
-    {% include "MainBundle:Layout:accountBlock.html.twig" %}
-    {% include "MainBundle:Layout:menu.html.twig" %}
     {% include "MainBundle:Layout:adminBoard.html.twig" %}
     {% include "MainBundle:Layout:userManager.html.twig" %}
     {% include "MainBundle:Layout:modifSerie.html.twig" %}
@@ -20,7 +18,13 @@
     {{ parent() }}
 {% endblock %}
 
-{% block content %} {% endblock %}
+{% block header %}
+    {% include "MainBundle:Layout:header.html.twig" %}
+{% endblock %}
+
+{% block content %}
+    {% include "MainBundle:Layout:menu.html.twig" %}
+{% endblock %}
 
 {% block footer %}
     {{ parent() }}
