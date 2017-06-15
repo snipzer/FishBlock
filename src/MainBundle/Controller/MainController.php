@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Security;
 
 class MainController extends Controller
 {
@@ -21,6 +23,8 @@ class MainController extends Controller
          * New User (EntityManager)
          * ~~Recupération des séries populaires (SerieRepository)
          */
+
+
         $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
         return $this->render("MainBundle:App:home.html.twig", [
@@ -111,7 +115,17 @@ class MainController extends Controller
          * Récupération de la note de la série (SerieRepository)
          */
 
+        $serieId = $request->attributes->get("serieId");
         $userId = "52fc83e7-59b2-45d3-94c2-c674385afdbe";
+
+        if($serieId)
+        {
+            $this->getDoctrine()
+                ->getRepository("MainBundle:Favoris")
+                ->addSerie($userId, $serieId);
+        }
+
+
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $favoris = $this->getDoctrine()->getRepository("MainBundle:Favoris")->getFavorisByUserId($userId);
@@ -137,7 +151,7 @@ class MainController extends Controller
          * Récupération de la note d'une série (SerieRepository)
          * Notification (Service)
          */
-        $serieId = "123f3c71-8462-4a24-9cb6-1c8152149edf";
+        $serieId = "86f55cf8-e0b5-4c61-a893-e29d93ae9de9";
 
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
@@ -146,8 +160,8 @@ class MainController extends Controller
         $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:SerieType");
 
         $serie = $SerieRepository->getSerieWithId($serieId);
-        $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serie->getId());
-        $episodes = $EpisodeRepository->getEpisodesFromSerie($serie->getId());
+        $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
+        $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
         $actors = $ActorRepository->getActorBySerieId($serieId);
         $types = $TypeRepository->getTypeBySerieId($serieId);
 
