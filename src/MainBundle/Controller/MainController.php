@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Security;
 
 class MainController extends Controller
 {
@@ -21,6 +23,8 @@ class MainController extends Controller
          * New User (EntityManager)
          * ~~Recupération des séries populaires (SerieRepository)
          */
+
+
         $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
         return $this->render("MainBundle:App:home.html.twig", [
@@ -39,7 +43,7 @@ class MainController extends Controller
          * ~~Afficher les critiques des séries que l'utilisateur à en favoris (Service)
          * Système de like/dislike (CriticNotationRepository)
          */
-        $userId = "52fc83e7-59b2-45d3-94c2-c674385afdbe";
+        $userId = $this->getUser()->getId()->__toString();
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $wallInfo = $this->getDoctrine()->getRepository("MainBundle:Favoris")->wall($userId);
@@ -111,7 +115,17 @@ class MainController extends Controller
          * Récupération de la note de la série (SerieRepository)
          */
 
-        $userId = "52fc83e7-59b2-45d3-94c2-c674385afdbe";
+        $serieId = $request->attributes->get("idSerie");
+        $userId = $this->getUser()->getId()->__toString();
+
+        if($serieId)
+        {
+            $this->getDoctrine()
+                ->getRepository("MainBundle:Favoris")
+                ->addSerie($userId, $serieId);
+        }
+
+
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $favoris = $this->getDoctrine()->getRepository("MainBundle:Favoris")->getFavorisByUserId($userId);
@@ -137,7 +151,8 @@ class MainController extends Controller
          * Récupération de la note d'une série (SerieRepository)
          * Notification (Service)
          */
-        $serieId = "123f3c71-8462-4a24-9cb6-1c8152149edf";
+
+        $serieId = $request->attributes->get("idSerie");
 
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
@@ -146,8 +161,8 @@ class MainController extends Controller
         $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:SerieType");
 
         $serie = $SerieRepository->getSerieWithId($serieId);
-        $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serie->getId());
-        $episodes = $EpisodeRepository->getEpisodesFromSerie($serie->getId());
+        $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
+        $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
         $actors = $ActorRepository->getActorBySerieId($serieId);
         $types = $TypeRepository->getTypeBySerieId($serieId);
 
@@ -167,8 +182,8 @@ class MainController extends Controller
          * Pareil que serieAction
          * Récupérer les informations d'un épidose (EpisodeRepository)
          */
-        $serieId = "123f3c71-8462-4a24-9cb6-1c8152149edf";
-        $episodeId = "6f75f97d-011d-4a97-ae2d-0d007663f84f";
+        $serieId = $request->attributes->get("idSerie");
+        $episodeId = $request->attributes->get("idEpisode");
 
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
@@ -205,7 +220,7 @@ class MainController extends Controller
          * ~~Suggestion de serie (SerieRepository)
          */
 
-        $userId = "52fc83e7-59b2-45d3-94c2-c674385afdbe";
+        $userId = $this->getUser()->getId()->__toString();
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $user = $this->getDoctrine()->getRepository("MainBundle:User")->getUserById($userId);
@@ -225,4 +240,5 @@ class MainController extends Controller
 
         return $this->render("MainBundle:App:legal.html.twig");
     }
+
 }
