@@ -62,11 +62,52 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
 
             $critic = $criticInArray[0];
 
-            $array = [$serie, $critic];
+            $array = ["serie" => $serie, "critic" => $critic];
 
             $DDArray[] = $array;
         }
 
         return $DDArray;
+    }
+
+    public function checkIfSerieIsInFav($serieId, $userId)
+    {
+        $user = $this->getEntityManager()->getRepository("MainBundle:User")->getUserById($userId);
+        $serie = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSerieWithId($serieId);
+
+        $isHereOrNot = $this->getEntityManager()->createQueryBuilder()
+            ->select("f")
+            ->from("MainBundle:Favoris", "f")
+            ->where("f.serie = :serie")
+            ->andWhere("f.user = :user")
+            ->setParameter(":serie", $serie)
+            ->setParameter(":user", $user)
+            ->getQuery()
+            ->getResult();
+
+        if(count($isHereOrNot))
+            return true;
+
+        return false;
+    }
+
+    public function TempFakeFav($userId1, $userId2)
+    {
+        $series = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSeries();
+
+        $i = 0;
+
+        foreach($series as $serie)
+        {
+            $i++;
+
+            if(rand(0, 100) > 60)
+            {
+                if($i%2 === 0)
+                    $this->addSerie($userId1, $serie->getId()->__toString());
+                else
+                    $this->addSerie($userId2, $serie->getId()->__toString());
+            }
+        }
     }
 }

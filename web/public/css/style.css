@@ -2,7 +2,7 @@
 Style pour la base du site (base.html.twig)
 -----------------------------------------------------------------------*/
 
-.base_color {
+.baseColor {
     background-color: #f3f2f0;
 }
 
@@ -14,73 +14,73 @@ html {
 Style pour le header du site (header.html.twig)
 ----------------------------------------------------------------------*/
 
-.site_header {
+header {
     margin: 15px 50px;
 }
 
-.block_header {
+.headerBlock {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.block_header >img {
+.headerBlock >img {
     height: 150px;
     width: 300px;
 }
 
-/* accountBlock.html.twig -----------------
+/* header.html.twig -----------------
 */
-.block_account {
+.accountBlock {
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    width: 28em;
+    width: 22em;
 
     color: #ffffff;
     background-color: #ed3126;
     font-weight: bolder;
+    font-size: larger;
 }
 
-.user_name {
+.accountName {
     flex: 1;
     display: flex;
     align-items: center;
 }
 
-.notification_account {
+.accountNotification {
     flex: 1;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: stretch;
 
     width: 100%;
 }
 
-.notification_account a {
+.accountNotification a {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    height: 100%;
     width: 50%;
 
     color: #ffffff;
 }
 
-.notification_account a:hover {
+.accountNotification a:hover {
     color: #ffffff;
     text-decoration: none;
     background-color: #686868;
 }
 
-/* loginBlock.html.twig -----------------
+/* headerLogin.html.twig -----------------
 */
-.block_login {
+.loginBlock {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
 
     width: 28em;
 
@@ -89,23 +89,47 @@ Style pour le header du site (header.html.twig)
     font-weight: bolder;
 }
 
-.login_username_password {
+.loginBlock form {
     display: flex;
-    flex-direction: column;
+    flex: 1;
 }
 
-.login_connection_forgot a {
+.loginUsernamePassword {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.loginUsernamePassword div:nth-child(2) {
+    display: none;
+}
+
+#username {
+    justify-content: center;
+    color: #000000;
+}
+#password {
+    color: #000000
+}
+
+.loginUsernamePassword label {
+    justify-content: center;
+}
+
+.loginConnectionForgot {
+}
+
+.loginConnectionForgot a {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    height: 100%;
-    width: 50%;
+    width: 100%;
 
     color: #ffffff;
 }
 
-.login_connection_forgot a:hover {
+.loginConnectionForgot a:hover {
     color: #ffffff;
     text-decoration: none;
     background-color: #686868;
@@ -113,50 +137,456 @@ Style pour le header du site (header.html.twig)
 
 /* Bar de séparation du header -----------------
 */
-.separation_bar {
+.separationBar {
     margin: 20px 0;
-    height: 1em;
     width: 100%;
     background-color: #686868;
+}
+
+.separationFat {
+    height: 1em;
 }
 
 /* Pour la version responsive -----------------
 */
 @media screen and (max-width: 900px) {
-    .block_header {
+    .headerBlock {
         flex-direction: column;
     }
 
-    .site_header {
+    header {
         margin: 10px 20px ;
     }
 
-    .block_header >img {
+    .headerBlock >img {
         height: 125px;
         width: 250px;
     }
 
-    .block_account {
+    .accountBlock {
         width: 100%;
         min-height: 5em;
     }
 
-    .notification_account a {
+    .accountNotification a {
         height: 2.5em;
     }
 
-    .separation_bar {
+    .separationBar {
         margin: 10px 0;
     }
 }
 
 @media screen and (max-width: 900px) and (min-width: 600px) {
-    .block_account {
+    .accountBlock {
         width: 70%;
         margin: auto;
     }
 }
 
 /*----------------------------------------------------------------------------------
+Style pour le block content
+----------------------------------------------------------------------------------*/
+
+.contentBlock {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 50px;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 900px) {
+
+    .contentBlock {
+        margin: 10px 20px;
+        height: 66vh;
+    }
+}
+
+/*----------------------------------------------------------------------------------
+Style pour le bloc menu du site
+----------------------------------------------------------------------------------*/
+
+.menuBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 15%;
+    height: 66vh;
+    min-width: 10em;
+
+    background-color: #686868;
+
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.menuBlock a {
+    color: #ffffff;
+}
+
+.menuBlock a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.menuBlockSearch {
+    display: flex;
+    flex: 1;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.menuBlockSearch:hover {
+    background-color: #fdb515;
+}
+
+.menuBlockFavorites {
+    display: flex;
+    flex: 1;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.menuBlockFavorites:hover {
+    background-color: #58bf94;
+}
+
+.menuBlockWall {
+    display: flex;
+    flex: 1;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+}
+
+.menuBlockWall:hover {
+    background-color: #ef7a35;
+}
+
+.menuBlockChat {
+    display: flex;
+    flex: 1;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.menuBlockChat:hover {
+    background-color: #00b6de;
+}
+
+.menuBlockAdmin {
+    display: flex;
+    flex: 1;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.menuBlockAdmin:hover {
+    background-color: #ed3126;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 900px) {
+
+    .menuBlock {
+        position: fixed;
+        top: 0;
+        left: 100%;
+        height: 100vh;
+    }
+
+}
+
+/*----------------------------------------------------------------------------------
+Style pour le bloc suggestion du site
+----------------------------------------------------------------------------------*/
+
+.suggestBlock {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    width: 16%;
+    height: 66vh;
+    min-width: 15em;
+
+    background-color: #686868;
+    color: #ffffff;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 1000px) {
+
+    .suggestBlock {
+        display: none;
+    }
+
+}
+
+/*----------------------------------------------------------------------------------
+Style pour le bloc recherche du site
+----------------------------------------------------------------------------------*/
+
+.searchBlock {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    width: 16%;
+    height: 66vh;
+    min-width: 15em;
+
+    background-color: #686868;
+    color: #ffffff;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 1000px) {
+
+    .searchBlock {
+        display: none;
+    }
+
+}
+
+/*----------------------------------------------------------------------------------
+Style pour la div register / visit
+----------------------------------------------------------------------------------*/
+
+.registerVisit {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+
+    width: 100%;
+}
+
+/*----------------------------------------------------------------------------------
+Style pour le bloc register
+----------------------------------------------------------------------------------*/
+
+.registerBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 20%;
+    height: 66vh;
+    min-width: 22em;
+
+    margin: 0 0.5em;
+
+    background-color: #686868;
+    color: #ffffff;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 1000px) {
+
+    .registerBlock {
+
+    }
+
+}
+
+
+/*----------------------------------------------------------------------------------
+Style pour le bloc "visiter le site"
+----------------------------------------------------------------------------------*/
+
+.visitBlock {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 16%;
+    height: 66vh;
+    min-width: 10em;
+
+    margin-left: 0.5em;
+
+    background-color: #686868;
+    color: #ffffff;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.visitBlock a {
+    display: flex;
+    flex: 1;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    color: #ffffff;
+}
+
+.visitBlock a:hover {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #ef7a35;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 1000px) {
+
+    .visitBlock {
+
+    }
+
+}
+
+/*----------------------------------------------------------------------------------
+Style pour la page Mentions légales
+----------------------------------------------------------------------------------*/
+
+.legalContent {
+
+}
+
+.legalContent h1 {
+    color: #FFFFFF;
+    background-color: #686868;
+}
+
+.title2 {
+    width: 60vh;
+
+    color: #FFFFFF;
+    background-color: #00b6de;
+}
+.title3 {
+    width: 60vh;
+
+    color: #FFFFFF;
+    background-color: #ef7a35;
+}
+.title4 {
+    width: 60vh;
+
+    color: #FFFFFF;
+    background-color: #58bf94;
+}
+.title5 {
+    width: 60vh;
+
+    color: #FFFFFF;
+    background-color: #ed3126;
+}
+.title6 {
+    width: 60vh;
+
+    color: #FFFFFF;
+    background-color: #fdb515;
+}
+
+/*----------------------------------------------------------------------------------
 Style pour le footer du site
 ----------------------------------------------------------------------------------*/
+
+footer {
+    margin: 15px 50px;
+}
+
+.separationThin {
+    height: 0.3em;
+}
+
+.footerBlock {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    white-space: nowrap;
+
+}
+
+.footerLegalNotice {
+    display: flex;
+
+    height: 100%;
+    border-right: solid 2px black;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.footerLegalNotice a {
+    color: #000000;
+}
+.footerLegalNotice a:hover {
+    color: #000000;
+}
+
+.footerWebsitePlan {
+    display: flex;
+    flex: 1;
+
+    height: 100%;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.footerWebsitePlan a {
+    color: #000000;
+}
+.footerWebsitePlan a:hover {
+    color: #000000;
+}
+
+.footerDevWeb {
+    display: flex;
+    flex-direction: column;
+    line-height: 1em;
+
+    padding: 0 10px;
+}
+
+/* Pour la version responsive -----------------
+*/
+@media screen and (max-width: 900px) {
+
+    footer {
+        margin: 10px 20px ;
+    }
+
+}
+
+/*@media screen and (max-width: 900px) and (min-width: 600px) {*/
+    /*.accountBlock {*/
+        /*width: 70%;*/
+        /*margin: auto;*/
+    /*}*/
+}

@@ -24,6 +24,15 @@ class SaveSerie extends Controller
         $this->tvdbClient = $tvdbConnector;
     }
 
+    public function genDataBase()
+    {
+        $users = $this->manager->getRepository("MainBundle:User")->TempFakeUser();
+
+        $this->manager->getRepository("MainBundle:Critic")->TempFakeCritic($users[0], $users[1]);
+
+        $this->manager->getRepository("MainBundle:Favoris")->TempFakeFav($users[0], $users[1]);
+    }
+
     public function saveSerie($serieName)
     {
 
@@ -49,43 +58,61 @@ class SaveSerie extends Controller
 
                 foreach ($genres as $genre)
                 {
-                    if ($this->manager->getRepository("MainBundle:Type")->checkIfTypeAlreadyHere($genre))
+                    $typeIsHere = $this->manager->getRepository("MainBundle:Type")->checkIfTypeAlreadyHere($genre);
+                    if ($typeIsHere)
                     {
                         $type = new Type();
                         $type->setName($genre);
-
-                        $serieType = new SerieType();
-                        $serieType->setType($type)
-                            ->setSerie($serie);
-
-                        $serie->setSerieTypes($serieType);
-
-                        $this->manager->persist($serieType);
-                        $this->manager->persist($type);
                     }
+                    else
+                    {
+                        $type = $this->manager->getRepository("MainBundle:Type")->getOneTypeByName($genre);
+                    }
+
+
+                    $serieType = new SerieType();
+                    $serieType->setType($type)
+                        ->setSerie($serie);
+
+                    $serie->setSerieTypes($serieType);
+
+                    if($typeIsHere)
+                        $this->manager->persist($type);
+
+                    $this->manager->persist($serieType);
                 }
 
                 $actorsFromApi = $this->tvdbClient->getActeursFromSerie($serieId);
 
                 foreach ($actorsFromApi as $actorFromApi)
                 {
-                    if ($this->manager->getRepository("MainBundle:Actor")->checkIfActorAlreadyHere($actorFromApi->getName()))
+                    $actorIsHere = $this->manager->getRepository("MainBundle:Actor")->checkIfActorAlreadyHere($actorFromApi->getName());
+                    if ($actorIsHere)
                     {
                         $actor = new Actor();
                         $actor->setName(($actorFromApi->getName()) ? $actorFromApi->getName() : "undefined")
                             ->setPicture(($actorFromApi->getImage()) ? $actorFromApi->getImage() : "undefined");
-
-                        $serieActor = new SerieActor();
-                        $serieActor->setSerie($serie)
-                            ->setActor($actor)
-                            ->setRole(($actorFromApi->getRole()) ? $actorFromApi->getRole() : "undefined");
-
-                        $serie->setSerieActors($serieActor);
-                        $actor->setSerieActors($serieActor);
-
-                        $this->manager->persist($actor);
-                        $this->manager->persist($serieActor);
                     }
+                    else
+                    {
+                        $actor = $this->manager->getRepository("MainBundle:Actor")->getActorByName($actorFromApi->getName());
+                    }
+
+                    $serieActor = new SerieActor();
+                    $serieActor->setSerie($serie)
+                        ->setActor($actor)
+                        ->setRole(($actorFromApi->getRole()) ? $actorFromApi->getRole() : "undefined");
+
+                    $serie->setSerieActors($serieActor);
+                    $actor->setSerieActors($serieActor);
+
+                    // Attention ici
+                    if ($actorIsHere)
+                    {
+                        $this->manager->persist($actor);
+                    }
+
+                    $this->manager->persist($serieActor);
                 }
 
                 $episodesFromApi = $this->tvdbClient->getEpisodesFromSerie($serieId);
@@ -100,8 +127,8 @@ class SaveSerie extends Controller
                         $episode = new Episode();
                         $episode->setTitle(($episodeFromApi->getEpisodeName()) ? $episodeFromApi->getEpisodeName() : "undefined")
                             ->setDescription(($episodeFromApi->getOverview()) ? $episodeFromApi->getOverview() : "undefined")
-                            ->setEpisodeNumber(($episodeFromApi->getAiredEpisodeNumber()) ? $episodeFromApi->getAiredEpisodeNumber() : 9999)
-                            ->setSeasonNumber(($episodeFromApi->getAiredSeason()) ? $episodeFromApi->getAiredSeason() : 9999)
+                            ->setEpisodeNumber(($episodeFromApi->getAiredEpisodeNumber()) ? $episodeFromApi->getAiredEpisodeNumber() : 0)
+                            ->setSeasonNumber(($episodeFromApi->getAiredSeason()) ? $episodeFromApi->getAiredSeason() : 0)
                             ->setSerie($serie);
 
                         $serie->setEpisodes($episode);
@@ -109,7 +136,6 @@ class SaveSerie extends Controller
                         $this->manager->persist($episode);
                     }
                 }
-
                 $this->manager->persist($serie);
                 $this->manager->flush();
             }

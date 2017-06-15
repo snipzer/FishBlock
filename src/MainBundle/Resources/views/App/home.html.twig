@@ -1,9 +1,5 @@
 {% extends 'MainBundle::base.html.twig' %}
 
-{% block include %}
-    {% include "MainBundle:Layout:loginBlock.html.twig" %}
-{% endblock %}
-
 {% block title %}{{ 'Home'|trans }}{% endblock %}
 
 {% block head %}
@@ -14,8 +10,16 @@
     {{ parent() }}
 {% endblock %}
 
-{% block content %}
+{% block header %}
+    {% include "MainBundle:Layout:headerLogin.html.twig" %}
+{% endblock %}
 
+{% block content %}
+    {# Caroussel #}
+    <div class="registerVisit">
+        {% include "MainBundle:Layout:register.html.twig" %}
+        {% include "MainBundle:Layout:visit.html.twig" %}
+    </div>
 {% endblock %}
 
 {% block footer %}

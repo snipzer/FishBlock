@@ -41,4 +41,9 @@ class TypeRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter(":name", $typeName)
             ->getQuery()->getResult();
     }
+
+    public function getOneTypeByName($typeName)
+    {
+        return $this->findOneBy(["name" => $typeName]);
+    }
 }

@@ -1,3 +1,17 @@
 <div class="detailSerie">
+    <h2>{{ serie.title }}</h2>
 
+    <p>{{ serie.description }}</p>
+    <p>Type:
+    {% for type in types %}
+         {{ type }}
+    {% endfor %}
+    </p>
+
+    <p>Acteur:</p>
+    <ul>
+    {% for result in actors %}
+        <li>{{ result["name"] ~ ' dans le role de ' ~ result["role"] }}</li>
+    {% endfor %}
+    </ul>
 </div>

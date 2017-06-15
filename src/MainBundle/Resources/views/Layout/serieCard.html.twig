@@ -1,0 +1,54 @@
+<div class="serieCard">
+
+    {% if serie is defined %}
+        <ul>
+            {% for ser in serie %}
+                <li>
+                    <h2><a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': ser.Id.__toString}) }}">{{ ser.title }}</a></h2>
+                </li>
+
+                {% if ser.poster == "undefined" %}
+                    <p>
+                        <img src={{ asset("public/img/undefined.jpg") }}/>
+                    </p>
+                {%  else %}
+                    <p>
+                        <img src={{ 'http://thetvdb.com/banners/_cache/' ~ ser.poster  }}/>
+                    </p>
+                {%  endif %}
+
+                <li>
+                    <p>{{ ser.description }}</p>
+                </li>
+                <li>
+                    <a href="{{ path('main_add_favoris', {'_locale': app.request.attributes.get('_locale'), 'idSerie': ser.Id.__toString}) }}" class="btn btn-primary">{{ "Favorites"|trans }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <ul>
+            {% for fav in favoris %}
+                <li>
+                    <h2><a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': fav.serie.Id.__toString}) }}">{{ fav.serie.title }}</a></h2>
+                </li>
+
+                {% if fav.serie.poster == "undefined" %}
+                    <p>
+                        <img src={{ asset("public/img/undefined.jpg") }}/>
+                    </p>
+                {%  else %}
+                    <p>
+                        <img src={{ 'http://thetvdb.com/banners/_cache/' ~ fav.serie.poster  }}/>
+                    </p>
+                {%  endif %}
+
+                <li>
+                    <p>{{ fav.serie.description }}</p>
+                </li>
+                <li>
+                    <a href="{{ path('main_add_favoris', {'_locale': app.request.attributes.get('_locale'), 'idSerie': fav.serie.Id.__toString}) }}" class="btn btn-primary">{{ "Favorites"|trans }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>

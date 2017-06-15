@@ -11,7 +11,7 @@ parameters:
 
 framework:
     #esi: ~
-    default_locale: '%locale%'
+    default_locale: 'en'
     translator:
         fallbacks: ['%locale%']
     secret: '%secret%'
@@ -90,7 +90,7 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Acme\UserBundle\Entity\User
+    user_class: MainBundle\Entity\User
     from_email:
         address: "noreply@yourcompany.com"
         sender_name: "No Reply"

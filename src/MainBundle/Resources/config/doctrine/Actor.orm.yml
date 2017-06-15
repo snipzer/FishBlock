@@ -4,10 +4,12 @@ MainBundle\Entity\Actor:
     repositoryClass: MainBundle\Repository\ActorRepository
     id:
         id:
-            type: integer
+            type: uuid
             id: true
             generator:
-                strategy: AUTO
+                strategy: CUSTOM
+            customIdGenerator:
+                class: Ramsey\Uuid\Doctrine\UuidGenerator
     fields:
         name:
             type: string

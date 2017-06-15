@@ -31,6 +31,8 @@ class CriticRepository extends \Doctrine\ORM\EntityRepository
 
         $this->getEntityManager()->persist($critic);
         $this->getEntityManager()->flush();
+
+        return $critic;
     }
 
     public function getCriticsFromSerie($serieId)
@@ -91,13 +93,7 @@ class CriticRepository extends \Doctrine\ORM\EntityRepository
     {
         $serie = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSerieWithId($serieId);
 
-        return $this->getEntityManager()->createQueryBuilder()
-            ->select("c")
-            ->from("MainBundle:Critic", "c")
-            ->where("c.serie = :id")
-            ->andWhere("c.isValid = true")
-            ->setParameter(":id", $serie)
-            ->getQuery()->getResult();
+        return $this->findBy(["serie" => $serie, "isValid" => true]);
     }
 
     // Renvois toutes les critiques non valider pour une série
@@ -155,30 +151,39 @@ class CriticRepository extends \Doctrine\ORM\EntityRepository
         return $result;
     }
 
-    public function TempFakeCritic($userId1, $userId2, $serieId1, $serieId2)
+    public function TempFakeCritic($userId1, $userId2)
     {
-        for($i = 0; $i < 35; $i++)
+        $series = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSeries();
+
+        foreach($series as $serie)
         {
-            if($i%2 === 0)
+            for($i = 0; $i < 10; $i++)
             {
-                $userId = $userId1;
-                $serieId = $serieId1;
-            }
-            else
-            {
-                $userId = $userId2;
-                $serieId = $serieId2;
-            }
+                if($i%2 === 0)
+                    $userId = $userId1;
+                else
+                    $userId = $userId2;
 
-            $array = [
-                "title" => "Title ".$i,
-                "content" => "Tolkien ipsum uilos lanthir taniquetil gwaihir mardil. Lameth elendil yavanna pelargir celon bandobras thalion formenos treebeard curunir.",
-                "note" => 5,
-                "userId" => $userId,
-                "serieId" => $serieId
-            ];
 
-            $this->postCritic($array["title"], $array["content"], $array["note"], $array["userId"], $array["serieId"]);
+                $array = [
+                    "title" => "Title ".$i,
+                    "content" => "Tolkien ipsum uilos lanthir taniquetil gwaihir mardil. Lameth elendil yavanna pelargir celon bandobras thalion formenos treebeard curunir.",
+                    "note" => 5,
+                    "userId" => $userId,
+                    "serieId" => $serie->getId()->__toString()
+                ];
+
+                $critic = $this->postCritic($array["title"], $array["content"], $array["note"], $array["userId"], $array["serieId"]);
+
+                if(rand(0, 100) > 60)
+                {
+                    $critic->setIsValid(true);
+                    $this->getEntityManager()->persist($critic);
+                    $this->getEntityManager()->flush();
+                }
+
+                $this->getEntityManager()->getRepository("MainBundle:CriticNotation")->addNotation($critic->getId()->__toString(), $userId, true);
+            }
         }
     }
 }
