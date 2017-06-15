@@ -19,7 +19,7 @@ class SuggestSerie extends  Controller
         // Récupération des favoris de l'utilisateurs
         $userFavs = $this->manager->GetRepository("MainBundle:Favoris")->getFavorisByUserId($userId);
 
-        $result = [];
+
         $array = [];
 
         // Pour chaque objet favoris, on stocke les séries
@@ -32,6 +32,7 @@ class SuggestSerie extends  Controller
 
         while($bool)
         {
+            $result = [];
             // On sélectionne une série parmis toutes celles stocker
             $chosenSerie = $array[array_rand($array)];
 
@@ -48,9 +49,6 @@ class SuggestSerie extends  Controller
             else
             {
                 $rand = array_rand($arraySerieTypes);
-
-
-
 
                 // On en choisie un au hazard
                 $chosenSerieType = $arraySerieTypes[$rand];
@@ -73,12 +71,8 @@ class SuggestSerie extends  Controller
 
 
                 $bool = false;
-
-                foreach($result as $res)
-                {
-                   if($res->getPoster() === "undefined")
-                       $bool = true;
-                }
+                if(count($result) != 3)
+                    $bool = true;
             }
         }
 

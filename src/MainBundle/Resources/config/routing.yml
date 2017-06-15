@@ -35,7 +35,7 @@ main_favoris:
         _locale: en|fr
 
 main_add_favoris:
-   path:     /{_locale}/favoris/{serieId}
+   path:     /{_locale}/favoris/{idSerie}
    defaults:
        _controller: MainBundle:Main:favoris
    requirements:

@@ -62,7 +62,7 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
 
             $critic = $criticInArray[0];
 
-            $array = [$serie, $critic];
+            $array = ["serie" => $serie, "critic" => $critic];
 
             $DDArray[] = $array;
         }
