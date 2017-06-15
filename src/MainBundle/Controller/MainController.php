@@ -137,7 +137,7 @@ class MainController extends Controller
          * Récupération de la note d'une série (SerieRepository)
          * Notification (Service)
          */
-        $serieId = "86f55cf8-e0b5-4c61-a893-e29d93ae9de9";
+        $serieId = "123f3c71-8462-4a24-9cb6-1c8152149edf";
 
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
