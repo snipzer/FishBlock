@@ -4,15 +4,14 @@
     <h2>{{ serie.title }}</h2>
 
     {% for type in types %}
-        {#<p>{{ types.name }}</p>#}
+        <h3 >{{ type }}</h3 >
     {% endfor %}
 
 
-    {% for actor in actors %}
-        {#<p>{{ actors.name }}</p>#}
-        {% for serie_actor in serie_actor %}
-            <p>{{ serie_actor.role }}</p>
-        {% endfor %}
+    {% for result in actors %}
+
+            <p>{{ result["name"] ~ ' - ' ~ result["role"] }}</p>
+
     {% endfor %}
 
 
