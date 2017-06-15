@@ -35,6 +35,8 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
+
+        return $user;
     }
 
     // Bannis l'utilisateur
@@ -67,8 +69,19 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             "role" => "ROLE_ADMIN"
         ];
 
-        $this->createUser($user1["email"], $user1["password"], $user1["userName"], $user1["firstName"], $user1["lastName"], $user1["role"]);
+        $user = $this->createUser($user1["email"], $user1["password"], $user1["userName"], $user1["firstName"], $user1["lastName"], $user1["role"]);
 
-        $this->createUser($user2["email"], $user2["password"], $user2["userName"], $user2["firstName"], $user2["lastName"], $user2["role"]);
+        $user->setEnabled(true);
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+        $user = $this->createUser($user2["email"], $user2["password"], $user2["userName"], $user2["firstName"], $user2["lastName"], $user2["role"]);
+
+        $user->setEnabled(true);
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+
+        return [$this->findBy(["username" => "TotoMaster"]), $this->findBy(["username" => "Snipzer"])];
     }
 }
