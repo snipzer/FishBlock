@@ -142,14 +142,14 @@ class MainController extends Controller
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
         $CritiqueRepository = $this->getDoctrine()->getRepository("MainBundle:Critic");
-        $ActorRepository = $this->getDoctrine()->getRepository("MainBundle:Actor");
-        $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:Type");
+        $ActorRepository = $this->getDoctrine()->getRepository("MainBundle:SerieActor");
+        $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:SerieType");
 
         $serie = $SerieRepository->getSerieWithId($serieId);
         $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serie->getId());
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serie->getId());
-        $actors = $ActorRepository->getActors();
-        $types = $TypeRepository->getTypes();
+        $actors = $ActorRepository->getActorBySerieId($serieId);
+        $types = $TypeRepository->getTypeBySerieId($serieId);
 
         return $this->render("MainBundle:App:serie.html.twig", [
             "episodes" => $episodes,
@@ -173,15 +173,15 @@ class MainController extends Controller
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
         $CritiqueRepository = $this->getDoctrine()->getRepository("MainBundle:Critic");
-        $ActorRepository = $this->getDoctrine()->getRepository("MainBundle:Actor");
-        $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:Type");
+        $ActorRepository = $this->getDoctrine()->getRepository("MainBundle:SerieActor");
+        $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:SerieType");
 
 
         $serie = $SerieRepository->getSerieWithId($serieId);
         $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
-        $actors = $ActorRepository->getActors();
-        $types = $TypeRepository->getTypes();
+        $actors = $ActorRepository->getActorBySerieId($serieId);
+        $types = $TypeRepository->getTypeBySerieId($serieId);
         $episode = $EpisodeRepository->getEpisode($episodeId);
 
         return $this->render("MainBundle:App:serie.html.twig", [
@@ -189,7 +189,8 @@ class MainController extends Controller
             "serie" => $serie,
             "critics" => $critics,
             "actors" => $actors,
-            "types" => $types
+            "types" => $types,
+            "episode" => $episode
         ]);
     }
 
@@ -197,11 +198,11 @@ class MainController extends Controller
     {
         /**
          * TODO:
-         * Récupérer les informations de l'utilisateur
+         * ~~Récupérer les informations de l'utilisateur
          * Après soumission du formulaire enregistrer les nouvelles informations de l'utilisateur
          * ATTENTION !
          * Les mots de passe ne doivent pas être envoyer en clair !
-         * Suggestion de serie (SerieRepository)
+         * ~~Suggestion de serie (SerieRepository)
          */
 
         $userId = "52fc83e7-59b2-45d3-94c2-c674385afdbe";
@@ -224,5 +225,4 @@ class MainController extends Controller
 
         return $this->render("MainBundle:App:legal.html.twig");
     }
-
 }
