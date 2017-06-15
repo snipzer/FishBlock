@@ -4,7 +4,7 @@
         <ul>
             {% for ser in serie %}
                 <li>
-                    <h2>{{ ser.title }}</h2>
+                    <h2><a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': ser.Id.__toString}) }}">{{ ser.title }}</a></h2>
                 </li>
 
                 {% if ser.poster == "undefined" %}
@@ -29,7 +29,7 @@
         <ul>
             {% for fav in favoris %}
                 <li>
-                    <h2>{{ fav.serie.title }}</h2>
+                    <h2><a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': fav.serie.Id.__toString}) }}">{{ fav.serie.title }}</a></h2>
                 </li>
 
                 {% if fav.serie.poster == "undefined" %}
