@@ -15,8 +15,11 @@
 {% endblock %}
 
 {% block content %}
-    {# {% include "MainBundle:Layout:register.html.twig %} #}
-    {# {% include "MainBundle:Layout:visit.html.twig %} #}
+    {# Caroussel #}
+    <div class="registerVisit">
+        {% include "MainBundle:Layout:register.html.twig" %}
+        {% include "MainBundle:Layout:visit.html.twig" %}
+    </div>
 {% endblock %}
 
 {% block footer %}
