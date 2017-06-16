@@ -13,15 +13,24 @@ class MainController extends Controller
      */
     public function homeAction(Request $request)
     {
-        $this->get('SaveSerie')->saveSerie("MacGyver");
-
         $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
+        $user = $this->getUser();
+
+        if (isset($user )) {
+            return $this->render("MainBundle:App:home.html.twig", [
+                "popularSeries" => $popularSeries,
+                "user" => $user
+
+            ]);
+        }
 
         return $this->render("MainBundle:App:home.html.twig", [
             "popularSeries" => $popularSeries
 
         ]);
     }
+
+
 
     public function wallAction(Request $request)
     {
@@ -97,16 +106,17 @@ class MainController extends Controller
         $serieId = $request->attributes->get("idSerie");
         $userId = $this->getUser()->getId()->__toString();
         $user = $this->getUser();
+        $FavorisRepo = $this->getDoctrine()->getRepository("MainBundle:Favoris");
+
 
         if($serieId)
         {
-            $this->getDoctrine()
-                ->getRepository("MainBundle:Favoris")
-                ->addSerie($userId, $serieId);
+            if(!$FavorisRepo->checkIfSerieIsInFav($serieId, $userId))
+                $FavorisRepo->addSerie($userId, $serieId);
         }
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
-        $favoris = $this->getDoctrine()->getRepository("MainBundle:Favoris")->getFavorisByUserId($userId);
+        $favoris = $FavorisRepo->getFavorisByUserId($userId);
 
         return $this->render("MainBundle:App:favoris.html.twig", [
             "favoris" => $favoris,

@@ -11,11 +11,7 @@
 {% endblock %}
 
 {% block header %}
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        {% include "MainBundle:Layout:header.html.twig" %}
-    {% else %}
-        {% include "MainBundle:Layout:headerLogin.html.twig" %}
-    {% endif %}
+    {% include "MainBundle:Layout:headerLogin.html.twig" %}
 {% endblock %}
 
 {% block content %}
@@ -33,7 +29,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
-                <img alt="" src={{ asset('public/img/undefined.jpg') }}>
+                <img alt="" src={{ asset('public/img/undefined.jpg') }} >
                 <div class="carousel-caption">
                     {#<h3>{{ serie.title }}</h3>#}
                     <p></p>
@@ -41,7 +37,7 @@
             </div>
 
             <div class="item">
-                <img alt="" src={{ asset('public/img/undefined.jpg') }}>
+                <img alt="" src={{ asset('public/img/undefined.jpg') }} >
                 <div class="carousel-caption">
                     {#<h3>{{ serie.title }}</h3>#}
                     <p></p>
@@ -49,7 +45,7 @@
             </div>
 
             <div class="item">
-                <img alt="" src={{ asset('public/img/undefined.jpg') }}>
+                <img alt="" src={{ asset('public/img/undefined.jpg') }} >
                 <div class="carousel-caption">
                     {#<h3>{{ serie.title }}</h3>#}
                     <p></p>
@@ -68,12 +64,8 @@
         </a>
     </div>
     <div class="registerVisit">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            {% include "MainBundle:Layout:menu.html.twig" %}
-        {% else %}
-            {% include "MainBundle:Layout:register.html.twig" %}
-            {% include "MainBundle:Layout:visit.html.twig" %}
-        {% endif %}
+        {% include "MainBundle:Layout:register.html.twig" %}
+        {% include "MainBundle:Layout:visit.html.twig" %}
     </div>
 {% endblock %}
 
