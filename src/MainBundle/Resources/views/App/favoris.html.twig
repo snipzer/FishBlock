@@ -1,0 +1,27 @@
+{% extends 'MainBundle::base.html.twig' %}
+
+
+{% block title %}{{ 'Favorites'|trans }}{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    {% include "MainBundle:Layout:header.html.twig" %}
+{% endblock %}
+
+{% block content %}
+    {% include "MainBundle:Layout:menu.html.twig" %}
+    {% include "MainBundle:Layout:serieCard.html.twig" %}
+    {% include "MainBundle:Layout:suggest.html.twig" %}
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
+

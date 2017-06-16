@@ -1,0 +1,32 @@
+{% extends 'MainBundle::base.html.twig' %}
+
+{% block title %}{{ 'Wall'|trans }}{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block header %}
+    {% include "MainBundle:Layout:header.html.twig" %}
+{% endblock %}
+
+{% block content %}
+    {% include "MainBundle:Layout:menu.html.twig" %}
+    <ul>
+        {% for result in wallInfo %}
+            <li><h2>{{ result["serie"].title }}</h2></li>
+            <li><h4>{{ result["critic"].title }}</h4></li>
+            <p>{{ result["critic"].content }}</p>
+        {% endfor %}
+    </ul>
+    {% include "MainBundle:Layout:suggest.html.twig" %}
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
+
