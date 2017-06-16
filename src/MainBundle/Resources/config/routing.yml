@@ -2,7 +2,6 @@ main_home:
     path:     /{_locale}
     defaults:
         _controller: MainBundle:Main:home
-        _locale: en
     requirements:
         _locale: en|fr
 
