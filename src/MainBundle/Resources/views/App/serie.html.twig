@@ -18,10 +18,18 @@
 {% block content %}
     {% include "MainBundle:Layout:menu.html.twig" %}
     {% include "MainBundle:Layout:detailSerie.html.twig" %}
+    {% if episode is defined %}
+        <div>
+            <h3>{{ episode.title }}</h3>
+            <p>Saison {{ episode.seasonNumber }}, Episode {{ episode.episodeNumber }}</p>
+            <p>{{ episode.description }}</p>
+        </div>
+    {% endif %}
+
     <div>
         {% for critic in critics %}
             <div>
-                <p>{{ critic.title }}</p>
+                <h4>{{ critic.title }}</h4>
                 <p>{{ critic.content }}</p>
             </div>
         {% endfor %}
