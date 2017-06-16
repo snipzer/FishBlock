@@ -15,6 +15,11 @@ class TypeRepository extends \Doctrine\ORM\EntityRepository
         return $this->findAll();
     }
 
+    public function getTypeById($typeId)
+    {
+        return $this->findOneBy(["id" => $typeId]);
+    }
+
     public function checkIfTypeAlreadyHere($typeName)
     {
         $isHereOrNot = $this->getEntityManager()->createQueryBuilder()
