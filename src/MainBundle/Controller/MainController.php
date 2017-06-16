@@ -67,7 +67,7 @@ class MainController extends Controller
     {
         $IdType = $request->get("types");
         $IdActor = $request->get("actors");
-        $SerieName = $request->get('serieName');
+        $SerieName = htmlentities($request->get('serieName'));
 
         $SerieRepo = $this->getDoctrine()->getRepository("MainBundle:Serie");
 
@@ -128,6 +128,8 @@ class MainController extends Controller
     public function serieAction(Request $request)
     {
         $serieId = $request->attributes->get("idSerie");
+        $user = $this->getUser();
+
 
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
@@ -135,12 +137,21 @@ class MainController extends Controller
         $ActorRepository = $this->getDoctrine()->getRepository("MainBundle:SerieActor");
         $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:SerieType");
 
+        $CriticTitle = htmlentities($request->get("title"));
+        $CriticContent = htmlentities($request->get("content"));
+        $CriticNote = htmlentities($request->get('note'));
+
+        if((isset($CriticTitle) && isset($CriticContent) && isset($CriticNote) && ($CriticTitle != "" && $CriticContent != "" && $CriticNote != "")))
+        {
+            $CritiqueRepository->postCritic($CriticTitle, $CriticContent, $CriticNote, $user->getId()->__toString(), $serieId);
+        }
+
         $serie = $SerieRepository->getSerieWithId($serieId);
         $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
         $actors = $ActorRepository->getActorBySerieId($serieId);
         $types = $TypeRepository->getTypeBySerieId($serieId);
-        $user = $this->getUser();
+
 
         return $this->render("MainBundle:App:serie.html.twig", [
             "episodes" => $episodes,
@@ -156,6 +167,7 @@ class MainController extends Controller
     {
         $serieId = $request->attributes->get("idSerie");
         $episodeId = $request->attributes->get("idEpisode");
+        $user = $this->getUser();
 
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
@@ -163,14 +175,23 @@ class MainController extends Controller
         $ActorRepository = $this->getDoctrine()->getRepository("MainBundle:SerieActor");
         $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:SerieType");
 
+        $CriticTitle = htmlentities($request->get("title"));
+        $CriticContent = htmlentities($request->get("content"));
+        $CriticNote = htmlentities($request->get('note'));
+
+        if((isset($CriticTitle) && isset($CriticContent) && isset($CriticNote) && ($CriticTitle != "" && $CriticContent != "" && $CriticNote != "")))
+        {
+            $CritiqueRepository->postCritic($CriticTitle, $CriticContent, $CriticNote, $user->getId()->__toString(), $serieId);
+        }
+
 
         $serie = $SerieRepository->getSerieWithId($serieId);
+        $episode = $EpisodeRepository->getEpisode($episodeId);
         $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
         $actors = $ActorRepository->getActorBySerieId($serieId);
         $types = $TypeRepository->getTypeBySerieId($serieId);
-        $episode = $EpisodeRepository->getEpisode($episodeId);
-        $user = $this->getUser();
+
 
         return $this->render("MainBundle:App:serie.html.twig", [
             "episodes" => $episodes,
