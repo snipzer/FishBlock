@@ -32,7 +32,50 @@
                     <h4 class="modal-title">{{ 'Critic'|trans }}</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Exemple text.</p>
+
+                    <form action="{{ path('main_serie', {_locale: app.request.attributes.get('_locale'), idSerie: serie.id.__toString}) }}"
+                          method="post">
+                        <ul>
+                            <li>{{ 'Title'|trans }}</li>
+                            <p><input value="" type="text" required></p>
+
+                            <li>{{ 'Content'|trans }}</li>
+                            <textarea required name="comment" ></textarea>
+
+                            <li>Note</li>
+                            <select name="critic" id="">
+                                <option value="0">0</option>
+
+                                <option value="1">1</option>
+
+                                <option value="2">2</option>
+
+                                <option value="3">3</option>
+
+                                <option value="4">4</option>
+
+                                <option selected value="5">5</option>
+
+                                <option value="6">6</option>
+
+                                <option value="7">7</option>
+
+                                <option value="8">8</option>
+
+                                <option value="9">9</option>
+
+                                <option value="10">10</option>
+
+                            </select>
+                            <p>
+                                <button class="btn btn-default" type="submit">{{ 'Submit'|trans }}</button>
+                            </p>
+                        </ul>
+
+
+                    </form>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'Close'|trans }}</button>
@@ -58,24 +101,43 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">{{ 'Modification'|trans }}</h4>
                 </div>
+
+                <!-- Modal ModifSerie form-->
                 <div class="modal-body">
                     <form action="{{ path('main_search', {_locale: app.request.attributes.get('_locale'), idSerie: serie.id.__toString}) }}"
                           method="post">
-                        <input type="text" name="serieName" id=""/>
-                        <div></div>
-                        <div></div>
+                        {#<input type="text" name="serieName" id=""/>#}
+
+                        <ul>
+                            <li><input value="{{ serie.title }}">{{ serie.title }}</input></li>
+                            <li><textarea value="{{ serie.description }}">{{ serie.description }}</textarea></li>
+                            <li><input value="{{ serie.poster }}">{{ serie.poster }}</input></li>
+                        </ul>
+
                         <select name="actors" id="">
-                            {% for actor in actors %}
-                                <option value="{{ actor.id }}">{{ actor.name }}</option>
-                            {% endfor %}
+                            <ul>
+                                {% for actor in actors %}
+                                    <li>
+                                        <option value="{{ actor['name'] }}">{{ actor['role'] }}</option>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </select>
+
                         <select name="types" id="">
-                            {% for type in types %}
-                                <option value="{{ type.id }}">{{ type.name }}</option>
-                            {% endfor %}
+                            <ul>
+                                {% for type in types %}
+                                    <li>
+                                        <option value="{{ type }}">{{ type }}</option>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </select>
+
                     </form>
                 </div>
+
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'Close'|trans }}</button>
                 </div>
