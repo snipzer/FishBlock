@@ -15,15 +15,17 @@
         {% endfor %}
     </ul>
 
+
+    <!-- Modal Critic Button-->
     <p>{{ 'Add critic'|trans }}</p>
     <button type="button" class="btn btn-primary" data-toggle="modal"
             data-target="#modalCritic">{{ 'add critic'|trans }}</button>
 
-    <!-- Modal -->
+    <!-- Modal Critic ID-->
     <div id="modalCritic" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
-            <!-- Modal content-->
+            <!-- Modal Critic content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -39,22 +41,25 @@
 
         </div>
     </div>
+
+
+    <!-- Modal ModifSerie Button-->
     <p>{{ 'Purpose modification'|trans }}</p>
     <button type="button" class="btn btn-primary" data-toggle="modal"
             data-target="#modalModif">{{ 'purpose modification'|trans }}</button>
 
-    <!-- Modal -->
+    <!-- Modal ModifSerie ID-->
     <div id="modalModif" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
-            <!-- Modal content-->
+            <!-- Modal ModifSerie content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">{{ 'Modification'|trans }}</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ path('main_search', {_locale: app.request.attributes.get('_locale')}) }}"
+                    <form action="{{ path('main_search', {_locale: app.request.attributes.get('_locale'), idSerie: serie.id.__toString}) }}"
                           method="post">
                         <input type="text" name="serieName" id=""/>
                         <div></div>
