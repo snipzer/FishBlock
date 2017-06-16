@@ -14,12 +14,23 @@ class MainController extends Controller
     public function homeAction(Request $request)
     {
         $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
+        $user = $this->getUser();
+
+        if (isset($user )) {
+            return $this->render("MainBundle:App:home.html.twig", [
+                "popularSeries" => $popularSeries,
+                "user" => $user
+
+            ]);
+        }
 
         return $this->render("MainBundle:App:home.html.twig", [
             "popularSeries" => $popularSeries
 
         ]);
     }
+
+
 
     public function wallAction(Request $request)
     {
