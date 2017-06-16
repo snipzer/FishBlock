@@ -15,7 +15,7 @@ if(menuBlock && magicButton) {
 
     document.addEventListener("click", function(e) {
         console.log($(e.srcElement).parents(".menuButtons"));
-        if($(e.srcElement).parents(".menuButtons").length == 0 && e.srcElement !== magicButton) {
+        if($(e.srcElement).parents(".menuButtons").length === 0 && e.srcElement !== magicButton) {
             $( menuBlock ).removeClass( "menuBlockExpanded" );
         }
     }, false);
