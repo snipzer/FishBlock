@@ -1,4 +1,25 @@
 <div class="registerBlock">
+    <form class="register"
+          action="{{ path('main_home', {'_locale': app.request.attributes.get('_locale')}) }}">
 
+
+        <h2>Inscription :</h2>
+        <label for="username">{{'User'|trans}}</label></br>
+        <input type="text" id="firstname" name="_firstname" placeholder="firstname" required="required"/></br>
+        <input type="text" id="lastname" name="_lastname" placeholder="lastname" required="required"/></br>
+        <input type="text" id="username" name="_username" placeholder="username" required="required"/></br>
+
+        <label for="password">{{'Password'|trans}}</label></br>
+        <input type="password" id="password" name="_password" placeholder="password" required="required"/></br>
+        <input type="password" id="passwordConfirmation" name="_passwordConfirmation" placeholder="passwordConfirmation" required="required"/></br>
+
+        <label for="email">{{'Mail'|trans}}</label></br>
+        <input type="email" id="email" name="_email" placeholder="mail" required="required"/></br>
+
+        <label for="birthday">{{'Birthday'|trans}}</label></br>
+        <input type="date" id="birthday" name="_birthday" placeholder="ex : 2001/12/01" required="required"/></br></br>
+
+        <input class="btn btn-default btn-sm" type="submit" id="_submit" name="_submit" value={{'Log in'|trans}}>
+    </form>
 
 </div>
