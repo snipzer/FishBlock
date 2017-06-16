@@ -13,8 +13,6 @@ class MainController extends Controller
      */
     public function homeAction(Request $request)
     {
-        $this->get('SaveSerie')->saveSerie("MacGyver");
-
         $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
         return $this->render("MainBundle:App:home.html.twig", [
