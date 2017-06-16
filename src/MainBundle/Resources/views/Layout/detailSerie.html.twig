@@ -1,19 +1,24 @@
 <div class="detailSerie">
-    <h2>{{ serie.title }}</h2>
+    <div class="serieDescription">
+        <h2>{{ serie.title }}</h2>
 
-    <p>{{ serie.description }}</p>
-    <p>Type:
-        {% for type in types %}
-            {{ type }}
-        {% endfor %}
-    </p>
+        <p>{{ serie.description }}</p>
+        <p><strong>{{ "Type"|trans }} :</strong>
+            {% for type in types %}
+                {{ type }}
+            {% endfor %}
+        </p>
+    </div>
 
-    <p>Acteur:</p>
-    <ul>
-        {% for result in actors %}
-            <li>{{ result["name"] ~ ' dans le role de ' ~ result["role"] }}</li>
-        {% endfor %}
-    </ul>
+    <div class="serieActors">
+        <p><strong>{{ "Actors"|trans }} :</strong></p>
+        <ul>
+            {% for result in actors %}
+                <li>{{ result["name"] ~ ' dans le role de ' ~ result["role"] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
 
 
     <!-- Modal Critic Button-->

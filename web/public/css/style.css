@@ -358,6 +358,72 @@ Style pour le bloc menu du site
 }
 
 /*----------------------------------------------------------------------------------
+Style pour detailSerie
+----------------------------------------------------------------------------------*/
+
+.detailSerie {
+    margin: 0 1em;
+}
+
+.serieDescription h2 {
+    background-color: #686868;
+    color: #FFFFFF;
+}
+
+/*----------------------------------------------------------------------------------
+Style pour episodeDetailSerie
+----------------------------------------------------------------------------------*/
+
+.episodesDetailSerie {
+    margin: 0 1em;
+}
+
+.episodesDetailSerie h3 {
+    background-color: #58bf94;
+    color: #FFFFFF;
+}
+
+/*----------------------------------------------------------------------------------
+Style pour criticDetailSerie
+----------------------------------------------------------------------------------*/
+
+.criticDetailSerieBlock {
+    margin: 0 1em;
+}
+
+.criticDetailSerie h4 {
+    background-color: #00b6de;
+    color: #FFFFFF;
+}
+
+.criticDetailSerieBlock h3 {
+    background-color: #ef7a35;
+    color: #FFFFFF;
+}
+
+/*----------------------------------------------------------------------------------
+Style pour le bloc liste des saisons
+----------------------------------------------------------------------------------*/
+
+.listSeason {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    width: 16%;
+    height: 100%;
+    min-width: 15em;
+
+    background-color: #686868;
+    color: #ffffff;
+}
+
+.listSeason h2 {
+
+}
+
+/*----------------------------------------------------------------------------------
 Style pour le bloc suggestion du site
 ----------------------------------------------------------------------------------*/
 
@@ -415,6 +481,16 @@ Style pour le bloc recherche du site
     padding: 10vh 0;
     font-size: larger;
     font-weight: bolder;
+}
+
+#searchActors {
+    color: #000000;
+}
+#searchType {
+    color: #000000;
+}
+#searchTitle {
+    color: #000000;
 }
 
 .searchButton {
