@@ -26,6 +26,7 @@ class CriticRepository extends \Doctrine\ORM\EntityRepository
         $critic->setTitle($title)
             ->setContent($content)
             ->setSerie($serie)
+            ->setIsValid(true)
             ->setUser($user)
             ->setNote($note);
 
