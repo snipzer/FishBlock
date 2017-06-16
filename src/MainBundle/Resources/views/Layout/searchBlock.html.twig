@@ -1,16 +1,17 @@
 <div class="searchBlock">
     <form action="{{ path('main_search', {_locale: app.request.attributes.get('_locale')}) }}" method="post">
-        <p>{{ "Serie's title"|trans }}</p>
+
+        <p>{{ "Serie's title"|trans }} :</p>
         <input type="text" name="serieName" id="" />
         <div></div>
         <div></div>
-        <p>{{ "Actors"|trans }}</p>
+        <p>{{ "Actors"|trans }} :</p>
         <select name="actors" id="">
             {% for actor in actors %}
                 <option value="{{ actor.id }}">{{ actor.name }}</option>
             {% endfor %}
         </select>
-        <p>{{ "Type"|trans }}</p>
+        <p>{{ "Type"|trans }} :</p>
         <select name="types" id="">
             {% for type in types %}
                 <option value="{{ type.id }}">{{ type.name }}</option>
