@@ -120,4 +120,15 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getSerieByNameAndActor($serieName, $actorId)
+    {
+        $series = $this->getSerieByName($serieName);
+        $ActorRepo = $this->getEntityManager()->getRepository("MainBundle:SerieActor");
+
+        foreach($series as $serie)
+        {
+
+        }
+    }
 }
