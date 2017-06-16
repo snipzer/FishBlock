@@ -16,6 +16,25 @@
 
 {% block content %}
     {% include "MainBundle:Layout:menuUnlogged.html.twig" %}
+    <div>
+        {% for result in lastPublishedSeries %}
+            <div>{{ result.title }}
+                {{ result.description }}</div>
+        {% endfor %}
+    </div>
+    <div>
+        {% for result in lastPublishedCritics %}
+            <div>{{ result.title }}
+                {{ result.content }}</div>
+        {% endfor %}
+    </div>
+    <div>
+        {% for result in trendingSeries %}
+            <div>{{ result.title }}
+                {{ result.description }}</div>
+        {% endfor %}
+    </div>
+    {% include "MainBundle:Layout:visit.html.twig" %}
 {% endblock %}
 
 {% block footer %}
