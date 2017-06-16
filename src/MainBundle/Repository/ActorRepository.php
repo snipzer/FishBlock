@@ -15,6 +15,21 @@ class ActorRepository extends \Doctrine\ORM\EntityRepository
         return $this->findAll();
     }
 
+    public function getActorsOrderByNameASC()
+    {
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("a")
+            ->from("MainBundle:Actor", "a")
+            ->orderBy("a.name", "ASC")
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getActorById($actorId)
+    {
+        return $this->findOneBy(["id" => $actorId]);
+    }
+
     public function getActorByName($name)
     {
         return $this->findOneBy(["name" => $name]);
