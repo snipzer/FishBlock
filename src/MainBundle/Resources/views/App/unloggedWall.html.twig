@@ -17,7 +17,7 @@
 {% block content %}
     {% include "MainBundle:Layout:menuUnlogged.html.twig" %}
     <div>
-        {% for result in lastPublishedSerie %}
+        {% for result in lastPublishedSeries %}
             <div>{{ result.title }}
                 {{ result.description }}</div>
         {% endfor %}
@@ -29,7 +29,7 @@
         {% endfor %}
     </div>
     <div>
-        {% for result in trendingSerie %}
+        {% for result in trendingSeries %}
             <div>{{ result.title }}
                 {{ result.description }}</div>
         {% endfor %}
