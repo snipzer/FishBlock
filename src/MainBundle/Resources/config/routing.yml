@@ -52,7 +52,7 @@ main_serie:
 main_episode:
     path:     /{_locale}/serie/{idSerie}/episode/{idEpisode}
     defaults:
-        _controller: MainBundle:Main:serie
+        _controller: MainBundle:Main:episode
     requirements:
         idSerie: '[a-zA-Z-0-9]{36}'
         idEpisode: '[a-zA-Z-0-9]{36}'

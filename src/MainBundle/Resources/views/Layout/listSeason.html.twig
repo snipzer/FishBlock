@@ -1,10 +1,9 @@
 <div class="listSeason">
     <h2>{{ serie.title }}</h2>
     <ul>
-
         {% for episode in episodes %}
             <li> {{ 'Season'|trans ~ ' ' ~ episode.seasonNumber }}</li>
-            <p> {{ episode.episodeNumber ~ '-' ~ episode.title }} </p>
+            <a href="{{ path('main_episode',{_locale: app.request.attributes.get('_locale'), idSerie: serie.id.__toString, idEpisode: episode.id }) }}"> {{ episode.episodeNumber ~ '-' ~ episode.title }} </a>
         {% endfor %}
     </ul>
 </div>

@@ -39,12 +39,7 @@ class MainController extends Controller
 
     public function unloggedWallAction(Request $request)
     {
-        $serieId = "123f3c71-8462-4a24-9cb6-1c8152149edf";
-
         $trendingSerie = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
-
-        //TODO: FAIRE EN SORTE DE RECUPERER LES DERNIERS EPISODES SORTIES
-        $lastPublishedEpisode = $this->getDoctrine()->getRepository("MainBundle:Episode")->getLastEpisodeFromSerie($serieId);
 
         $lastPublishedSerie = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
 
@@ -53,7 +48,6 @@ class MainController extends Controller
         return $this->render("MainBundle:App:unloggedWall.html.twig", [
             "trendingSerie" => $trendingSerie,
             "lastPublishedSerie" => $lastPublishedSerie,
-            "lastPublishedEpisode" => $lastPublishedEpisode,
             "lastPublishedCritics" => $lastPublishedCritics
         ]);
     }
