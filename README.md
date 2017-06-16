@@ -117,6 +117,46 @@ Pour plus d'informations sur Doctrine Cache, visitez https://github.com/doctrine
 
 
 friendsofsymfony/user-bundle
+----------------------------
+Le composant de sécurité Symfony2 fournit un cadre de sécurité flexible qui nous permet de charger les utilisateurs à partir de la configuration, d'une base de données ou d'autres endroits que nous pouvons imaginer.
+
+Si nous devons persister et récupérer des utilisateurs dans notre système vers et à partir d'une base de données, c'est le bundle adéquat.
+
+<<>>Conditions préalables d'utilisation du bundle :
+
+>>Traductions
+Pour utiliser des textes par défaut fournis dans le paquage, nous devons nous assurer que notre traducteur est activé dans notre configuration:
+app/resources/translations/message.fr.yml
+
+>>Installation
+Processus en 8 étapes:
+    >Télécharger FOSUserBundle
+        Les fichiers du bundle seront téléchargés dans le répertoire:
+        vendor/fsofsymfony/userBundle
+        Sous-modules git, exécutez les opérations suivantes:
+        $ Git submodule add git: //github.com/FriendsOfSymfony/FOSUserBundle.git fournisseur / bundles / FOS / UserBundle
+        Mise à jour du module de $ git --init
+    >Configurer l'autochargeur
+        On ajoute l'espace de noms à notre chargeur automatique:
+        <? Php
+        // app / autoload.php
+        $ Loader -> registerNamespaces ( array ( // ... ' FOS ' => __DIR__ . ' /../vendor/bundles ' , ));  
+    >Activer le Bundle
+        On active le lot dans le noyau:
+        <? Php
+        // app / AppKernel.php
+        Public  function  registerBundles () 
+        { 
+            $ bundles = array ( // ... nouveau FOS \ UserBundle \ FOSUserBundle (),     ); }
+    >Création de notre classe User
+        On persiste une Userclasse dans notre base de données (MySql) puis on crée la classe User pour l'application. On ajoute les propriétés ou méthodes souhaitées qu'on trouve utiles.
+        On utilise comme suit:
+            *On étend la Userclasse de base
+            *On mappe l'id champ qui doit être protégé car il hérite de la classe parent.
+    >Configurez le security.yml de votre application
+    >Configurez le FOSUserBundle
+    >Importer le routage FOSUserBundle
+    >Mettre à jour votre schéma de base de données
 
 
 Structure du projet FishBlock
