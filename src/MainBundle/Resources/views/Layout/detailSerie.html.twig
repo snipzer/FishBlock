@@ -24,7 +24,7 @@
     <!-- Modal Critic Button-->
     <p>{{ 'Add critic'|trans }}</p>
     <button type="button" class="btn btn-primary" data-toggle="modal"
-            data-target="#modalCritic">{{ 'add critic'|trans }}</button>
+            data-target="#modalCritic">{{ 'Add critic'|trans }}</button>
 
     <!-- Modal Critic ID-->
     <div id="modalCritic" class="modal fade" role="dialog">
@@ -34,55 +34,43 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">{{ 'Critic'|trans }}</h4>
+
+                    <h4 class="modal-title">{{ 'Critic of serie'|trans }}</h4>
                 </div>
                 <div class="modal-body">
 
-                    <form action="{{ path('main_serie', {_locale: app.request.attributes.get('_locale'), idSerie: serie.id.__toString}) }}"
+                    <form id=criticForm
+                          action="{{ path('main_serie', {_locale: app.request.attributes.get('_locale'), idSerie: serie.id.__toString}) }}"
                           method="post">
-                        <ul>
-                            <li>{{ 'Title'|trans }}</li>
-                            <p><input value="" type="text" required></p>
 
-                            <li>{{ 'Content'|trans }}</li>
-                            <textarea required name="comment" ></textarea>
+                        <h4>{{ 'Title'|trans }}</h4>
+                        <p><input class="form-control" value="" type="text" required></p>
 
-                            <li>Note</li>
-                            <select name="critic" id="">
-                                <option value="0">0</option>
+                        <h4>{{ 'Content'|trans }}</h4>
+                        <textarea required class="form-control" rows="5" id="comment" name="comment"></textarea>
 
-                                <option value="1">1</option>
-
-                                <option value="2">2</option>
-
-                                <option value="3">3</option>
-
-                                <option value="4">4</option>
-
-                                <option selected value="5">5</option>
-
-                                <option value="6">6</option>
-
-                                <option value="7">7</option>
-
-                                <option value="8">8</option>
-
-                                <option value="9">9</option>
-
-                                <option value="10">10</option>
-
-                            </select>
-                            <p>
-                                <button class="btn btn-default" type="submit">{{ 'Submit'|trans }}</button>
-                            </p>
-                        </ul>
-
-
+                        <h4>Note</h4>
+                        <select class="form-control" id="sel1" name="critic" id="">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option selected value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
                     </form>
 
-
                 </div>
+
                 <div class="modal-footer">
+
+                    <button form="criticForm" class="btn btn-default" type="submit">{{ 'Submit'|trans }}</button>
+
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'Close'|trans }}</button>
                 </div>
             </div>
@@ -94,7 +82,7 @@
     <!-- Modal ModifSerie Button-->
     <p>{{ 'Purpose modification'|trans }}</p>
     <button type="button" class="btn btn-primary" data-toggle="modal"
-            data-target="#modalModif">{{ 'purpose modification'|trans }}</button>
+            data-target="#modalModif">{{ 'Purpose modification'|trans }}</button>
 
     <!-- Modal ModifSerie ID-->
     <div id="modalModif" class="modal fade" role="dialog">
@@ -104,46 +92,47 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">{{ 'Modification'|trans }}</h4>
+
+                    <h4 class="modal-title">{{ 'Modification serie'|trans }}</h4>
                 </div>
 
                 <!-- Modal ModifSerie form-->
                 <div class="modal-body">
-                    <form action="{{ path('main_search', {_locale: app.request.attributes.get('_locale'), idSerie: serie.id.__toString}) }}"
+                    <form id="modiform" action="{{ path('main_search', {_locale: app.request.attributes.get('_locale'), idSerie: serie.id.__toString}) }}"
                           method="post">
                         {#<input type="text" name="serieName" id=""/>#}
 
-                        <ul>
-                            <li><input value="{{ serie.title }}">{{ serie.title }}</input></li>
-                            <li><textarea value="{{ serie.description }}">{{ serie.description }}</textarea></li>
-                            <li><input value="{{ serie.poster }}">{{ serie.poster }}</input></li>
-                        </ul>
+                        <h4>{{ 'Title'|trans }}</h4>
+                        <p><input required class="form-control" value="{{ serie.title }}"></p>
 
-                        <select name="actors" id="">
-                            <ul>
-                                {% for actor in actors %}
-                                    <li>
-                                        <option value="{{ actor['name'] }}">{{ actor['role'] }}</option>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </select>
+                        <h4>{{ 'Description'|trans }}</h4>
+                        <p><textarea required class="form-control" rows="5" id="comment"
+                                     value="{{ serie.description }}">{{ serie.description }}</textarea></p>
+                        <h4>{{ 'Image'|trans }}</h4>
+                        <p><input required class="form-control" value="{{ serie.poster }}"></p>
 
-                        <select name="types" id="">
-                            <ul>
-                                {% for type in types %}
-                                    <li>
-                                        <option value="{{ type }}">{{ type }}</option>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </select>
+                        {#<h4>{{ 'Actors'|trans }}</h4>#}
+                        {#<select class="form-control" id="sel1" name="actors">#}
+                        {#{% for actor in actors %}#}
+                        {#<option value="{{ actor['name'] }}">{{ actor['role'] }}</option>#}
+                        {#{% endfor %}#}
+                        {#</select>#}
+
+                        {#<h4>{{ 'Type'|trans }}</h4>#}
+                        {#<select class="form-control" id="sel1" name="types">#}
+                        {#{% for type in types %}#}
+                        {#<option value="{{ type }}">{{ type }}</option>#}
+                        {#{% endfor %}#}
+                        {#</select>#}
 
                     </form>
                 </div>
 
 
                 <div class="modal-footer">
+
+                    <button form="modiform" class="btn btn-default" type="submit">{{ 'Submit'|trans }}</button>
+
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'Close'|trans }}</button>
                 </div>
             </div>
