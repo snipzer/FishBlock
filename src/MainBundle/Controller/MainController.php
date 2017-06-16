@@ -13,6 +13,7 @@ class MainController extends Controller
      */
     public function homeAction(Request $request)
     {
+        $this->get('SaveSerie')->saveSerie("MacGyver");
 
         $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
@@ -59,27 +60,29 @@ class MainController extends Controller
         $IdActor = $request->get("actors");
         $SerieName = $request->get('serieName');
 
-        $series = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
+        $SerieRepo = $this->getDoctrine()->getRepository("MainBundle:Serie");
+
+        $series = $SerieRepo->getSeriesSortByDate();
         if(isset($SerieName))
         {
-            $series = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSerieByName($SerieName);
+            $series = $SerieRepo->getSerieByName($SerieName);
             if((isset($IdActor) && isset($IdType)) && ($IdActor != "NULL" && $IdType != "NULL") )
             {
-                var_dump("IdActor && IdType");
+                $series = $SerieRepo->getSerieByNameAndTypeAndActor($SerieName, $IdActor, $IdType);
             }
             if(isset($IdActor) && $IdActor != "NULL")
             {
-                var_dump("IdActor");
+                $series = $SerieRepo->getSerieByNameAndActor($SerieName, $IdActor);
             }
             if(isset($IdType) && $IdType != "NULL")
             {
-                var_dump("IdType");
+                $series = $SerieRepo->getSerieByNameAndType($SerieName, $IdType);
             }
         }
 
         $user = $this->getUser();
-        $actors = $this->getDoctrine()->getRepository("MainBundle:Actor")->getActors();
-        $types = $this->getDoctrine()->getRepository("MainBundle:Type")->getTypes();
+        $actors = $this->getDoctrine()->getRepository("MainBundle:Actor")->getActorsOrderByNameASC();
+        $types = $this->getDoctrine()->getRepository("MainBundle:Type")->getTypesOrderByNameASC();
 
         return $this->render("MainBundle:App:search.html.twig", [
             "series" => $series,
