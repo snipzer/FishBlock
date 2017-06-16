@@ -55,13 +55,34 @@ class MainController extends Controller
 
     public function searchAction(Request $request)
     {
-        $user = $this->getUser();
+        $IdType = $request->get("types");
+        $IdActor = $request->get("actors");
+        $SerieName = $request->get('serieName');
+
         $series = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
+        if(isset($SerieName))
+        {
+            $series = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSerieByName($SerieName);
+            if((isset($IdActor) && isset($IdType)) && ($IdActor != "NULL" && $IdType != "NULL") )
+            {
+                var_dump("IdActor && IdType");
+            }
+            if(isset($IdActor) && $IdActor != "NULL")
+            {
+                var_dump("IdActor");
+            }
+            if(isset($IdType) && $IdType != "NULL")
+            {
+                var_dump("IdType");
+            }
+        }
+
+        $user = $this->getUser();
         $actors = $this->getDoctrine()->getRepository("MainBundle:Actor")->getActors();
         $types = $this->getDoctrine()->getRepository("MainBundle:Type")->getTypes();
 
         return $this->render("MainBundle:App:search.html.twig", [
-            "serie" => $series,
+            "series" => $series,
             "user" => $user,
             "actors" => $actors,
             "types" => $types
