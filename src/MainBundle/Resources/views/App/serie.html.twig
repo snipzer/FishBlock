@@ -31,8 +31,9 @@
             <h3>{{ "Critics"|trans }}</h3>
             {% for critic in critics %}
                 <div class="criticDetailSerie">
-                    <h4>{{ critic.title }}</h4>
+                    <h4>{{ "Title"|trans }}: {{ critic.title }}  Note: {{ critic.note }}/10</h4>
                     <p>{{ critic.content }}</p>
+                    <h5>{{ "Posted by"|trans }} {{ user.username }} {{ "the"|trans }} {{ critic.postedThe|date("d-m-Y") }}</h5>
                 </div>
             {% endfor %}
         </div>
