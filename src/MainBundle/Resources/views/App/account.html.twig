@@ -16,7 +16,9 @@
 
 {% block content %}
     {% include "MainBundle:Layout:menu.html.twig" %}
-    {% include "MainBundle:Layout:suggest.html.twig" %}
+    {% if serieSuggest is not empty %}
+        {% include "MainBundle:Layout:suggest.html.twig" %}
+    {% endif %}
 {% endblock %}
 
 {% block footer %}

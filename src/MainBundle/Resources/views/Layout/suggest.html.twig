@@ -1,28 +1,33 @@
 <div class="suggestBlock">
     {# récupérer série aimée puis afficher deux autres séries #}
-    <ul>
-        <li><p>{{ 'If you love'|trans }} </p>
+    <div>
+        <div>
+            <p>{{ 'If you love'|trans }} </p>
             {% if serieSuggest[0].poster == 'undefined' %}
                 <img src="{{ asset('public/img/undefined.jpg') }}">
             {% else %}
-                <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[0].poster }}"/>
+                <a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSuggest[0].Id.__toString}) }}">
+                    <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[0].poster }}"/>
+                </a>
             {% endif %}
-        </li>
-        <li><p>{{ 'You will enjoy'|trans }} </p>
+        </div>
+        <div>
+            <p>{{ 'You will enjoy'|trans }} </p>
             {% if serieSuggest[1].poster == 'undefined' %}
                 <img src="{{ asset('public/img/undefined.jpg') }}">
             {% else %}
-                <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[1].poster }}" />
+            <a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSuggest[1].Id.__toString}) }}">
+                <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[1].poster }}"/>
+            </a>
             {% endif %}
 
             {% if serieSuggest[2].poster == 'undefined' %}
-                <img src="{{ asset('public/img/undefined.jpg') }}" />
+                <img src="{{ asset('public/img/undefined.jpg') }}"/>
             {% else %}
-                <p><img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[2].poster }}" /></p>
+            <a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSuggest[2].Id.__toString}) }}">
+                <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[2].poster }}"/>
+            </a>
             {% endif %}
-
-        </li>
-
-    </ul>
-
+        </div>
+    </div>
 </div>

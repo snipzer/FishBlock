@@ -1,7 +1,10 @@
 <div class="detailSerie">
     <div class="serieDescription">
         <h2>{{ serie.title }}</h2>
-
+        <div>
+            <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serie.poster }}" width="80%"/>
+            <a href="{{ path('main_add_favoris', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serie.Id.__toString}) }}" class="btn btn-primary">{{ "Favorites"|trans }}</a>
+        </div>
         <p>{{ serie.description }}</p>
         <p><strong>{{ "Type"|trans }} :</strong>
             {% for type in types %}
@@ -18,8 +21,6 @@
             {% endfor %}
         </ul>
     </div>
-
-
 
     <!-- Modal Critic Button-->
     <p>{{ 'Add critic'|trans }}</p>
