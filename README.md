@@ -37,8 +37,86 @@ Pour la création de la base de données:
 Bundle utiliser:
 ----------------
     Pour la connection à l'api: adrenth/thetvdb2
-    Pour gerer les utilisateurs: friendsofsymfony/user-bundle
+    Pour gérer les utilisateurs: friendsofsymfony/user-bundle
     Pour gerer doctrine qui utilise des uuid: ramsey/uuid et ramsey/uuid-doctrine
+
+Adrenth / thetvdb2
+------------------
+Il s'agit d'un client API (Application Programming Interface ou Interface de programmation) pour le site thetvdb.com. Il utilise les flux XML (C'est un format d'échange de données, défini en XML version 1.0. On peut délivrer des données en les intégrant dans ce format, et l'on peut recueillir des données de sources multiples dans ce format. On désigne les sources par fil ou flux RSS) disponibles publiquement.
+
+>>Enregistrement de clé API
+
+Pour utiliser ce paquet PHP, vous devez demander une clé API à partir du site Web thetvdb.com : http://thetvdb.com/?tab=apiregister .
+
+>>Directives à suivre:
+
+Si vous utilisez les informations de l'API dans un produit commercial ou un site Web, vous devez envoyer un courriel à scott@thetvdb.com et attendre l'autorisation avant d'utiliser l'API. Toutefois, vous pouvez utiliser l'API pour le développement et les tests avant une publication publique.
+Si vous disposez d'un programme accessible au public, VOUS DEVEZ informer vos utilisateurs de ce site Web et leur demander de contribuer à l'information et à l'illustration si possible.
+Vous devez vous familiariser avec notre structure de données, qui est détaillée dans la documentation wiki.
+Vous NE DEVEZ PAS effectuer plus de demandes que nécessaire pour chaque utilisateur. Cela signifie qu'il n'y a pas de téléchargement de tout notre contenu (nous fournirons la base de données si vous en avez besoin). Jouez bien avec notre serveur.
+Vous NE DEVEZ PAS accéder directement à nos données sans utiliser les méthodes API documentées.
+VOUS DEVEZ conserver l'adresse e-mail dans les informations de votre compte au courant et exacte au cas où nous devrions vous contacter en ce qui concerne votre clé (nous détestons le spam autant que n'importe qui, donc nous ne divulguerons jamais votre adresse électronique à personne).
+N'hésitez pas à nous contacter et à demander des modifications à notre site et / ou API. Nous examinerons volontiers toutes les suggestions raisonnables.
+Source: thetvdb.com
+
+<<>>API v2 (celle utilisée pour le fil rouge)
+
+>>Installation
+Installation du paquet en utilisant le compositeur: $ composer require adrenth/thetvdb
+
+>>Usage
+Créer une instance client:
+$apiKey = 'yourapikey';
+$cache = new \Doctrine\Common\Cache\FilesystemCache('path/to/cache');
+$client = new Client($cache, $apiKey);
+
+>>Cache
+$client->setCacheTtl(3600); // in seconds
+
+>>La langue
+$language = new Language('nl');
+echo $language->getCode();
+// 'nl'
+echo $language->getLabel();
+// 'Nederlands'
+$language = $client->getUserPreferredLanguage($accountId);
+
+>>Gérer les notes des utilisateurs
+// Returns a UserFavoritesResponse
+$favorites = $client->getUserFavorites($accountId);
+$seriesIds = $favorites->getSeriesIds();
+$favorites = $client->addUserFavorite($accountId, $seriesId);
+$seriesIds = $favorites->getSeriesIds();
+$favorites = $client->removeUserFavorite($accountId, $seriesId);
+$seriesIds = $favorites->getSeriesIds();
+
+>>Gérer les notes des utilisateurs
+$rating = $client->addUserRatingForEpisode($accountId, $episodeId, $rating);
+$rating = $client->removeUserRatingForEpisode($accountId, $episodeId);
+$rating = $client->addUserRatingForSeries($accountId, $seriesId, $rating);
+$rating = $client->removeUserRatingForSeries($accountId, $seriesId);
+echo $rating->getUserRating();
+// 7
+echo $rating->getCommunityRating();
+// 7.65
+
+>>Série recherche / recherche
+$language = new Language('nl');
+$response = $client->getSeries('Ray Donovan', $language, $accountId);
+$seriesCollection = $response->getSeries();
+foreach ($seriesCollection as $series) {
+    echo $series->getName();
+}
+$response = $client->getSeriesByImdbId('tt0290978');
+$response = $client->getSeriesByImdbId('tt0290978', new \Adrenth\Thetvdb\Language('de'));
+$response = $client->getSeriesByZap2itId('EP01579745', new \Adrenth\Thetvdb\Language('nl'));
+
+>>Mise en cache
+Ce paquetage nécessite une Cacheinstance Doctrine . Pour désactiver la mise en cache (ce que je ne recommanderai jamais!), Il suffit de fournir une instance VoidCacheou ArrayCache.
+Pour plus d'informations sur Doctrine Cache, visitez https://github.com/doctrine/cache
+
+
+friendsofsymfony/user-bundle
 
 
 Structure du projet FishBlock
@@ -146,11 +224,18 @@ framework:
 
 Préfixer nos routes
 -------------------
-Le fichier contenant les routes de notre bundle est chargé dans 
-le fichier app/config/routing.yml
+Le routing permet d'interpréter une URL et en déduire l'action et donc la page à afficher. 
+C'est un système très puissant qui nous permettra de gérer tous les liens internes du projet. 
+Le routing nous permet aussi de gérer facilement des URLs plus parlantes et de savoir à quelle action et donnée elle correspond. 
+
+Pour comprendre comment fonctionne le routing dans Symfony, voici un petit schéma qui explique globalement le processus de traitement d'une requête HTTP: 
+http://www.lafermeduweb.net/images/tutorial/47/.orig/symfony2-schema-routing.jpg
+
+Le fichier contenant les routes de notre bundle est chargé dans le fichier app/config/routing.yml
  (Le chemin d'accès au fichier contenant toutes les routes de notre bundle.)
 Eventuellement on peut ajouter un préfixe à nos routes.
-Exemple:
+
+//\\Explications sur les routes de notre projet fil rouge:
 main_home:
     path:     /{_locale}
     defaults:
@@ -159,7 +244,210 @@ main_home:
     requirements:
         _locale: en|fr
 
-Cette route fait appel au controller page accueil du site et pour avoir cette page, faudra mettre dans l'url : ../en or ../fr
+Cette route fait appel à la méthode homeAction du controller MainController et renvoit les informations des séries populaires.
+
+On y accède en rajoutant dans l'URL: /{_locale} ou ../en ou ../fr
++++++++++++++++++++++++++++++++++++++++++++
+main_wall:
+    path:     /{_locale}/wall
+    defaults:
+        _controller: MainBundle:Main:wall
+    requirements:
+        _locale: en|fr
+
+Cette route fait appel à la méthode wallAction du controller MainController et renvoit les informations sur:
+    >le wall (mur), 
+    >les suggestions de séries 
+    >l'utilisatuer.
+
+On y accède en rajoutant dans l'URL: /{_locale}/wall ou _locale: /en ou /fr
+++++++++++++++++++++++++++++++++++++++++++++++++++
+main_unloggedWall:
+    path:     /{_locale}/unWall
+    defaults:
+        _controller: MainBundle:Main:unloggedWall
+    requirements:
+        _locale: en|fr
+
+Cette route fait appel à la méthode unloggedWallAction du controller MainController et renvoit les informations sur: 
+    >les tendances des séries, 
+    >les dernières publications d'une série, 
+    >les dernières publications d'un épisode, 
+    >les dernières publications des critiques.
+
+On y accède en rajoutant dans l'URL: /{_locale}/unWall ou _locale: /en ou /fr
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+main_search:
+    path:     /{_locale}/search
+    defaults:
+        _controller: MainBundle:Main:search
+    requirements:
+        _locale: en|fr
+
+Cette route fait appel à la méthode searchAction du controller MainController et renvoit les informations sur: 
+    >les séries, 
+    >l'utilisateur, 
+    >les acteurs, 
+    >les genres de série.
+
+On y accède en rajoutant dans l'URL: /{_locale}/search ou _locale: /en ou /fr
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+main_favoris:
+    path:     /{_locale}/favoris
+    defaults:
+        _controller: MainBundle:Main:favoris
+    requirements:
+        _locale: en|fr
+
+Cette route fait appel à la méthode favorisAction du controller MainController et renvoit les informations sur: 
+    >les suggestions d'une série, 
+    >l'utilisateur,
+    >les favoris.
+
+On y accède en rajoutant dans l'URL: /{_locale}/favoris ou _locale: /en ou /fr
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+main_add_favoris:
+   path:     /{_locale}/favoris/{idSerie}
+   defaults:
+       _controller: MainBundle:Main:favoris
+   requirements:
+       _locale: en|fr
+
+Cette route fait appel à la méthode favorisAction du controller MainController et renvoit les informations sur: 
+    >les suggestions d'une série, 
+    >l'utilisateur,
+    >les favoris.
+En plus elle rajoute une série en favoris.
+
+On y accède en rajoutant dans l'URL: /{_locale}/favoris ou _locale: /en ou /fr
++++++++++++++++++++++++++++++++++++++++++++++++++
+main_serie:
+    path:     /{_locale}/serie/{idSerie}
+    defaults:
+        _controller: MainBundle:Main:serie
+    requirements:
+        idSerie: '[a-zA-Z-0-9]{36}'
+        _locale: en|fr
+
+Cette route fait appel à la méthode serieAction du controller MainController et renvoit les informations sur: 
+    >la liste des épisodes de la série, 
+    >les infos de la série,
+    >les infos sur les acteurs de la série,
+    >les infos sur les genres de la série,
+    >les infos sur l'utilisateur connecté,
+    >les infos sur les critiques de la série.
+
+On y accède en rajoutant dans l'URL: /{_locale}/serie/{idSerie} ou _locale: /en ou /fr
++++++++++++++++++++++++++++++++++++++++++++++++++
+main_episode:
+    path:     /{_locale}/serie/{idSerie}/episode/{idEpisode}
+    defaults:
+        _controller: MainBundle:Main:serie
+    requirements:
+        idSerie: '[a-zA-Z-0-9]{36}'
+        idEpisode: '[a-zA-Z-0-9]{36}'
+        _locale: en|fr
+
+Cette route fait appel à la méthode episodeAction du controller MainController et renvoit les informations sur: 
+    >les infos des épisodes d'une série, 
+    >les infos de la série,
+    >les infos sur les acteurs de la série,
+    >les infos sur les genres de la série,
+    >les infos sur l'utilisateur connecté,
+    >les infos d'un épisode de la série.
+
+On y accède en rajoutant dans l'URL: /{_locale}/serie/{idSerie}/episode/{idEpisode} ou _locale: /en ou /fr
++++++++++++++++++++++++++++++++++++++++++++++++++
+main_account:
+    path:     /{_locale}/account
+    defaults:
+        _controller: MainBundle:Main:account
+    requirements:
+        _locale: en|fr
+
+Cette route fait appel à la méthode accountAction du controller MainController et renvoit les informations sur: 
+    >l'utilisateur connecté,
+    >les suggestions série.
+
+On y accède en rajoutant dans l'URL: /{_locale}/account ou _locale: /en ou /fr
++++++++++++++++++++++++++++++++++++++++++++++++++
+main_legal:
+    path:     /{_locale}/legal
+    defaults:
+        _controller: MainBundle:Main:legal
+    requirements:
+        _locale: en|fr
+
+Cette route fait appel à la méthode legalAction du controller MainController et renvoit les informations légales sur le l'utilisation du site.
+
+On y accède en rajoutant dans l'URL: /{_locale}/legal ou _locale: /en ou /fr
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+admin_modifSerie:
+    path:     /{_locale}/admin/modifSerie
+    defaults:
+        _controller: MainBundle:Admin:modifSerie
+    requirements:
+        _locale: en|fr
+
+Cette route fait appel à la méthode modifSerieAction du controller AdminController et devrait renvoyer après développement les idées suivantes:
+         * Récupérer toutes les modifications en attente pour une série (SerieRepository)
+         * Récupération du formulaire
+         *      validation de la série (isValid en true)
+         *      mettre l'ancienne qui a isValid=true en false
+         *      supprimer les modifications refuser
+         *      bannir un utilisateur
+         * Récupérer toute les noms de série (a mettre dans le select) (SerieRepository)
+
+On y accède en rajoutant dans l'URL: /{_locale}/admin/modifSerie ou _locale: /en ou /fr
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+admin_submitSerie:
+    path:     /{_locale}/admin/submitSerie
+    defaults:
+        _controller: MainBundle:Admin:submitSerie
+    requirements:
+        _locale: en|fr
+
+Cette route fait appel à la méthode submitSerieAction du controller AdminController et devrait renvoyer après développement les idées suivantes:
+         * Récupérer les séries non valider et qui n'ont pas de doublon au niveau de l'uuid (SerieRepository)
+         * Passer le valider de la série en cours à true (SerieRepository)
+         * Supprimer la série de la base de données si on clique sur refuser (SerieRepository)
+         * Bannir l'utilisateur (UserRepository)
+         * Service de notification
+
+On y accède en rajoutant dans l'URL: /{_locale}/admin/submitSerie ou _locale: /en ou /fr
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+admin_validCritic:
+    path:     /{_locale}/admin/validCritic
+    defaults:
+        _controller: MainBundle:Admin:validCritic
+    requirements:
+        _locale: en|fr
+
+Cette route fait appel à la méthode validCriticAction du controller AdminController et devrait renvoyer après développement les idées suivantes:
+         * Récupération des série dans le select (SerieRepository)
+         * Récupération des critiques non valider pour la série selectionner (CriticRepository)
+         * Récupération du formulaire (CriticRepository)
+         *      Si accepter passer isValid en true
+         *      Si refuser supprime la critique
+         * Service de notification (Service)
+
+On y accède en rajoutant dans l'URL: /{_locale}/admin/validCritic ou _locale: /en ou /fr
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+admin_userManager:
+    path:     /{_locale}/admin/userManager
+    defaults:
+        _controller: MainBundle:Admin:userManager
+    requirements:
+        _locale: en|fr
+
+Cette route fait appel à la méthode userManagerAction du controller AdminController et devrait renvoyer après développement les idées suivantes:
+        * Récupération des informations utilisateurs (UserRepository)
+        * Récupération du formulaire
+        * Proumouvoir/bannir utilisateur
+
+On y accède en rajoutant dans l'URL: /{_locale}/admin/validCritic ou _locale: /en ou /fr
+
+NB: TOUTES CES FONCTIONNALITES RISQUE DE NE PAS ETRE PRESENTE DANS L'APPLICATION !
 
 
 
