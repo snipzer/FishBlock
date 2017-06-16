@@ -52,22 +52,29 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
     {
         $favs = $this->getFavorisByUserId($userId);
 
-        $DDArray = [];
-
-        foreach($favs as $fav)
+        if(count($favs))
         {
-            $serie = $fav->getSerie();
+            $DDArray = [];
 
-            $criticInArray = $this->getEntityManager()->getRepository("MainBundle:Critic")->getLastUploadedAndValidatedCriticFromSerie($serie);
+            foreach($favs as $fav)
+            {
+                $serie = $fav->getSerie();
 
-            $critic = $criticInArray[0];
+                $criticInArray = $this->getEntityManager()->getRepository("MainBundle:Critic")->getLastUploadedAndValidatedCriticFromSerie($serie);
 
-            $array = ["serie" => $serie, "critic" => $critic];
+                $critic = $criticInArray[0];
 
-            $DDArray[] = $array;
+                $array = ["serie" => $serie, "critic" => $critic];
+
+                $DDArray[] = $array;
+            }
+
+            return $DDArray;
         }
-
-        return $DDArray;
+        else
+        {
+            return null;
+        }
     }
 
     public function checkIfSerieIsInFav($serieId, $userId)

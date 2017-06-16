@@ -8,25 +8,52 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MainController extends Controller
 {
-    /**
-     * Page d'accueil
-     */
+
     public function homeAction(Request $request)
     {
+        $firstName = htmlentities($request->get('firstname'));
+        $lastName = htmlentities($request->get('lastname'));
+        $userName = htmlentities($request->get('username'));
+        $email = htmlentities($request->get('email'));
+        $password = htmlentities($request->get("password"));
+        $passwordConfirm = htmlentities($request->get("passwordConfirmation"));
+        $birthDate = htmlentities($request->get('birthday'));
+
+        if((isset($firstName) && isset($lastName) && isset($userName) && isset($password) && isset($passwordConfirm) && isset($birthDate) && isset($email))
+            && ($firstName != "" && $lastName != "" && $userName != "" && $password != "" && $passwordConfirm != "" && $birthDate != "" && $email != ""))
+        {
+            if($password === $passwordConfirm)
+            {
+                $this->getDoctrine()->getRepository("MainBundle:User")->createUser($email, $password, $userName, $firstName, $lastName, "ROLE_USER");
+                $error = "Compte créer";
+            }
+            else
+            {
+                $error = "Password should be identical";
+            }
+        }
+
         $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
         $user = $this->getUser();
 
-        if (isset($user )) {
+        if (isset($user))
+        {
             return $this->render("MainBundle:App:home.html.twig", [
                 "popularSeries" => $popularSeries,
                 "user" => $user
+            ]);
+        }
 
+        if(isset($error))
+        {
+            return $this->render("MainBundle:App:home.html.twig", [
+                "popularSeries" => $popularSeries,
+                "error" => $error
             ]);
         }
 
         return $this->render("MainBundle:App:home.html.twig", [
             "popularSeries" => $popularSeries
-
         ]);
     }
 

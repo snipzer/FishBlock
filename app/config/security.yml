@@ -24,7 +24,9 @@ security:
                 default_target_path: /en/wall
                 use_referer : true
                 csrf_token_generator: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
-            logout:       true
+            logout:
+                path: /en/logout
+                target: /en
             anonymous:    true
 
     access_control:
