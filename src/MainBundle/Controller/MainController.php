@@ -141,8 +141,10 @@ class MainController extends Controller
         $CriticContent = htmlentities($request->get("content"));
         $CriticNote = htmlentities($request->get('note'));
 
-        if(isset($CriticTitle) && isset($CriticContent) && isset($CriticNote))
+        if((isset($CriticTitle) && isset($CriticContent) && isset($CriticNote) && ($CriticTitle != "" && $CriticContent != "" && $CriticNote != "")))
+        {
             $CritiqueRepository->postCritic($CriticTitle, $CriticContent, $CriticNote, $user->getId()->__toString(), $serieId);
+        }
 
         $serie = $SerieRepository->getSerieWithId($serieId);
         $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
@@ -177,8 +179,11 @@ class MainController extends Controller
         $CriticContent = htmlentities($request->get("content"));
         $CriticNote = htmlentities($request->get('note'));
 
-        if(isset($CriticTitle) && isset($CriticContent) && isset($CriticNote))
+        if((isset($CriticTitle) && isset($CriticContent) && isset($CriticNote) && ($CriticTitle != "" && $CriticContent != "" && $CriticNote != "")))
+        {
             $CritiqueRepository->postCritic($CriticTitle, $CriticContent, $CriticNote, $user->getId()->__toString(), $serieId);
+        }
+
 
         $serie = $SerieRepository->getSerieWithId($serieId);
         $episode = $EpisodeRepository->getEpisode($episodeId);
