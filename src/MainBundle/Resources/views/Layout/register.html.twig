@@ -7,21 +7,21 @@
         {% endif %}
         <h2>Inscription :</h2>
         <label for="username">{{'User'|trans}}</label></br>
-        <input type="text" id="firstname" name="firstname" placeholder="firstname" required="required"/></br>
-        <input type="text" id="lastname" name="lastname" placeholder="lastname" required="required"/></br>
-        <input type="text" id="username" name="username" placeholder="username" required="required"/></br>
+        <p><input type="text" id="firstname" name="firstname" placeholder="{{ "Firstname"|trans }}" required /></p>
+        <p><input type="text" id="lastname" name="lastname" placeholder="{{ "Lastname"|trans }}" required /></p>
+        <p><input type="text" id="username" name="username" placeholder="{{ "Username"|trans }}" required /></p>
 
         <label for="password">{{'Password'|trans}}</label></br>
-        <input type="password" id="password" name="password" placeholder="password" required="required"/></br>
-        <input type="password" id="passwordConfirmation" name="passwordConfirmation" placeholder="passwordConfirmation" required="required"/></br>
+        <p><input type="password" id="password" name="password" placeholder="{{ "Password"|trans }}" required /></p>
+        <p><input type="password" id="passwordConfirmation" name="passwordConfirmation" placeholder="{{ "Password confirmation"|trans }}" required /></p>
 
         <label for="email">{{'Mail'|trans}}</label></br>
-        <input type="email" id="email" name="email" placeholder="mail" required="required"/></br>
+        <p><input type="email" id="email" name="email" placeholder="{{ "Mail"|trans }}" required /></p>
 
-        <label for="birthday">{{'Birthday'|trans}}</label></br>
-        <input type="date" id="birthday" name="birthday" placeholder="ex : 2001/12/01" max="{{ date().timestamp }}" required="required"/></br></br>
+        <label for="birthday">{{'Birthday'|trans}}</label>
+        <p><input type="date" id="birthday" name="birthday" placeholder="ex : 2001/12/01" max="{{ date().timestamp }}" required /></p>
 
-        <input class="btn btn-default btn-sm" type="submit" id="_submit" name="submit" value={{'Register'|trans}}>
+        <p><input class="btn btn-default btn-sm" type="submit" id="_submit" name="submit" value={{'Register'|trans}}></p>
     </form>
 
 </div>

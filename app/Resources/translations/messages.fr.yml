@@ -43,7 +43,7 @@ Administration: Administration
 Chat: Chat
 If you love: Si vous aimez
 You will enjoy: Vous aimerez
-Free visit: Visiter le site
+Unlogged visit: Visiter le site
 season: saison
 Season : Saison
 Actors: Acteurs
@@ -63,6 +63,7 @@ Back: Retour
 Posted by: Ecris par
 the: le
 User: Utilisateur
+Password confirmation: Confirmer le mot de passe
 Password: Mot de passe
 Mail: Email
 Birthday: Date de naissance
@@ -70,3 +71,11 @@ Register: Enregistrer
 Password should be identical: Les mots de passe doivent être identique
 Click on search to start add serie: Cliquer sur rechercher pour commencer à ajouter des séries
 Logout: Déconnexion
+Firstname: Prénom
+LastName: Nom
+Username: Pseudonyme
+Mail: Email
+Save information: Mofifier les informations
+Confirm password change: Confirmer le changement de mot de passe
+General informations: Informations générales
+Password modification: Modification du mot de passe

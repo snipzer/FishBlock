@@ -19,42 +19,27 @@
 {% endblock %}
 
 {% block content %}
-    {# Caroussel #}
-    <!-- Carousel Bootstrap -->
-
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
                 <img alt="" src={{ asset('public/img/logoFishblock.svg') }}>
                 <div class="carousel-caption">
-                    {#<h3>{{ serie.title }}</h3>#}
-                    <p></p>
                 </div>
             </div>
-
-            <div class="item">
-                <img alt="" src={{ asset('public/img/logoFishblock.svg') }}>
-                <div class="carousel-caption">
-                    {#<h3>{{ serie.title }}</h3>#}
-                    <p></p>
-                </div>
-            </div>
-
-            <div class="item">
-                <img alt="" src={{ asset('public/img/logoFishblock.svg') }}>
-                <div class="carousel-caption">
-                    {#<h3>{{ serie.title }}</h3>#}
-                    <p></p>
-                </div>
-            </div>
+            {% for popularSerie in popularSeries %}
+                {% if popularSerie.poster == "undefined" %}
+                {% else %}
+                    <div class="item">
+                        <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ popularSerie.poster }}"
+                             alt="{{ popularSerie.title }}"/>
+                        <div class="carousel-caption">
+                            <h3>{{ popularSerie.title }}</h3>
+                            <p>{{ popularSerie.description }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
 
         <!-- Left and right controls -->
