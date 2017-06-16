@@ -124,11 +124,74 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
     public function getSerieByNameAndActor($serieName, $actorId)
     {
         $series = $this->getSerieByName($serieName);
-        $ActorRepo = $this->getEntityManager()->getRepository("MainBundle:SerieActor");
+        $SerieActorRepository = $this->getEntityManager()->getRepository("MainBundle:SerieActor");
+        $actor = $this->getEntityManager()->getRepository("MainBundle:Actor")->getActorById($actorId);
+
+        $result = [];
 
         foreach($series as $serie)
         {
-
+            $SerieActors = $SerieActorRepository->findBy(["serie" => $serie, "actor" => $actor]);
+            if(count($SerieActors))
+            {
+                foreach($SerieActors as $serieActor)
+                {
+                    $result[] = $serieActor->getSerie();
+                }
+            }
         }
+
+        return $result;
+    }
+
+    public function getSerieByNameAndType($serieName, $typeId)
+    {
+        $series = $this->getSerieByName($serieName);
+        $SerieTypeRepository = $this->getEntityManager()->getRepository("MainBundle:SerieType");
+        $type = $this->getEntityManager()->getRepository("MainBundle:Type")->getTypeById($typeId);
+
+        $result = [];
+
+        foreach($series as $serie)
+        {
+            $SerieTypes = $SerieTypeRepository->findBy(["serie" => $serie, "type" => $type]);
+            if(count($SerieTypes))
+            {
+                foreach($SerieTypes as $serieType)
+                {
+                    $result[] = $serieType->getSerie();
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    public function getSerieByNameAndTypeAndActor($serieName, $actorId, $typeId)
+    {
+        $series = $this->getSerieByName($serieName);
+        $SerieActorRepository = $this->getEntityManager()->getRepository("MainBundle:SerieActor");
+        $SerieTypeRepository = $this->getEntityManager()->getRepository("MainBundle:SerieType");
+
+        $type = $this->getEntityManager()->getRepository("MainBundle:Type")->getTypeById($typeId);
+        $actor = $this->getEntityManager()->getRepository("MainBundle:Actor")->getActorById($actorId);
+
+        $result = [];
+
+        foreach($series as $serie)
+        {
+            $SerieActors = $SerieActorRepository->findBy(["serie" => $serie, "actor" => $actor]);
+            $SerieTypes = $SerieTypeRepository->findBy(["serie" => $serie, "type" => $type]);
+
+            if(count($SerieActors) && count($SerieTypes))
+            {
+                foreach($SerieActors as $serieActor)
+                {
+                    $result[] = $serieActor->getSerie();
+                }
+            }
+        }
+
+        return $result;
     }
 }
