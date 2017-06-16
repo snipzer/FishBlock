@@ -49,15 +49,15 @@ class MainController extends Controller
 
     public function unloggedWallAction(Request $request)
     {
-        $trendingSerie = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
+        $trendingSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
-        $lastPublishedSerie = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
+        $lastPublishedSeries = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
 
         $lastPublishedCritics = $this->getDoctrine()->getRepository("MainBundle:Critic")->getLastUploadedAndValidatedCritics();
 
         return $this->render("MainBundle:App:unloggedWall.html.twig", [
-            "trendingSerie" => $trendingSerie,
-            "lastPublishedSerie" => $lastPublishedSerie,
+            "trendingSeries" => $trendingSeries,
+            "lastPublishedSeries" => $lastPublishedSeries,
             "lastPublishedCritics" => $lastPublishedCritics
         ]);
     }
