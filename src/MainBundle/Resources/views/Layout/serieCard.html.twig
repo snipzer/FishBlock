@@ -13,7 +13,7 @@
                     </p>
                 {%  else %}
                     <p>
-                        <img src={{ 'http://thetvdb.com/banners/_cache/' ~ serie.poster  }}/>
+                        <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serie.poster  }}"/>
                     </p>
                 {%  endif %}
 
@@ -34,11 +34,11 @@
 
                 {% if fav.serie.poster == "undefined" %}
                     <p>
-                        <img src={{ asset("public/img/undefined.jpg") }}/>
+                        <img src="{{ asset("public/img/undefined.jpg") }}"/>
                     </p>
                 {%  else %}
                     <p>
-                        <img src={{ 'http://thetvdb.com/banners/_cache/' ~ fav.serie.poster  }}/>
+                        <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ fav.serie.poster  }}"/>
                     </p>
                 {%  endif %}
 
