@@ -21,7 +21,7 @@
     {% if episode is defined %}
         <div>
             <h3>{{ episode.title }}</h3>
-            <p>Saison {{ episode.seasonNumber }}, Episode {{ episode.episodeNumber }}</p>
+            <p>{{ 'Season'|trans }} {{ episode.seasonNumber }}, Episode {{ episode.episodeNumber }}</p>
             <p>{{ episode.description }}</p>
         </div>
     {% endif %}
