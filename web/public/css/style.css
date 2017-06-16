@@ -199,6 +199,7 @@ Style pour le block content
 @media screen and (max-width: 900px) {
 
     .contentBlock {
+        flex-direction: column-reverse;
         margin: 10px 20px;
         /*height: 66vh;*/
     }
@@ -392,7 +393,7 @@ Style pour le bloc recherche du site
     display: flex;
 
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
 
     width: 16%;
     height: 66vh;
@@ -402,14 +403,45 @@ Style pour le bloc recherche du site
     color: #ffffff;
 }
 
+.searchBlock form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+
+
+    width: 100%;
+    height: 80vh;
+    padding: 10vh 0;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.searchButton {
+    margin: 10% 0;
+    width: 100%;
+    height: 15%;
+    color: #FFFFFF;
+    background-color: #58bf94;
+    border: #686868;
+}
+
 /* Pour la version responsive -----------------
 */
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 900px) {
 
     .searchBlock {
-        display: none;
+        width: 40%;
+        max-height: 25em;
     }
 
+    .searchBlock form {
+        padding: 10% 0;
+    }
+
+    .contentBlock {
+        align-items: center;
+    }
 }
 
 /*----------------------------------------------------------------------------------

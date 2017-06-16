@@ -109,4 +109,15 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
 
         return true;
     }
+
+    public function getSerieByName($serieName)
+    {
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("s")
+            ->from("MainBundle:Serie", "s")
+            ->where("s.title like :serieName")
+            ->setParameter(":serieName", "%$serieName%")
+            ->getQuery()
+            ->getResult();
+    }
 }
