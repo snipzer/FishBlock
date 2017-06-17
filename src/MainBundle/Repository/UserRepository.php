@@ -40,23 +40,20 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         return $user;
     }
 
-    public function changeUserPassword($userId, $password, $passwordConfirm)
+    public function changeUserInformation($userId, $email, $userName, $firstName, $lastName)
     {
-        if($password === $passwordConfirm)
-        {
-            $user = $this->getUserById($userId);
+        $user = $this->getUserById($userId);
 
-            $user->setPlainPassword($password);
+        $user->setEmail($email)
+            ->setUsernameCanonical($userName)
+            ->setUsername($userName)
+            ->setLastName($lastName)
+            ->setFirstName($firstName);
 
-            $this->getEntityManager()->persist($user);
-            $this->getEntityManager()->flush();
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
 
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return $user;
     }
 
     // Bannis l'utilisateur

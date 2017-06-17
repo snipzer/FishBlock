@@ -38,48 +38,36 @@
     </div>
     <div>
         <h3>{{ "Password modification"|trans }}</h3>
-        {#<form action="{{ path("fos_user_change_password", {_locale: app.request.attributes.get('_locale')}) }}" method="post">#}
-        {#<label for="password">{{ 'Password'|trans }}</label></br>#}
-        {#<p><input type="hidden" name="_csrf_token" value="{{ csrf_token('intention') }}"></p>#}
-        {#<p><input class="form-control" type="password" id="password" name="password-old"#}
-        {#placeholder="{{ "Old password"|trans }}" required/></p>#}
-        {#<p><input class="form-control" type="password" id="password" name="password"#}
-        {#placeholder="{{ "New password"|trans }}" required/></p>#}
-        {#<p><input class="form-control" type="password" id="passwordConfirmation" name="passwordConfirmation"#}
-        {#placeholder="{{ "New password confirmation"|trans }}" required/></p>#}
-        {#<p><input class="btn btn-danger" type="submit" id="_submit" name="submit"#}
-        {#value={{ 'Confirm password change'|trans }}></p>#}
-        {#</form>#}
-
         <form name="fos_user_change_password_form" method="post" action="/profile/change-password"
-              class="fos_user_change_password" >
+              class="fos_user_change_password">
             <div id="fos_user_change_password_form">
                 <div>
                     <label for="fos_user_change_password_form_current_password" class="required">Current
                         password</label>
-                    <input type="password" id="fos_user_change_password_form_current_password"
+                    <input class="form-control" type="password" id="fos_user_change_password_form_current_password"
                            name="fos_user_change_password_form[current_password]"
                            required="required"/>
                 </div>
                 <div>
                     <label for="fos_user_change_password_form_plainPassword_first" class="required">New password</label>
-                    <input type="password" id="fos_user_change_password_form_plainPassword_first"
+                    <input class="form-control" type="password" id="fos_user_change_password_form_plainPassword_first"
                            name="fos_user_change_password_form[plainPassword][first]"
                            required="required"/>
                 </div>
                 <div>
                     <label for="fos_user_change_password_form_plainPassword_second" class="required">Repeat new
                         password</label>
-                    <input type="password" id="fos_user_change_password_form_plainPassword_second"
+                    <input class="form-control" type="password" id="fos_user_change_password_form_plainPassword_second"
                            name="fos_user_change_password_form[plainPassword][second]"
                            required="required"/>
                 </div>
                 <input type="hidden" id="fos_user_change_password_form__token"
                        name="fos_user_change_password_form[_token]"
-                       value="{{ csrf_token('intention') }}"/>
+                       value="{{ csrf_token('change_password') }}"/>
             </div>
             <div>
-                <input type="submit" value="Change password"/>
+                <br>
+                <input class="btn btn-danger" type="submit" value="Change password"/>
             </div>
         </form>
     </div>
