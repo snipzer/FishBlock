@@ -1,23 +1,24 @@
 <div class="suggestBlock">
     {# récupérer série aimée puis afficher deux autres séries #}
     <div>
-        <div>
+        <div class="suggestSerie">
             <p>{{ 'If you love'|trans }} </p>
             {% if serieSuggest[0].poster == 'undefined' %}
                 <img src="{{ asset('public/img/undefined.jpg') }}">
             {% else %}
                 <a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSuggest[0].Id.__toString}) }}">
-                    <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[0].poster }}"/>
+                    <img class="suggestSerieImage" src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[0].poster }}"/>
                 </a>
             {% endif %}
+            </br></br></br>
         </div>
-        <div>
+        <div class="suggestSerie">
             <p>{{ 'You will enjoy'|trans }} </p>
             {% if serieSuggest[1].poster == 'undefined' %}
                 <img src="{{ asset('public/img/undefined.jpg') }}">
             {% else %}
             <a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSuggest[1].Id.__toString}) }}">
-                <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[1].poster }}"/>
+                <img class="suggestSerieImage" src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[1].poster }}"/>
             </a>
             {% endif %}
 
@@ -25,7 +26,7 @@
                 <img src="{{ asset('public/img/undefined.jpg') }}"/>
             {% else %}
             <a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSuggest[2].Id.__toString}) }}">
-                <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[2].poster }}"/>
+                <img class="suggestSerieImage" src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[2].poster }}"/>
             </a>
             {% endif %}
         </div>

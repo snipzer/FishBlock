@@ -1,0 +1,54 @@
+<div class="serieCard">
+
+    {% if series is defined %}
+        <ul>
+            {% for serie in series %}
+                <li>
+                    <h2><a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serie.Id.__toString}) }}">{{ serie.title }}</a></h2>
+                </li>
+
+                {% if serie.poster == "undefined" %}
+                    <p>
+                        <img src={{ asset("public/img/undefined.jpg") }}/>
+                    </p>
+                {%  else %}
+                    <p>
+                        <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serie.poster  }}"/>
+                    </p>
+                {%  endif %}
+
+                <li>
+                    <p>{{ serie.description }}</p>
+                </li>
+                <li>
+                    <a href="{{ path('main_add_favoris', {'_locale': app.request.attributes.get('_locale'), 'idSerie': fav.serie.Id.__toString}) }}" class="btn btn-danger">{{ "Remove"|trans }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <ul>
+            {% for fav in favoris %}
+                <li>
+                    <h2><a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': fav.serie.Id.__toString}) }}">{{ fav.serie.title }}</a></h2>
+                </li>
+
+                {% if fav.serie.poster == "undefined" %}
+                    <p>
+                        <img src="{{ asset("public/img/undefined.jpg") }}"/>
+                    </p>
+                {%  else %}
+                    <p>
+                        <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ fav.serie.poster  }}"/>
+                    </p>
+                {%  endif %}
+
+                <li>
+                    <p>{{ fav.serie.description }}</p>
+                </li>
+                <li>
+                    <a href="{{ path('main_add_favoris', {'_locale': app.request.attributes.get('_locale'), 'idSerie': fav.serie.Id.__toString}) }}" class="btn btn-danger">{{ "Remove"|trans }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>

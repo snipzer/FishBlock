@@ -17,3 +17,29 @@ input {
     color: red;
     background-color: #262626;
 }
+
+.btn {
+    color: white !important;
+}
+
+.btn-danger {
+    width: 100%;
+}
+
+.btn-info {
+    width: 100%;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+.suggestSerie {
+    text-align: center;
+    width: 100%;
+    font-size: large;
+    text-transform: uppercase;
+}
+.suggestSerieImage {
+    width: 100%;
+}
