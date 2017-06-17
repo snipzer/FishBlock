@@ -4,11 +4,35 @@ input {
 
 #myCarousel {
     width: 350%;
+
 }
 
-.carousel-inner img {
+.slideCarousel {
+    color: white;
+    padding: 20px;
+}
+
+.carousel-inner {
     width: 100%; max-height: 1000px;
     min-height: 600px; min-width: 800px; overflow:hidden;
+    background-color: #505050;
+}
+
+.carousel-inner img{
+    width: 10%; max-height: 100px;
+    min-height: 100px; min-width: 100%; overflow:hidden;
+}
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+    #myCarousel {
+        display: none!important;
+    }
+}
+
+@media screen and (max-width: 600px) and (min-width: 0px) {
+    #myCarousel {
+        display: none!important;
+    }
 }
 
 .error
@@ -37,6 +61,11 @@ input {
     font-weight: bolder;
 }
 
+.btn-warning {
+    width: 100%;
+    font-weight: bolder;
+}
+
 .suggestSerie {
     text-align: center;
     width: 100%;
@@ -53,9 +82,12 @@ input {
     text-decoration: underline;
 }
 
-.selectpicker {
-    height: 60px;
+.loginBlock form input{
+    display: flex;
+    flex: 1;
+    width: 100% !important;
 }
+
 
 @media screen and (max-width: 900px) {
     .selectpicker {

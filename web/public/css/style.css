@@ -81,8 +81,9 @@ header {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    padding-bottom: 5px;
 
-    width: 28em;
+    width: 20em;
 
     color: #ffffff;
     background-color: #ed3126;
@@ -92,6 +93,7 @@ header {
 .loginBlock form {
     display: flex;
     flex: 1;
+    text-align: center;
 }
 
 .loginUsernamePassword {
@@ -225,7 +227,7 @@ Style pour le bloc menu du site
     align-items: center;
 
     width: 15%;
-    height: 66vh;
+    height: 100vh;
     min-width: 10em;
 
     background-color: #686868;
@@ -492,7 +494,7 @@ Style pour le bloc recherche du site
     align-items: stretch;
 
     width: 16%;
-    height: 66vh;
+    height: 100vh;
     min-width: 15em;
 
     background-color: #686868;
@@ -561,6 +563,7 @@ Style pour la div register / visit
     justify-content: flex-end;
 
     width: 100%;
+    height: 100vh;
 }
 
 /*----------------------------------------------------------------------------------
@@ -573,7 +576,7 @@ Style pour le bloc register
     align-items: center;
 
     width: 20%;
-    height: 66vh;
+    height: 100vh;
     min-width: 22em;
 
     margin: 0 0.5em;
@@ -601,7 +604,7 @@ Style pour le bloc "visiter le site"
     flex-direction: column;
 
     width: 16%;
-    height: 66vh;
+    height: 100vh;
     min-width: 10em;
 
     margin-left: 0.5em;
