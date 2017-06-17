@@ -46,3 +46,25 @@ input {
 .suggestSerieImage {
     width: 100%;
 }
+
+.center {
+    text-align: center;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.selectpicker {
+    height: 60px;
+}
+
+@media screen and (max-width: 900px) {
+    .selectpicker {
+        height: 90px;
+    }
+}
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+    .selectpicker {
+        height: 90px;
+    }
+}
