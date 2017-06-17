@@ -241,14 +241,15 @@ class MainController extends Controller
         $userId = $this->getUser()->getId()->__toString();
         $user = $this->getUser();
 
-        $NewPassword = htmlentities($request->get('password'));
-        $NewPasswordConfirm = htmlentities($request->get('passwordConfirmation'));
+        $NewFirstName = htmlentities($request->get('firstname'));
+        $NewLastName = htmlentities($request->get('lastname'));
+        $NewUserName = htmlentities($request->get('username'));
+        $NewEmail = htmlentities($request->get('email'));
 
-        if((isset($NewPassword) && isset($NewPasswordConfirm)) && ($NewPassword != "" && $NewPasswordConfirm != ""))
+        if((isset($NewFirstName) && isset($NewLastName) && isset($NewUserName) && isset($NewEmail)) && ($NewFirstName != "" && $NewLastName != "" && $NewUserName != "" && $NewEmail != ""))
         {
-            $this->getDoctrine()->getRepository("MainBundle:User")->changeUserPassword($userId, $NewPassword, $NewPasswordConfirm);
+            $this->getDoctrine()->getRepository("MainBundle:User")->changeUserInformation($userId, $NewEmail, $NewUserName, $NewFirstName, $NewLastName);
         }
-
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
 
