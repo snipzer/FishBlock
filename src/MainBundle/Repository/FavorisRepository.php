@@ -42,7 +42,8 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
     // Retirer la série des favoris
     public function removeFavoris($favorisId)
     {
-        $fav = $this->findOneBy($favorisId);
+        $fav = $this->findOneBy(["id" => $favorisId]);
+
 
         $this->getEntityManager()->remove($fav);
         $this->getEntityManager()->flush();
