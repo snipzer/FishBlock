@@ -34,14 +34,14 @@ main_favoris:
         _locale: en|fr
 
 main_add_favoris:
-   path:     /favoris/{idSerie}
+   path:     /favoris/add/{idSerie}
    defaults:
        _controller: MainBundle:Main:favoris
    requirements:
        _locale: en|fr
 
 main_remove_favoris:
-    path:     /favoris/{idFavoris}
+    path:     /favoris/remove/{idFavoris}
     defaults:
         _controller: MainBundle:Main:favoris
     requirements:
