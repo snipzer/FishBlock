@@ -1,47 +1,54 @@
 main_home:
-    path:     /{_locale}
+    path:     /
     defaults:
         _controller: MainBundle:Main:home
     requirements:
         _locale: en|fr
 
 main_wall:
-    path:     /{_locale}/wall
+    path:     /wall
     defaults:
         _controller: MainBundle:Main:wall
     requirements:
         _locale: en|fr
 
 main_unloggedWall:
-    path:     /{_locale}/unWall
+    path:     /unWall
     defaults:
         _controller: MainBundle:Main:unloggedWall
     requirements:
         _locale: en|fr
 
 main_search:
-    path:     /{_locale}/search
+    path:     /search
     defaults:
         _controller: MainBundle:Main:search
     requirements:
         _locale: en|fr
 
 main_favoris:
-    path:     /{_locale}/favoris
+    path:     /favoris
     defaults:
         _controller: MainBundle:Main:favoris
     requirements:
         _locale: en|fr
 
 main_add_favoris:
-   path:     /{_locale}/favoris/{idSerie}
+   path:     /favoris/{idSerie}
    defaults:
        _controller: MainBundle:Main:favoris
    requirements:
        _locale: en|fr
 
+main_remove_favoris:
+    path:     /favoris/{idFavoris}
+    defaults:
+        _controller: MainBundle:Main:favoris
+    requirements:
+        _locale: en|fr
+
 main_serie:
-    path:     /{_locale}/serie/{idSerie}
+    path:     /serie/{idSerie}
     defaults:
         _controller: MainBundle:Main:serie
     requirements:
@@ -49,7 +56,7 @@ main_serie:
         _locale: en|fr
 
 main_episode:
-    path:     /{_locale}/serie/{idSerie}/episode/{idEpisode}
+    path:     /serie/{idSerie}/episode/{idEpisode}
     defaults:
         _controller: MainBundle:Main:episode
     requirements:
@@ -58,42 +65,42 @@ main_episode:
         _locale: en|fr
 
 main_account:
-    path:     /{_locale}/account
+    path:     /account
     defaults:
         _controller: MainBundle:Main:account
     requirements:
         _locale: en|fr
 
 main_legal:
-    path:     /{_locale}/legal
+    path:     /legal
     defaults:
         _controller: MainBundle:Main:legal
     requirements:
         _locale: en|fr
 
 admin_modifSerie:
-    path:     /{_locale}/admin/modifSerie
+    path:     /admin/modifSerie
     defaults:
         _controller: MainBundle:Admin:modifSerie
     requirements:
         _locale: en|fr
 
 admin_submitSerie:
-    path:     /{_locale}/admin/submitSerie
+    path:     /admin/submitSerie
     defaults:
         _controller: MainBundle:Admin:submitSerie
     requirements:
         _locale: en|fr
 
 admin_validCritic:
-    path:     /{_locale}/admin/validCritic
+    path:     /admin/validCritic
     defaults:
         _controller: MainBundle:Admin:validCritic
     requirements:
         _locale: en|fr
 
 admin_userManager:
-    path:     /{_locale}/admin/userManager
+    path:     /admin/userManager
     defaults:
         _controller: MainBundle:Admin:userManager
     requirements:
