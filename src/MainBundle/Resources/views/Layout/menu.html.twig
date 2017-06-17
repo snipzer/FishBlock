@@ -1,12 +1,12 @@
 <nav class="menuBlock" id="menuBlock">
     <button class="magicButton" id="magicButton">TEST</button>
     <div class="menuButtons">
+        <a href="{{ path('main_home', {_locale: app.request.attributes.get('_locale')}) }}" class="menuBlockChat">{{ "Home"|trans }}</a>
         <a href="{{ path("main_search", {_locale: app.request.attributes.get('_locale')}) }}" class="menuBlockSearch">{{ 'Search'|trans }}</a>
         <a href="{{ path("main_favoris", {_locale: app.request.attributes.get('_locale')}) }}" class="menuBlockFavorites">{{ 'Favorites'|trans }}</a>
         <a href="{{ path("main_wall", {_locale: app.request.attributes.get('_locale')}) }}" class="menuBlockWall">{{ 'Wall'|trans }}</a>
-        <a class="menuBlockChat">{{ 'Chat'|trans }}</a>
-        {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path("admin_validCritic", {_locale: app.request.attributes.get('_locale')}) }}" class="menuBlockAdmin">{{ 'Administration'|trans }}</a>
-        {% endif %}
+        {#{% if is_granted('ROLE_ADMIN') %}#}
+        {#<a href="{{ path("admin_validCritic", {_locale: app.request.attributes.get('_locale')}) }}" class="menuBlockAdmin">{{ 'Administration'|trans }}</a>#}
+        {#{% endif %}#}
     </div>
 </nav>
