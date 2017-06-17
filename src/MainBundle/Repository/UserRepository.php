@@ -31,13 +31,32 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->setFirstName($firstName)
             ->setPlainPassword($password)
             ->setRoles([$role])
-//            ->setEnabled(true)
+            ->setEnabled(true)
             ->setBirthdate(new \DateTime());
 
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
 
         return $user;
+    }
+
+    public function changeUserPassword($userId, $password, $passwordConfirm)
+    {
+        if($password === $passwordConfirm)
+        {
+            $user = $this->getUserById($userId);
+
+            $user->setPlainPassword($password);
+
+            $this->getEntityManager()->persist($user);
+            $this->getEntityManager()->flush();
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     // Bannis l'utilisateur

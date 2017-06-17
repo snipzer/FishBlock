@@ -71,6 +71,20 @@ main_account:
     requirements:
         _locale: en|fr
 
+main_account_change_password:
+    path:     /account/password_change
+    defaults:
+        _controller: MainBundle:Main:account
+    requirements:
+        _locale: en|fr
+
+main_account_change_user_information:
+    path:     /account/change_user_information
+    defaults:
+        _controller: MainBundle:Main:account
+    requirements:
+        _locale: en|fr
+
 main_legal:
     path:     /legal
     defaults:

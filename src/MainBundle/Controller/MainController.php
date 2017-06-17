@@ -239,9 +239,18 @@ class MainController extends Controller
     public function accountAction(Request $request)
     {
         $userId = $this->getUser()->getId()->__toString();
+        $user = $this->getUser();
+
+        $NewPassword = htmlentities($request->get('password'));
+        $NewPasswordConfirm = htmlentities($request->get('passwordConfirmation'));
+
+        if((isset($NewPassword) && isset($NewPasswordConfirm)) && ($NewPassword != "" && $NewPasswordConfirm != ""))
+        {
+            $this->getDoctrine()->getRepository("MainBundle:User")->changeUserPassword($userId, $NewPassword, $NewPasswordConfirm);
+        }
+
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
-        $user = $this->getDoctrine()->getRepository("MainBundle:User")->getUserById($userId);
 
         return $this->render("MainBundle:App:account.html.twig", [
             "user" => $user,

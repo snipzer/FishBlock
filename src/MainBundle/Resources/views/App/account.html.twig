@@ -18,28 +18,72 @@
     {% include "MainBundle:Layout:menu.html.twig" %}
     <div>
         <h3>{{ "General informations"|trans }}</h3>
-        <form action="{{ path("main_account", {_locale: app.request.attributes.get('_locale')}) }}" method="post">
-            <label for="username">{{'User'|trans}}</label></br>
-            <p><input class="form-control" type="text" id="firstname" name="firstname" placeholder="{{ "Firstname"|trans }}" value="{{ user.firstname }}" required /></p>
-            <p><input class="form-control" type="text" id="lastname" name="lastname" placeholder="{{ "Lastname"|trans }}" value="{{ user.lastname }}" required /></p>
-            <p><input class="form-control" type="text" id="username" name="username" placeholder="{{ "Username"|trans }}" value="{{ user.username }}" required /></p>
+        <form action="{{ path("main_account_change_user_information", {_locale: app.request.attributes.get('_locale')}) }}"
+              method="post">
+            <label for="username">{{ 'User'|trans }}</label></br>
+            <p><input class="form-control" type="text" id="firstname" name="firstname"
+                      placeholder="{{ "Firstname"|trans }}" value="{{ user.firstname }}" required/></p>
+            <p><input class="form-control" type="text" id="lastname" name="lastname"
+                      placeholder="{{ "Lastname"|trans }}" value="{{ user.lastname }}" required/></p>
+            <p><input class="form-control" type="text" id="username" name="username"
+                      placeholder="{{ "Username"|trans }}" value="{{ user.username }}" required/></p>
 
-            <label for="email">{{'Mail'|trans}}</label></br>
-            <p><input class="form-control" type="email" id="email" name="email" placeholder="{{ "Mail"|trans }}" value="{{ user.email }}" required /></p>
+            <label for="email">{{ 'Mail'|trans }}</label></br>
+            <p><input class="form-control" type="email" id="email" name="email" placeholder="{{ "Mail"|trans }}"
+                      value="{{ user.email }}" required/></p>
 
-            <p><input class="btn btn-info btn-sm" type="submit" id="_submit" name="submit" value={{'Save information'|trans}}></p>
+            <p><input class="btn btn-info btn-sm" type="submit" id="_submit" name="submit"
+                      value={{ 'Save information'|trans }}></p>
         </form>
     </div>
     <div>
         <h3>{{ "Password modification"|trans }}</h3>
-        <form action="{{ path("main_account", {_locale: app.request.attributes.get('_locale')}) }}" method="post">
-            <label for="password">{{'Password'|trans}}</label></br>
-            <p><input class="form-control" type="password" id="password" name="password" placeholder="{{ "Password"|trans }}" required /></p>
-            <p><input class="form-control" type="password" id="passwordConfirmation" name="passwordConfirmation" placeholder="{{ "Password confirmation"|trans }}" required /></p>
-            <p><input class="btn btn-danger" type="submit" id="_submit" name="submit" value={{'Confirm password change'|trans}}></p>
+        {#<form action="{{ path("fos_user_change_password", {_locale: app.request.attributes.get('_locale')}) }}" method="post">#}
+        {#<label for="password">{{ 'Password'|trans }}</label></br>#}
+        {#<p><input type="hidden" name="_csrf_token" value="{{ csrf_token('intention') }}"></p>#}
+        {#<p><input class="form-control" type="password" id="password" name="password-old"#}
+        {#placeholder="{{ "Old password"|trans }}" required/></p>#}
+        {#<p><input class="form-control" type="password" id="password" name="password"#}
+        {#placeholder="{{ "New password"|trans }}" required/></p>#}
+        {#<p><input class="form-control" type="password" id="passwordConfirmation" name="passwordConfirmation"#}
+        {#placeholder="{{ "New password confirmation"|trans }}" required/></p>#}
+        {#<p><input class="btn btn-danger" type="submit" id="_submit" name="submit"#}
+        {#value={{ 'Confirm password change'|trans }}></p>#}
+        {#</form>#}
+
+        <form name="fos_user_change_password_form" method="post" action="/profile/change-password"
+              class="fos_user_change_password" >
+            <div id="fos_user_change_password_form">
+                <div>
+                    <label for="fos_user_change_password_form_current_password" class="required">Current
+                        password</label>
+                    <input type="password" id="fos_user_change_password_form_current_password"
+                           name="fos_user_change_password_form[current_password]"
+                           required="required"/>
+                </div>
+                <div>
+                    <label for="fos_user_change_password_form_plainPassword_first" class="required">New password</label>
+                    <input type="password" id="fos_user_change_password_form_plainPassword_first"
+                           name="fos_user_change_password_form[plainPassword][first]"
+                           required="required"/>
+                </div>
+                <div>
+                    <label for="fos_user_change_password_form_plainPassword_second" class="required">Repeat new
+                        password</label>
+                    <input type="password" id="fos_user_change_password_form_plainPassword_second"
+                           name="fos_user_change_password_form[plainPassword][second]"
+                           required="required"/>
+                </div>
+                <input type="hidden" id="fos_user_change_password_form__token"
+                       name="fos_user_change_password_form[_token]"
+                       value="{{ csrf_token('intention') }}"/>
+            </div>
+            <div>
+                <input type="submit" value="Change password"/>
+            </div>
         </form>
     </div>
-    
+
     {% if serieSuggest is not empty %}
         {% include "MainBundle:Layout:suggest.html.twig" %}
     {% endif %}
