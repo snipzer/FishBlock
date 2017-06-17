@@ -53,21 +53,28 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
     {
         $favs = $this->getFavorisByUserId($userId);
 
-        if(count($favs))
+        if (count($favs))
         {
             $DDArray = [];
 
-            foreach($favs as $fav)
+            foreach ($favs as $fav)
             {
                 $serie = $fav->getSerie();
 
                 $criticInArray = $this->getEntityManager()->getRepository("MainBundle:Critic")->getLastUploadedAndValidatedCriticFromSerie($serie);
 
-                $critic = $criticInArray[0];
+                if (count($criticInArray) === 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    $critic = $criticInArray[0];
 
-                $array = ["serie" => $serie, "critic" => $critic];
+                    $array = ["serie" => $serie, "critic" => $critic];
 
-                $DDArray[] = $array;
+                    $DDArray[] = $array;
+                }
             }
 
             return $DDArray;
@@ -93,8 +100,11 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
 
-        if(count($isHereOrNot))
+        if (count($isHereOrNot) > 0)
+        {
             return true;
+        }
+
 
         return false;
     }
@@ -105,16 +115,20 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
 
         $i = 0;
 
-        foreach($series as $serie)
+        foreach ($series as $serie)
         {
             $i++;
 
-            if(rand(0, 100) > 60)
+            if (rand(0, 100) > 60)
             {
-                if($i%2 === 0)
+                if ($i % 2 === 0)
+                {
                     $this->addSerie($userId1, $serie->getId()->__toString());
+                }
                 else
+                {
                     $this->addSerie($userId2, $serie->getId()->__toString());
+                }
             }
         }
     }
