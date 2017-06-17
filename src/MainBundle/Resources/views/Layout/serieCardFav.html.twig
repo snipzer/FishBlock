@@ -21,7 +21,7 @@
                     <p>{{ serie.description }}</p>
                 </li>
                 <li>
-                    <a href="{{ path('main_add_favoris', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serie.Id.__toString}) }}" class="btn btn-primary">{{ "Favorites"|trans }}</a>
+                    <a href="{{ path('main_add_favoris', {'_locale': app.request.attributes.get('_locale'), 'idSerie': fav.serie.Id.__toString}) }}" class="btn btn-danger">{{ "Remove"|trans }}</a>
                 </li>
             {% endfor %}
         </ul>
@@ -46,7 +46,7 @@
                     <p>{{ fav.serie.description }}</p>
                 </li>
                 <li>
-                    <a href="{{ path('main_add_favoris', {'_locale': app.request.attributes.get('_locale'), 'idSerie': fav.serie.Id.__toString}) }}" class="btn btn-primary">{{ "Favorites"|trans }}</a>
+                    <a href="{{ path('main_add_favoris', {'_locale': app.request.attributes.get('_locale'), 'idSerie': fav.serie.Id.__toString}) }}" class="btn btn-danger">{{ "Remove"|trans }}</a>
                 </li>
             {% endfor %}
         </ul>

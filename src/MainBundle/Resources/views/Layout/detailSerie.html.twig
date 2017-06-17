@@ -1,38 +1,78 @@
 <div class="detailSerie">
-    <h2>{{ serie.title }}</h2>
+    <div class="serieDescription">
+        <h2>{{ serie.title }}</h2>
+        <div>
+            <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ serie.poster }}" width="80%"/>
+            <a href="{{ path('main_add_favoris', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serie.Id.__toString}) }}" class="btn btn-primary">{{ "Favorites"|trans }}</a>
+        </div>
+        <p>{{ serie.description }}</p>
+        <p><strong>{{ "Type"|trans }} :</strong>
+            {% for type in types %}
+                {{ type }}
+            {% endfor %}
+        </p>
+    </div>
 
-    <p>{{ serie.description }}</p>
-    <p>Type:
-        {% for type in types %}
-            {{ type }}
-        {% endfor %}
-    </p>
+    <div class="serieActors">
+        <p><strong>{{ "Actors"|trans }} :</strong></p>
+        <ul>
+            {% for result in actors %}
+                <li>{{ result["name"] ~ ' dans le role de ' ~ result["role"] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
-    <p>Acteur:</p>
-    <ul>
-        {% for result in actors %}
-            <li>{{ result["name"] ~ ' dans le role de ' ~ result["role"] }}</li>
-        {% endfor %}
-    </ul>
+    <!-- Modal Critic Button-->
+    <p>{{ 'Add critic'|trans }}</p>
+    <button type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#modalCritic">{{ 'Add critic'|trans }}</button>
 
-    <p>Modal</p>
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-    <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
+    <!-- Modal Critic ID-->
+    <div id="modalCritic" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
-            <!-- Modal content-->
+            <!-- Modal Critic content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Title</h4>
+
+                    <h4 class="modal-title">{{ 'Critic of serie'|trans }}</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Exemple text.</p>
+
+                    <form id=criticForm
+                          action="{{ path('main_serie', {_locale: app.request.attributes.get('_locale'), idSerie: serie.id.__toString}) }}"
+                          method="post">
+
+                        <h4>{{ 'Title'|trans }}</h4>
+                        <p><input class="form-control" value="" type="text" name="title" required></p>
+
+                        <h4>{{ 'Content'|trans }}</h4>
+                        <textarea required class="form-control" rows="5" id="comment" name="content"></textarea>
+
+                        <h4>Note</h4>
+                        <select class="form-control" id="sel1" name="note" >
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option selected value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </form>
+
                 </div>
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                    <button form="criticForm" class="btn btn-primary" type="submit">{{ 'Submit'|trans }}</button></br>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{ 'Close'|trans }}</button>
                 </div>
             </div>
 

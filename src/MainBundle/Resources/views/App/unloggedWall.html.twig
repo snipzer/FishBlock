@@ -15,7 +15,33 @@
 {% endblock %}
 
 {% block content %}
-    {% include "MainBundle:Layout:menu.html.twig" %}
+    {% include "MainBundle:Layout:menuUnlogged.html.twig" %}
+    <div class="detailSerie">
+        <h2>{{ "Last published serie"|trans }}:</h2>
+        {% for result in lastPublishedSeries %}
+            <div class="serieDescription">
+                <h2>{{ result.title }}</h2>
+                <p>{{ result.description }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="criticDetailSerieBlock">
+        {% for result in lastPublishedCritics %}
+            <div class="criticDetailSerie">
+                <h4>{{ result.title }}</h4>
+                <p>{{ result.content }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    <div>
+        {% for result in trendingSeries %}
+            <div>
+                <h2>{{ result.title }}</h2>
+                <p>{{ result.description }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    {% include "MainBundle:Layout:visit.html.twig" %}
 {% endblock %}
 
 {% block footer %}

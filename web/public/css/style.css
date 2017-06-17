@@ -185,6 +185,12 @@ header {
 }
 
 /*----------------------------------------------------------------------------------
+Style pour le 'carousel'
+----------------------------------------------------------------------------------*/
+
+
+
+/*----------------------------------------------------------------------------------
 Style pour le block content
 ----------------------------------------------------------------------------------*/
 
@@ -199,6 +205,7 @@ Style pour le block content
 @media screen and (max-width: 900px) {
 
     .contentBlock {
+        flex-direction: column-reverse;
         margin: 10px 20px;
         /*height: 66vh;*/
     }
@@ -357,6 +364,96 @@ Style pour le bloc menu du site
 }
 
 /*----------------------------------------------------------------------------------
+Style pour serieCard.html.twig
+----------------------------------------------------------------------------------*/
+
+.serieCard {
+    margin: 0 1em;
+
+}
+
+.serieCard ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.serieCard h2 {
+    background-color: #ef7a35;
+}
+
+.serieCard h2>a {
+
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+/*----------------------------------------------------------------------------------
+Style pour detailSerie
+----------------------------------------------------------------------------------*/
+
+.detailSerie {
+    margin: 0 1em;
+}
+
+.serieDescription h2 {
+    background-color: #686868;
+    color: #FFFFFF;
+}
+
+/*----------------------------------------------------------------------------------
+Style pour episodeDetailSerie
+----------------------------------------------------------------------------------*/
+
+.episodesDetailSerie {
+    margin: 0 1em;
+}
+
+.episodesDetailSerie h3 {
+    background-color: #58bf94;
+    color: #FFFFFF;
+}
+
+/*----------------------------------------------------------------------------------
+Style pour criticDetailSerie
+----------------------------------------------------------------------------------*/
+
+.criticDetailSerieBlock {
+    margin: 0 1em;
+}
+
+.criticDetailSerie h4 {
+    background-color: #00b6de;
+    color: #FFFFFF;
+}
+
+.criticDetailSerieBlock h3 {
+    background-color: #ef7a35;
+    color: #FFFFFF;
+}
+
+/*----------------------------------------------------------------------------------
+Style pour le bloc liste des saisons
+----------------------------------------------------------------------------------*/
+
+.listSeason {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    width: 16%;
+    height: 100%;
+    min-width: 15em;
+
+    background-color: #686868;
+    color: #ffffff;
+}
+
+.listSeason h2 {
+
+}
+
+/*----------------------------------------------------------------------------------
 Style pour le bloc suggestion du site
 ----------------------------------------------------------------------------------*/
 
@@ -392,7 +489,7 @@ Style pour le bloc recherche du site
     display: flex;
 
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
 
     width: 16%;
     height: 66vh;
@@ -402,14 +499,55 @@ Style pour le bloc recherche du site
     color: #ffffff;
 }
 
+.searchBlock form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+
+
+    width: 100%;
+    height: 80vh;
+    padding: 10vh 0;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+#searchActors {
+    color: #000000;
+}
+#searchType {
+    color: #000000;
+}
+#searchTitle {
+    color: #000000;
+}
+
+.searchButton {
+    margin: 10% 0;
+    width: 100%;
+    height: 15%;
+    color: #FFFFFF;
+    background-color: #58bf94;
+    border: #686868;
+}
+
 /* Pour la version responsive -----------------
 */
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 900px) {
 
     .searchBlock {
-        display: none;
+        width: 40%;
+        max-height: 25em;
     }
 
+    .searchBlock form {
+        padding: 10% 0;
+    }
+
+    .contentBlock {
+        align-items: center;
+    }
 }
 
 /*----------------------------------------------------------------------------------
@@ -451,9 +589,7 @@ Style pour le bloc register
     .registerBlock {
 
     }
-
 }
-
 
 /*----------------------------------------------------------------------------------
 Style pour le bloc "visiter le site"

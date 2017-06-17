@@ -17,22 +17,26 @@
 
 {% block content %}
     {% include "MainBundle:Layout:menu.html.twig" %}
-    {% include "MainBundle:Layout:detailSerie.html.twig" %}
-    {% if episode is defined %}
-        <div>
-            <h3>{{ episode.title }}</h3>
-            <p>Saison {{ episode.seasonNumber }}, Episode {{ episode.episodeNumber }}</p>
-            <p>{{ episode.description }}</p>
-        </div>
-    {% endif %}
-
-    <div>
-        {% for critic in critics %}
-            <div>
-                <h4>{{ critic.title }}</h4>
-                <p>{{ critic.content }}</p>
+    <div class="serieBlock">
+        {% include "MainBundle:Layout:detailSerie.html.twig" %}
+        {% if episode is defined %}
+            <div class="episodesDetailSerie">
+                <h3>{{ episode.title }}</h3>
+                <p>{{ 'Season'|trans }} {{ episode.seasonNumber }}, Episode {{ episode.episodeNumber }}</p>
+                <p>{{ episode.description }}</p>
             </div>
-        {% endfor %}
+        {% endif %}
+
+        <div class="criticDetailSerieBlock">
+            <h3>{{ "Critics"|trans }}</h3>
+            {% for critic in critics %}
+                <div class="criticDetailSerie">
+                    <h4>{{ "Title"|trans }}: {{ critic.title }}  Note: {{ critic.note }}/10</h4>
+                    <p>{{ critic.content }}</p>
+                    <h5>{{ "Posted by"|trans }} {{ critic.user.username }} {{ "the"|trans }} {{ critic.postedThe|date("d-m-Y") }}</h5>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     {% include "MainBundle:Layout:listSeason.html.twig" %}
 {% endblock %}

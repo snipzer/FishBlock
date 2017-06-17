@@ -17,14 +17,16 @@ security:
         main:
             pattern: ^/
             form_login:
-                login_path: /en
+                login_path: fos_user_security_login
                 check_path: fos_user_security_check
                 provider: fos_userbundle
                 always_use_default_target_path : true
-                default_target_path: /en/wall
+                default_target_path: main_wall
                 use_referer : true
                 csrf_token_generator: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
-            logout:       true
+            logout:
+                path: logout
+                target: main_home
             anonymous:    true
 
     access_control:

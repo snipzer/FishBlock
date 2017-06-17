@@ -16,14 +16,31 @@
 
 {% block content %}
     {% include "MainBundle:Layout:menu.html.twig" %}
-    <ul>
-        {% for result in wallInfo %}
-            <li><h2>{{ result["serie"].title }}</h2></li>
-            <li><h4>{{ result["critic"].title }}</h4></li>
-            <p>{{ result["critic"].content }}</p>
-        {% endfor %}
-    </ul>
-    {% include "MainBundle:Layout:suggest.html.twig" %}
+
+    {% if wallInfo is not empty %}
+        <div>
+            {% for result in wallInfo %}
+                <div>
+                    <div>
+                        <h2><a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': result["serie"].Id.__toString}) }}">{{ result["serie"].title }}</a></h2>
+                        <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ result['serie'].poster }}" alt="">
+                    </div>
+                    <div>
+                        <h4>{{ "Title"|trans }}: {{ result["critic"].title }}  Note: {{ result["critic"].note }}/10</h4>
+                        <p>{{ result["critic"].content }}</p>
+                        <h5>{{ "Posted by"|trans }} {{ result["critic"].user.username }} {{ "the"|trans }} {{ result["critic"].postedThe|date("d-m-Y") }}</h5>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div>
+            <p>{{ "Click on search to start add serie"|trans }}</p>
+        </div>
+    {% endif %}
+    {% if serieSuggest is not empty %}
+        {% include "MainBundle:Layout:suggest.html.twig" %}
+    {% endif %}
 {% endblock %}
 
 {% block footer %}

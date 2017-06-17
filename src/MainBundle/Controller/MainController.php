@@ -8,17 +8,56 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MainController extends Controller
 {
-    /**
-     * Page d'accueil
-     */
+
     public function homeAction(Request $request)
     {
+        $firstName = htmlentities($request->get('firstname'));
+        $lastName = htmlentities($request->get('lastname'));
+        $userName = htmlentities($request->get('username'));
+        $email = htmlentities($request->get('email'));
+        $password = htmlentities($request->get("password"));
+        $passwordConfirm = htmlentities($request->get("passwordConfirmation"));
+        $birthDate = htmlentities($request->get('birthday'));
+
+        if((isset($firstName) && isset($lastName) && isset($userName) && isset($password) && isset($passwordConfirm) && isset($birthDate) && isset($email))
+            && ($firstName != "" && $lastName != "" && $userName != "" && $password != "" && $passwordConfirm != "" && $birthDate != "" && $email != ""))
+        {
+            if($password === $passwordConfirm)
+            {
+                $this->getDoctrine()->getRepository("MainBundle:User")->createUser($email, $password, $userName, $firstName, $lastName, "ROLE_USER");
+                $error = "Compte créer";
+            }
+            else
+            {
+                $error = "Password should be identical";
+            }
+        }
+
         $popularSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
+        $user = $this->getUser();
+
+        if (isset($user))
+        {
+            return $this->render("MainBundle:App:home.html.twig", [
+                "popularSeries" => $popularSeries,
+                "user" => $user
+            ]);
+        }
+
+        if(isset($error))
+        {
+            return $this->render("MainBundle:App:home.html.twig", [
+                "popularSeries" => $popularSeries,
+                "error" => $error
+            ]);
+        }
 
         return $this->render("MainBundle:App:home.html.twig", [
             "popularSeries" => $popularSeries
         ]);
     }
+
+
 
     public function wallAction(Request $request)
     {
@@ -37,15 +76,15 @@ class MainController extends Controller
 
     public function unloggedWallAction(Request $request)
     {
-        $trendingSerie = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
+        $trendingSeries = $this->getDoctrine()->getRepository("MainBundle:Critic")->getPopularSerie();
 
-        $lastPublishedSerie = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
+        $lastPublishedSeries = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
 
         $lastPublishedCritics = $this->getDoctrine()->getRepository("MainBundle:Critic")->getLastUploadedAndValidatedCritics();
 
         return $this->render("MainBundle:App:unloggedWall.html.twig", [
-            "trendingSerie" => $trendingSerie,
-            "lastPublishedSerie" => $lastPublishedSerie,
+            "trendingSeries" => $trendingSeries,
+            "lastPublishedSeries" => $lastPublishedSeries,
             "lastPublishedCritics" => $lastPublishedCritics
         ]);
     }
@@ -53,13 +92,36 @@ class MainController extends Controller
 
     public function searchAction(Request $request)
     {
+        $IdType = $request->get("types");
+        $IdActor = $request->get("actors");
+        $SerieName = htmlentities($request->get('serieName'));
+
+        $SerieRepo = $this->getDoctrine()->getRepository("MainBundle:Serie");
+
+        $series = $SerieRepo->getSeriesSortByDate();
+        if(isset($SerieName))
+        {
+            $series = $SerieRepo->getSerieByName($SerieName);
+            if((isset($IdActor) && isset($IdType)) && ($IdActor != "NULL" && $IdType != "NULL") )
+            {
+                $series = $SerieRepo->getSerieByNameAndTypeAndActor($SerieName, $IdActor, $IdType);
+            }
+            if(isset($IdActor) && $IdActor != "NULL")
+            {
+                $series = $SerieRepo->getSerieByNameAndActor($SerieName, $IdActor);
+            }
+            if(isset($IdType) && $IdType != "NULL")
+            {
+                $series = $SerieRepo->getSerieByNameAndType($SerieName, $IdType);
+            }
+        }
+
         $user = $this->getUser();
-        $series = $this->getDoctrine()->getRepository("MainBundle:Serie")->getSeriesSortByDate();
-        $actors = $this->getDoctrine()->getRepository("MainBundle:Actor")->getActors();
-        $types = $this->getDoctrine()->getRepository("MainBundle:Type")->getTypes();
+        $actors = $this->getDoctrine()->getRepository("MainBundle:Actor")->getActorsOrderByNameASC();
+        $types = $this->getDoctrine()->getRepository("MainBundle:Type")->getTypesOrderByNameASC();
 
         return $this->render("MainBundle:App:search.html.twig", [
-            "serie" => $series,
+            "series" => $series,
             "user" => $user,
             "actors" => $actors,
             "types" => $types
@@ -71,16 +133,22 @@ class MainController extends Controller
         $serieId = $request->attributes->get("idSerie");
         $userId = $this->getUser()->getId()->__toString();
         $user = $this->getUser();
+        $FavorisRepo = $this->getDoctrine()->getRepository("MainBundle:Favoris");
+        $favorisId = $request->attributes->get("idFavoris");
 
         if($serieId)
         {
-            $this->getDoctrine()
-                ->getRepository("MainBundle:Favoris")
-                ->addSerie($userId, $serieId);
+            if(!$FavorisRepo->checkIfSerieIsInFav($serieId, $userId))
+                $FavorisRepo->addSerie($userId, $serieId);
+        }
+
+        if($favorisId)
+        {
+            $FavorisRepo->removeFavoris($favorisId);
         }
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
-        $favoris = $this->getDoctrine()->getRepository("MainBundle:Favoris")->getFavorisByUserId($userId);
+        $favoris = $FavorisRepo->getFavorisByUserId($userId);
 
         return $this->render("MainBundle:App:favoris.html.twig", [
             "favoris" => $favoris,
@@ -92,6 +160,8 @@ class MainController extends Controller
     public function serieAction(Request $request)
     {
         $serieId = $request->attributes->get("idSerie");
+        $user = $this->getUser();
+
 
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
@@ -99,12 +169,21 @@ class MainController extends Controller
         $ActorRepository = $this->getDoctrine()->getRepository("MainBundle:SerieActor");
         $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:SerieType");
 
+        $CriticTitle = htmlentities($request->get("title"));
+        $CriticContent = htmlentities($request->get("content"));
+        $CriticNote = htmlentities($request->get('note'));
+
+        if((isset($CriticTitle) && isset($CriticContent) && isset($CriticNote) && ($CriticTitle != "" && $CriticContent != "" && $CriticNote != "")))
+        {
+            $CritiqueRepository->postCritic($CriticTitle, $CriticContent, $CriticNote, $user->getId()->__toString(), $serieId);
+        }
+
         $serie = $SerieRepository->getSerieWithId($serieId);
         $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
         $actors = $ActorRepository->getActorBySerieId($serieId);
         $types = $TypeRepository->getTypeBySerieId($serieId);
-        $user = $this->getUser();
+
 
         return $this->render("MainBundle:App:serie.html.twig", [
             "episodes" => $episodes,
@@ -120,6 +199,7 @@ class MainController extends Controller
     {
         $serieId = $request->attributes->get("idSerie");
         $episodeId = $request->attributes->get("idEpisode");
+        $user = $this->getUser();
 
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
@@ -127,14 +207,23 @@ class MainController extends Controller
         $ActorRepository = $this->getDoctrine()->getRepository("MainBundle:SerieActor");
         $TypeRepository = $this->getDoctrine()->getRepository("MainBundle:SerieType");
 
+        $CriticTitle = htmlentities($request->get("title"));
+        $CriticContent = htmlentities($request->get("content"));
+        $CriticNote = htmlentities($request->get('note'));
+
+        if((isset($CriticTitle) && isset($CriticContent) && isset($CriticNote) && ($CriticTitle != "" && $CriticContent != "" && $CriticNote != "")))
+        {
+            $CritiqueRepository->postCritic($CriticTitle, $CriticContent, $CriticNote, $user->getId()->__toString(), $serieId);
+        }
+
 
         $serie = $SerieRepository->getSerieWithId($serieId);
+        $episode = $EpisodeRepository->getEpisode($episodeId);
         $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
         $actors = $ActorRepository->getActorBySerieId($serieId);
         $types = $TypeRepository->getTypeBySerieId($serieId);
-        $episode = $EpisodeRepository->getEpisode($episodeId);
-        $user = $this->getUser();
+
 
         return $this->render("MainBundle:App:serie.html.twig", [
             "episodes" => $episodes,

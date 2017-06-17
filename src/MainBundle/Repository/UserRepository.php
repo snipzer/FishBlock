@@ -31,6 +31,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->setFirstName($firstName)
             ->setPlainPassword($password)
             ->setRoles([$role])
+//            ->setEnabled(true)
             ->setBirthdate(new \DateTime());
 
         $this->getEntityManager()->persist($user);

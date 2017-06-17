@@ -11,14 +11,54 @@
 {% endblock %}
 
 {% block header %}
-    {% include "MainBundle:Layout:headerLogin.html.twig" %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% include "MainBundle:Layout:header.html.twig" %}
+    {% else %}
+        {% include "MainBundle:Layout:headerLogin.html.twig" %}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-    {# Caroussel #}
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img alt="" src={{ asset('public/img/logoFishblock.svg') }}>
+                <div class="carousel-caption">
+                </div>
+            </div>
+            {% for popularSerie in popularSeries %}
+                {% if popularSerie.poster == "undefined" %}
+                {% else %}
+                    <div class="item">
+                        <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ popularSerie.poster }}"
+                             alt="{{ popularSerie.title }}"/>
+                        <div class="carousel-caption">
+                            <h3>{{ popularSerie.title }}</h3>
+                            <p>{{ popularSerie.description }}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
     <div class="registerVisit">
-        {% include "MainBundle:Layout:register.html.twig" %}
-        {% include "MainBundle:Layout:visit.html.twig" %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% include "MainBundle:Layout:menu.html.twig" %}
+        {% else %}
+            {% include "MainBundle:Layout:register.html.twig" %}
+            {% include "MainBundle:Layout:visit.html.twig" %}
+        {% endif %}
     </div>
 {% endblock %}
 

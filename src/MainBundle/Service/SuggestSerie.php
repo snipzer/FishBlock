@@ -19,64 +19,82 @@ class SuggestSerie extends  Controller
         // Récupération des favoris de l'utilisateurs
         $userFavs = $this->manager->GetRepository("MainBundle:Favoris")->getFavorisByUserId($userId);
 
-
-        $array = [];
-
-        // Pour chaque objet favoris, on stocke les séries
-        foreach($userFavs as $userFav)
+        if(count($userFavs))
         {
-            array_push($array, $userFav->getSerie());
-        }
+            $array = [];
 
-        $bool = true;
-
-        while($bool)
-        {
-            $result = [];
-            // On sélectionne une série parmis toutes celles stocker
-            $chosenSerie = $array[array_rand($array)];
-
-            // On stocke les informations de la série de départ
-            $result[] = $chosenSerie;
-
-            // On récupère les type de la série choisie
-            $arraySerieTypes = $chosenSerie->getSerieTypes();
-
-            if(count($arraySerieTypes) === 0)
+            // Pour chaque objet favoris, on stocke les séries
+            foreach($userFavs as $userFav)
             {
-                continue;
+                array_push($array, $userFav->getSerie());
             }
-            else
+
+            $bool = true;
+
+//            foreach($array as $ar)
+//            {
+//                echo "<pre>";
+//                var_dump($ar->getTitle());
+//                echo "</pre>";
+//            }
+
+            while($bool)
             {
-                $rand = array_rand($arraySerieTypes);
+                $result = [];
+                // On sélectionne une série parmis toutes celles stocker
+                $chosenSerie = $array[array_rand($array)];
 
-                // On en choisie un au hazard
-                $chosenSerieType = $arraySerieTypes[$rand];
+                // On stocke les informations de la série de départ
+                $result[] = $chosenSerie;
 
-                // On récupère sont nom
-                $typeName = $chosenSerieType->getType()->getName();
+                // On récupère les type de la série choisie
+                $arraySerieTypes = $chosenSerie->getSerieTypes();
 
-                // A partir du nom on récupère les sériesType qui ont le même type
-                $serieTypes = $this->manager
-                    ->getRepository("MainBundle:SerieType")
-                    ->getSeriesTypeByType($typeName);
-
-
-                // Pour chaque sérieType
-                foreach($serieTypes as $serieType)
+                if(count($arraySerieTypes) === 0)
                 {
-                    if($serieType->getSerie() !== $chosenSerie)
-                        array_push($result, $serieType->getSerie());
+                    continue;
                 }
+                else
+                {
+                    $rand = array_rand($arraySerieTypes);
+
+                    // On en choisie un au hazard
+                    $chosenSerieType = $arraySerieTypes[$rand];
+
+                    // On récupère sont nom
+                    $typeName = $chosenSerieType->getType()->getName();
+
+                    // A partir du nom on récupère les sériesType qui ont le même type
+                    $serieTypes = $this->manager
+                        ->getRepository("MainBundle:SerieType")
+                        ->getSeriesTypeByType($typeName);
 
 
-                $bool = false;
-                if(count($result) != 3)
-                    $bool = true;
+                    // Pour chaque sérieType
+                    foreach($serieTypes as $serieType)
+                    {
+                        if($serieType->getSerie() !== $chosenSerie)
+                        {
+                            if(!$this->manager->getRepository("MainBundle:Favoris")->checkIfSerieIsInFav($serieType->getSerie()->getId()->__toString(), $userId))
+                            {
+                                array_push($result, $serieType->getSerie());
+                            }
+                        }
+                    }
+
+
+                    $bool = false;
+                    if(count($result) != 3)
+                        $bool = true;
+                }
             }
-        }
 
-        return $result;
+            return $result;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
 ?>
