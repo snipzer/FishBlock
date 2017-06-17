@@ -24,3 +24,4 @@ parameters:
     userkey: ~
 
     app_webmaster: snipzer
+    locale: fr

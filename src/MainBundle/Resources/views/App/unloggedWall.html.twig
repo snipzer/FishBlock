@@ -16,22 +16,29 @@
 
 {% block content %}
     {% include "MainBundle:Layout:menuUnlogged.html.twig" %}
-    <div>
+    <div class="detailSerie">
+        <h2>{{ "Last published serie"|trans }}:</h2>
         {% for result in lastPublishedSeries %}
-            <div>{{ result.title }}
-                {{ result.description }}</div>
+            <div class="serieDescription">
+                <h2>{{ result.title }}</h2>
+                <p>{{ result.description }}</p>
+            </div>
         {% endfor %}
     </div>
-    <div>
+    <div class="criticDetailSerieBlock">
         {% for result in lastPublishedCritics %}
-            <div>{{ result.title }}
-                {{ result.content }}</div>
+            <div class="criticDetailSerie">
+                <h4>{{ result.title }}</h4>
+                <p>{{ result.content }}</p>
+            </div>
         {% endfor %}
     </div>
     <div>
         {% for result in trendingSeries %}
-            <div>{{ result.title }}
-                {{ result.description }}</div>
+            <div>
+                <h2>{{ result.title }}</h2>
+                <p>{{ result.description }}</p>
+            </div>
         {% endfor %}
     </div>
     {% include "MainBundle:Layout:visit.html.twig" %}
