@@ -2,6 +2,7 @@
 
 namespace MainBundle\Repository;
 
+use MainBundle\Entity\Critic;
 use MainBundle\Entity\CriticNotation;
 
 /**
@@ -21,35 +22,31 @@ class CriticNotationRepository extends \Doctrine\ORM\EntityRepository
             ->from("MainBundle:CriticNotation", "cn")
             ->where("cn.critic = :critic")
             ->setParameter(":critic", $critic)
-            ->getQuery()->getSingleScalarResult();
+            ->getQuery()->getScalarResult();
 
     }
 
-    public function getLikedByCriticId($criticId)
+    public function getLikedByCritic(Critic $critic)
     {
-        $critic = $this->getEntityManager()->getRepository("MainBundle:Critic")->getCriticByCriticId($criticId);
-
-        return $this->getEntityManager()->createQueryBuilder()
+        return count($this->getEntityManager()->createQueryBuilder()
             ->select("cn")
             ->from("MainBundle:CriticNotation", "cn")
             ->where("cn.critic = :critic")
             ->andWhere("cn.isLike = true")
             ->setParameter(":critic", $critic)
-            ->getQuery()->getSingleScalarResult();
+            ->getQuery()->getResult());
 
     }
 
-    public function getUnLikedByCriticId($criticId)
+    public function getUnLikedByCritic(Critic $critic)
     {
-        $critic = $this->getEntityManager()->getRepository("MainBundle:Critic")->getCriticByCriticId($criticId);
-
-        return $this->getEntityManager()->createQueryBuilder()
+        return count($this->getEntityManager()->createQueryBuilder()
             ->select("cn")
             ->from("MainBundle:CriticNotation", "cn")
             ->where("cn.critic = :critic")
             ->andWhere("cn.isLike = false")
             ->setParameter(":critic", $critic)
-            ->getQuery()->getSingleScalarResult();
+            ->getQuery()->getResult());
 
     }
 

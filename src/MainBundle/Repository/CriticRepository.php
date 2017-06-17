@@ -108,6 +108,53 @@ class CriticRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
+    public function getLastUploadedAndValidatedCriticAndNotationFromSerie($serieId)
+    {
+        $critic = $this->getLastUploadedAndValidatedCriticFromSerie($serieId);
+
+        $CriticNotationRepo = $this->getEntityManager()->getRepository("MainBundle:CriticNotation");
+
+        if(count($critic) === 0)
+        {
+            return null;
+        }
+        else
+        {
+            $array = [
+                "critic" => $critic,
+                "like" => $CriticNotationRepo->getLikedByCritic($critic[0]),
+                "dislike" => $CriticNotationRepo->getUnLikedByCritic($critic[0])
+            ];
+
+            return $array;
+        }
+    }
+
+    public function getValidatedCriticsAndNotationFromSerie($serieId)
+    {
+        $critics = $this->getValidatedCriticsFromSerie($serieId);
+
+        $CriticNotationRepo = $this->getEntityManager()->getRepository("MainBundle:CriticNotation");
+
+        $array = [];
+
+        foreach($critics as $critic)
+        {
+            $like = $CriticNotationRepo->getLikedByCritic($critic);
+            $dislike = $CriticNotationRepo->getUnLikedByCritic($critic);
+
+            $arr = [
+                "critic" => $critic,
+                "like" => $like,
+                "dislike" => $dislike
+            ];
+
+            $array[] = $arr;
+        }
+
+        return $array;
+    }
+
     // Renvois toutes les critiques non valider pour une série
     public function getNonValidatedCriticFromSerie($serieId)
     {

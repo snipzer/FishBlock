@@ -179,7 +179,7 @@ class MainController extends Controller
         }
 
         $serie = $SerieRepository->getSerieWithId($serieId);
-        $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
+        $critics = $CritiqueRepository->getValidatedCriticsAndNotationFromSerie($serieId);
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
         $actors = $ActorRepository->getActorBySerieId($serieId);
         $types = $TypeRepository->getTypeBySerieId($serieId);
@@ -219,7 +219,7 @@ class MainController extends Controller
 
         $serie = $SerieRepository->getSerieWithId($serieId);
         $episode = $EpisodeRepository->getEpisode($episodeId);
-        $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
+        $critics = $CritiqueRepository->getValidatedCriticsAndNotationFromSerie($serieId);
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
         $actors = $ActorRepository->getActorBySerieId($serieId);
         $types = $TypeRepository->getTypeBySerieId($serieId);

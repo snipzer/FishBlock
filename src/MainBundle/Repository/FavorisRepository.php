@@ -61,17 +61,15 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
             {
                 $serie = $fav->getSerie();
 
-                $criticInArray = $this->getEntityManager()->getRepository("MainBundle:Critic")->getLastUploadedAndValidatedCriticFromSerie($serie);
+                $infoCritic = $this->getEntityManager()->getRepository("MainBundle:Critic")->getLastUploadedAndValidatedCriticAndNotationFromSerie($serie->getId()->__toString());
 
-                if (count($criticInArray) === 0)
+                if (is_null($infoCritic))
                 {
                     continue;
                 }
                 else
                 {
-                    $critic = $criticInArray[0];
-
-                    $array = ["serie" => $serie, "critic" => $critic];
+                    $array = ["serie" => $serie, "infoCritic" => $infoCritic];
 
                     $DDArray[] = $array;
                 }
