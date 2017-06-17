@@ -7,7 +7,6 @@
             </div>
             <div class="accountNotification">
                 <a href="{{ path("logout", {'_locale': app.request.attributes.get('_locale')}) }}" >{{ "Logout"|trans }}</a>
-                <a href="{{ path('main_home', {'_locale': app.request.attributes.get('_locale')}) }}" >{{ "Home"|trans }}</a>
                 <a href="{{ path("main_account", {'_locale': app.request.attributes.get('_locale')}) }}" >{{ "Account"|trans }}</a>
             </div>
         </div>

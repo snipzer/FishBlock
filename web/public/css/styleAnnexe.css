@@ -24,14 +24,17 @@ input {
 
 .btn-danger {
     width: 100%;
+    font-weight: bolder;
 }
 
 .btn-info {
     width: 100%;
+    font-weight: bolder;
 }
 
 .btn-primary {
     width: 100%;
+    font-weight: bolder;
 }
 
 .suggestSerie {
@@ -42,4 +45,26 @@ input {
 }
 .suggestSerieImage {
     width: 100%;
+}
+
+.center {
+    text-align: center;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.selectpicker {
+    height: 60px;
+}
+
+@media screen and (max-width: 900px) {
+    .selectpicker {
+        height: 90px;
+    }
+}
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+    .selectpicker {
+        height: 90px;
+    }
 }

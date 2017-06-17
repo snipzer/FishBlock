@@ -1,19 +1,19 @@
 <div class="searchBlock">
+    <h2 class="center">{{'Search'|trans}}</h2>
     <form action="{{ path('main_search', {_locale: app.request.attributes.get('_locale')}) }}" method="post">
-
         <p>{{ "Serie's title"|trans }} :</p>
         <input class="form-control" type="text" name="serieName" id="searchTitle" />
         <div></div>
         <div></div>
         <p>{{ "Actors"|trans }} :</p>
-        <select class="form-control" name="actors" id="searchActors">
+        <select class="selectpicker" name="actors" id="searchActors">
             <option value="NULL" selected></option>
             {% for actor in actors %}
                 <option value="{{ actor.id }}">{{ actor.name }}</option>
             {% endfor %}
         </select>
         <p>{{ "Type"|trans }} :</p>
-        <select class="form-control" name="types" id="searchType">
+        <select class="selectpicker" name="types" id="searchType">
             <option value="NULL" selected></option>
             {% for type in types %}
                 <option value="{{ type.id }}">{{ type.name }}</option>

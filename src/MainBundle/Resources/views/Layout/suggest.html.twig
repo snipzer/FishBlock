@@ -2,7 +2,7 @@
     {# récupérer série aimée puis afficher deux autres séries #}
     <div>
         <div class="suggestSerie">
-            <p>{{ 'If you love'|trans }} </p>
+            <p>{{ 'If you like'|trans }} </p>
             {% if serieSuggest[0].poster == 'undefined' %}
                 <img src="{{ asset('public/img/undefined.jpg') }}">
             {% else %}
