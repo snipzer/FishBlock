@@ -61,12 +61,15 @@ class CriticRepository extends \Doctrine\ORM\EntityRepository
 
     public function getLastUploadedAndValidatedCriticFromSerie($serie)
     {
-        return $this->getEntityManager()->createQuery(
-            'SELECT c
-              FROM MainBundle\Entity\Critic c
-              WHERE c.isValid = true AND c.serie = :serie
-              ORDER BY c.postedThe DESC'
-        )->setParameter(":serie", $serie)->setMaxResults(1)->getResult();
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("c")
+            ->from("MainBundle:Critic", "c")
+            ->where('c.serie = :serie')
+            ->orderBy('c.postedThe', "DESC")
+            ->setParameter(":serie", $serie)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
     }
 
     // Supprime une critique
