@@ -7,19 +7,19 @@
         {% endif %}
         <h2>Inscription :</h2>
         <label for="username">{{'User'|trans}}</label></br>
-        <p><input type="text" id="firstname" name="firstname" placeholder="{{ "Firstname"|trans }}" required /></p>
-        <p><input type="text" id="lastname" name="lastname" placeholder="{{ "Lastname"|trans }}" required /></p>
-        <p><input type="text" id="username" name="username" placeholder="{{ "Username"|trans }}" required /></p>
+        <p><input class="form-control" type="text" id="firstname" name="firstname" placeholder="{{ "Firstname"|trans }}" required /></p>
+        <p><input class="form-control" type="text" id="lastname" name="lastname" placeholder="{{ "Lastname"|trans }}" required /></p>
+        <p><input class="form-control" type="text" id="username" name="username" placeholder="{{ "Username"|trans }}" required /></p>
 
         <label for="password">{{'Password'|trans}}</label></br>
-        <p><input type="password" id="password" name="password" placeholder="{{ "Password"|trans }}" required /></p>
-        <p><input type="password" id="passwordConfirmation" name="passwordConfirmation" placeholder="{{ "Password confirmation"|trans }}" required /></p>
+        <p><input class="form-control" type="password" id="password" name="password" placeholder="{{ "Password"|trans }}" required /></p>
+        <p><input class="form-control" type="password" id="passwordConfirmation" name="passwordConfirmation" placeholder="{{ "Password confirmation"|trans }}" required /></p>
 
         <label for="email">{{'Mail'|trans}}</label></br>
-        <p><input type="email" id="email" name="email" placeholder="{{ "Mail"|trans }}" required /></p>
+        <p><input class="form-control" type="email" id="email" name="email" placeholder="{{ "Mail"|trans }}" required /></p>
 
         <label for="birthday">{{'Birthday'|trans}}</label>
-        <p><input type="date" id="birthday" name="birthday" placeholder="ex : 2001/12/01" max="{{ date().timestamp }}" required /></p>
+        <p><input class="form-control" type="date" id="birthday" name="birthday" placeholder="ex : 2001/12/01" max="{{ date().timestamp }}" required /></p>
 
         <p><input class="btn btn-primary btn-sm" type="submit" id="_submit" name="submit" value={{'Register'|trans}}></p>
     </form>
