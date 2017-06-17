@@ -1,16 +1,14 @@
-
 <header>
     <div class="headerBlock">
         <img src="{{ asset('public/img/logoFishblock.svg') }}">
-
-
         <div class="accountBlock">
             <div class="accountName">
-                {{ user }}
+                <p>{{ user }}</p>
             </div>
             <div class="accountNotification">
+                <a href="{{ path("logout", {'_locale': app.request.attributes.get('_locale')}) }}" >{{ "Logout"|trans }}</a>
                 <a href="{{ path('main_home', {'_locale': app.request.attributes.get('_locale')}) }}" >{{ "Home"|trans }}</a>
-                <a href="{{ path("main_account", {_locale: app.request.attributes.get('_locale')}) }}">{{ "Account"|trans }}</a>
+                <a href="{{ path("main_account", {'_locale': app.request.attributes.get('_locale')}) }}" >{{ "Account"|trans }}</a>
             </div>
         </div>
     </div>
