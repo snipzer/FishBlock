@@ -24,14 +24,17 @@ input {
 
 .btn-danger {
     width: 100%;
+    font-weight: bolder;
 }
 
 .btn-info {
     width: 100%;
+    font-weight: bolder;
 }
 
 .btn-primary {
     width: 100%;
+    font-weight: bolder;
 }
 
 .suggestSerie {
