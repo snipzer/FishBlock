@@ -134,12 +134,17 @@ class MainController extends Controller
         $userId = $this->getUser()->getId()->__toString();
         $user = $this->getUser();
         $FavorisRepo = $this->getDoctrine()->getRepository("MainBundle:Favoris");
-
+        $favorisId = $request->attributes->get("idFavoris");
 
         if($serieId)
         {
             if(!$FavorisRepo->checkIfSerieIsInFav($serieId, $userId))
                 $FavorisRepo->addSerie($userId, $serieId);
+        }
+
+        if($favorisId)
+        {
+            $FavorisRepo->removeFavoris($favorisId);
         }
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
