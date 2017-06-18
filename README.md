@@ -9,22 +9,18 @@ Documentation du projet
 =======================
 Mise en place du projet Symfony FishBlock
 -----------------------------------------
-http://symfony.com/download 
-Téléchargez   le   fichier   symfony   et   placez-le   dans   votre répertoire www de Wamp ou  projects d'EasyPHP.
-Exécuter la commande suivante : 
-	www> php symfony new <nom projet>
-Afin   de   régler   les différents problèmes, rendez-vous à l'adresse :
-		localhost/…/web/config.php 
-Lorsque tout est réglé, rendez-vous sur la page:  	localhost/…/web/app_dev.php
 
-Si  l'installeur  de  Symfony  ne  fonctionne  pas,  vous  pouvez également passer par Composer :
+1-Créer une base de données vide qui s'appelle fishblock
+2-Cloner le répository.
+3-Se placer dans le repertoire Fishblock
+4-Faire composer install
+5-A la fin de composer install, rentrés les différentes options de configuration demander
+6-Faire un php bin/console doctrine:schema:update --force pour créer les tables
+7-Créer le jeux de données
 
-www> php composer.phar create-project symfony/framework-standard-edition <nom projet> "2.8.*"
+NB: Certaine personne auront reçus par mail un jeux de données qui s'occupe de créer les tables et de les remplir (évite les étapes 1, 6 et 7)
 
-Placez-vous dans le dossier créé pour toutes les autres commandes.
-
-
-Pour la création de la base de données:
+Pour la création du jeux de données:
 ---------------------------------------
     Appeler dans un controleur:
         $this->get("SaveSerie")->saveSerie("NomSerieSansEspace");
