@@ -75,27 +75,24 @@ class SuggestSerie extends Controller
                         // Pour ne pas proposer la série de départ
                         if ($serieType->getSerie() !== $chosenSerie)
                         {
+                            $serieInFav = $this->manager->getRepository("MainBundle:Favoris")->checkIfSerieIsInFav($serieType->getSerie()->getId()->__toString(), $userId);
 
                             // Pour ne pas proposer une série déjà en favoris
-                            if (!$this->manager->getRepository("MainBundle:Favoris")->checkIfSerieIsInFav($serieType->getSerie()->getId()->__toString(), $userId))
+                            if (!$serieInFav)
                             {
-//                                array_push($result, $serieType->getSerie());
                                 $result[] = $serieType->getSerie();
-
                             }
                         }
                     }
 
-
                     $bool = false;
-
                 }
-                if (count($result) >= 3)
+                if (count($result) < 3)
                 {
                     $bool = true;
                 }
             }
-//            var_dump($result);
+
             if(empty($result))
                 return [];
 

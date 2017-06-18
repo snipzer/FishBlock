@@ -66,6 +66,33 @@ class MainController extends Controller
         $userId = $this->getUser()->getId()->__toString();
         $user = $this->getUser();
 
+
+        $CriticNotationRepo = $this->getDoctrine()->getRepository("MainBundle:CriticNotation");
+
+        $IdCriticForNotation = $request->get('idCriticForNotation');
+        $like = $request->get('like');
+        $dislike = $request->get('dislike');
+
+        if(isset($IdCriticForNotation))
+        {
+            $isHaveNotation = $CriticNotationRepo->checkIfNotationAlreadyHere($IdCriticForNotation, $userId);
+
+            if($isHaveNotation === false)
+            {
+                if(isset($IdCriticForNotation) && isset($like))
+                {
+                    $like = true;
+                    $CriticNotationRepo->addNotation($IdCriticForNotation, $userId, $like);
+                }
+
+                if(isset($IdCriticForNotation) && isset($dislike))
+                {
+                    $dislike = false;
+                    $CriticNotationRepo->addNotation($IdCriticForNotation, $userId, $dislike);
+                }
+            }
+        }
+
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $wallInfo = $this->getDoctrine()->getRepository("MainBundle:Favoris")->wall($userId);
 
@@ -164,7 +191,9 @@ class MainController extends Controller
         $serieId = $request->attributes->get("idSerie");
         $user = $this->getUser();
 
+        $userId = $user->getId()->__toString();
 
+        $CriticNotationRepo = $this->getDoctrine()->getRepository("MainBundle:CriticNotation");
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
         $CritiqueRepository = $this->getDoctrine()->getRepository("MainBundle:Critic");
@@ -177,8 +206,33 @@ class MainController extends Controller
 
         if((isset($CriticTitle) && isset($CriticContent) && isset($CriticNote) && ($CriticTitle != "" && $CriticContent != "" && $CriticNote != "")))
         {
-            $CritiqueRepository->postCritic($CriticTitle, $CriticContent, $CriticNote, $user->getId()->__toString(), $serieId);
+            $CritiqueRepository->postCritic($CriticTitle, $CriticContent, $CriticNote, $userId, $serieId);
         }
+
+        $IdCriticForNotation = $request->get('idCriticForNotation');
+        $like = $request->get('like');
+        $dislike = $request->get('dislike');
+
+        if(isset($IdCriticForNotation))
+        {
+            $isHaveNotation = $CriticNotationRepo->checkIfNotationAlreadyHere($IdCriticForNotation, $userId);
+
+            if($isHaveNotation === false)
+            {
+                if(isset($IdCriticForNotation) && isset($like))
+                {
+                    $like = true;
+                    $CriticNotationRepo->addNotation($IdCriticForNotation, $userId, $like);
+                }
+
+                if(isset($IdCriticForNotation) && isset($dislike))
+                {
+                    $dislike = false;
+                    $CriticNotationRepo->addNotation($IdCriticForNotation, $userId, $dislike);
+                }
+            }
+        }
+
 
         $serie = $SerieRepository->getSerieWithId($serieId);
         $critics = $CritiqueRepository->getValidatedCriticsAndNotationFromSerie($serieId);
@@ -202,7 +256,9 @@ class MainController extends Controller
         $serieId = $request->attributes->get("idSerie");
         $episodeId = $request->attributes->get("idEpisode");
         $user = $this->getUser();
+        $userId = $user->getId()->__toString();
 
+        $CriticNotationRepo = $this->getDoctrine()->getRepository("MainBundle:CriticNotation");
         $EpisodeRepository = $this->getDoctrine()->getRepository("MainBundle:Episode");
         $SerieRepository = $this->getDoctrine()->getRepository("MainBundle:Serie");
         $CritiqueRepository = $this->getDoctrine()->getRepository("MainBundle:Critic");
@@ -215,7 +271,32 @@ class MainController extends Controller
 
         if((isset($CriticTitle) && isset($CriticContent) && isset($CriticNote) && ($CriticTitle != "" && $CriticContent != "" && $CriticNote != "")))
         {
-            $CritiqueRepository->postCritic($CriticTitle, $CriticContent, $CriticNote, $user->getId()->__toString(), $serieId);
+            $CritiqueRepository->postCritic($CriticTitle, $CriticContent, $CriticNote, $userId, $serieId);
+        }
+
+
+        $IdCriticForNotation = $request->get('idCriticForNotation');
+        $like = $request->get('like');
+        $dislike = $request->get('dislike');
+
+        if(isset($IdCriticForNotation))
+        {
+            $isHaveNotation = $CriticNotationRepo->checkIfNotationAlreadyHere($IdCriticForNotation, $userId);
+
+            if($isHaveNotation === false)
+            {
+                if(isset($IdCriticForNotation) && isset($like))
+                {
+                    $like = true;
+                    $CriticNotationRepo->addNotation($IdCriticForNotation, $userId, $like);
+                }
+
+                if(isset($IdCriticForNotation) && isset($dislike))
+                {
+                    $dislike = false;
+                    $CriticNotationRepo->addNotation($IdCriticForNotation, $userId, $dislike);
+                }
+            }
         }
 
 

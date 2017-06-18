@@ -35,11 +35,22 @@
                     {% if array['like'] is not empty %}
                         <div>
                             <p>Like: {{ array['like'] }}</p>
-                            <a href="{{ path("main_add") }}" class="btn-primary btn">+1</a>
+                            <form action="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serie.Id.__toString}) }}" method="post">
+                                <input type="hidden" name="idCriticForNotation" value="{{ array['critic'].id }}">
+                                <input type="hidden" name="like" value="true">
+                                <input type="submit" value="+1" name="submit" class="btn btn-primary">
+                            </form>
                         </div>
                     {% endif %}
                     {% if array["dislike"] is not empty %}
-                        <p>Dislike: {{ array["dislike"] }}</p>
+                        <div>
+                            <p>Dislike: {{ array["dislike"] }}</p>
+                            <form action="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serie.Id.__toString}) }}" method="post">
+                                <input type="hidden" name="idCriticForNotation" value="{{ array['critic'].id }}">
+                                <input type="hidden" name="dislike" value="false">
+                                <input type="submit" value="-1" name="submit" class="btn btn-primary">
+                            </form>
+                        </div>
                     {% endif %}
                     <p>{{ array["critic"].content }}</p>
                     <h5>{{ "Posted by"|trans }} {{ array["critic"].user.username }} {{ "the"|trans }} {{ array["critic"].postedThe|date("d-m-Y") }}</h5>
