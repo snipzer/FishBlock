@@ -55,15 +55,6 @@ main_serie:
         idSerie: '[a-zA-Z-0-9]{36}'
         _locale: en|fr
 
-main_serie_add_like:
-    path:     /serie/{idSerie}/like/{idCritic}
-    defaults:
-        _controller: MainBundle:Main:serie
-    requirements:
-        idSerie: '[a-zA-Z-0-9]{36}'
-        idCritic: '[a-zA-Z-0-9]{36}'
-        _locale: en|fr
-
 main_episode:
     path:     /serie/{idSerie}/episode/{idEpisode}
     defaults:
