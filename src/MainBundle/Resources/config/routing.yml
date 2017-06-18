@@ -26,13 +26,6 @@ main_search:
     requirements:
         _locale: en|fr
 
-main_favoris:
-    path:     /favoris
-    defaults:
-        _controller: MainBundle:Main:favoris
-    requirements:
-        _locale: en|fr
-
 main_add_favoris:
    path:     /favoris/add/{idSerie}
    defaults:
@@ -42,6 +35,13 @@ main_add_favoris:
 
 main_remove_favoris:
     path:     /favoris/remove/{idFavoris}
+    defaults:
+        _controller: MainBundle:Main:favoris
+    requirements:
+        _locale: en|fr
+
+main_favoris:
+    path:     /favoris
     defaults:
         _controller: MainBundle:Main:favoris
     requirements:
