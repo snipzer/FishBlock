@@ -154,9 +154,181 @@ Processus en 8 étapes:
             *On étend la Userclasse de base
             *On mappe l'id champ qui doit être protégé car il hérite de la classe parent.
     >Configurez le security.yml de votre application
+        Pour que le composant de sécurité de Symfony utilise le FOSUserBundle, nous devons le dire dans le security.yml fichier. Le security.ymlfichier est l'endroit où la configuration de base pour la sécurité de votre application est contenue.
+        Voici un exemple minimal de la configuration nécessaire pour utiliser FOSUserBundle dans votre application:
+
+        # Application / config / security.yml 
+        # To get started with security, check out the documentation:
+        # http://symfony.com/doc/current/security.html
+        security:
+            encoders:
+                FOS\UserBundle\Model\UserInterface: bcrypt
+
+        role_hierarchy:
+            ROLE_USER:        ROLE_USER
+            ROLE_ADMIN:       ROLE_MODO
+            ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+        providers:
+            fos_userbundle:
+                id: fos_user.user_provider.username
+
+            Sous la section providers, nous mettons le service fournisseur de paquets fourni par le paquet disponible via l'alias fos_userbundle. Le service de fournisseur d'accès ID du groupe est fos_user.user_provider.username.
+
+        firewalls:
+            main:
+                pattern: ^/
+                form_login:
+                    login_path: /en
+                    check_path: fos_user_security_check
+                    provider: fos_userbundle
+                    always_use_default_target_path : true
+                    default_target_path: /en/wall
+                    use_referer : true
+                    csrf_token_generator: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
+                logout:       true
+                anonymous:    true
+
+        access_control:
+            - { path: ^/(en|fr)/serie/*, role: ROLE_USER }
+            - { path: ^/(en|fr)/admin/*, role: ROLE_ADMIN }
+            - { path: ^/(en|fr)/favoris/*, role: ROLE_USER }
+            - { path: ^/(en|fr)/favoris, role: ROLE_USER }
+            - { path: ^/(en|fr)/unwall, role: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/(en|fr)/legal, role: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/(en|fr)/wall, role: ROLE_USER }
+            - { path: ^/(en|fr)/search, role: ROLE_USER }
+            - { path: ^/(en|fr)/account, role: ROLE_USER }
+            - { path: ^/(en|fr), role: IS_AUTHENTICATED_ANONYMOUSLY }
+            - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
     >Configurez le FOSUserBundle
+        Après la configuration correcte de notre application pour fonctionner security.yml avec FOSUserBundle, la prochaine étape consiste à configurer le paquet pour fonctionner avec les besoins spécifiques de notre application.
+        Ajoutons la configuration suivante à notre config.yml fichier en fonction du type de magasin qu'on a utilisé.
+
+        # App / config / config.yml 
+        fos_user:
+            db_driver: orm
+            firewall_name: main
+            user_class: MainBundle\Entity\User
+            from_email:
+                address: "noreply@yourcompany.com"
+                sender_name: "No Reply"
+        Seules trois valeurs de configuration sont nécessaires pour utiliser le faisceau:
+
+            >Le type de magasin de données que vous utilisez ( orm, mongodb, couchdbou propel).
+            >Le nom du pare-feu que vous avez configuré à l'étape 5.
+            >Le nom de classe complet (FQCN) de la Userclasse que vous avez créé à l'étape 4.
+        Attention:
+            Lorsque vous utilisez l'une des implémentations de Doctrine, vous devez soit utiliser l' auto_mappingoption du paquet correspondant (effectuée par défaut pour DoctrineBundle dans la distribution standard), soit activer le mappage pour FOSUserBundle sinon le mappage de base sera ignoré.
     >Importer le routage FOSUserBundle
+        Maintenant que nous avons activé et configuré le bundle, tout ce qu'il reste à faire est d'importer les fichiers de routage FOSUserBundle.
+        En important les fichiers de routage, nous aurons des pages prêtes pour des choses telles que la connexion, la création d'utilisateurs, etc.
+        Dans YAML:
+        # App / config / routing.yml 
+        main:
+            resource: "@MainBundle/Resources/config/routing.yml"
+            prefix:   /
+        fos_user_security:
+            resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+        fos_user_profile:
+            resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+            prefix: /profile
+        fos_user_register:
+            resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+            prefix: /register
+        fos_user_resetting:
+            resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+            prefix: /resetting
+        fos_user_change_password:
+            resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+            prefix: /profile
     >Mettre à jour votre schéma de base de données
+        Maintenant que le paquet est configuré, la dernière chose que nous devons faire est de mettre à jour votre schéma de base de données car nous avons ajouté une nouvelle entité, la Userclasse que nous avons créée à l'étape 4.
+        Pour ORM, exécutez la commande suivante.
+            $ Php app / console doctrine: schéma: mise à jour - force
+        Pour les utilisateurs de MongoDB, vous pouvez exécuter la commande suivante pour créer les index.
+            $ Php app / console doctrine: mongodb: schema: create --index
+        Pour les utilisateurs de Propel, vous devez d'abord installer TypehintableBehavior pour créer votre modèle. Tout d'abord, installez-le:
+        En utilisant les sous-modules Git:
+            $ Git submodule add http://github.com/willdurand/TypehintableBehavior.git vendeur / propel-behaviors / TypehintableBehavior
+Maintenant que nous avons terminé l'installation de base et la configuration du FOSUserBundle, on peut connaître les fonctionnalités et les fonctionnalités les plus avancées du paquet.
+
+
+ramsey/uuid (Un identifiant universellement unique)
+---------------------------------------------------------------------------
+https://en.wikipedia.org/wiki/Universally_unique_identifier 
+L'intention des UUID est de permettre aux systèmes distribués d'identifier de manière unique les informations sans une coordination centrale importante. Dans ce contexte, le mot unique devrait être considéré comme «pratiquement unique» plutôt que «garanti unique». Étant donné que les identificateurs ont une taille finie, deux éléments différents peuvent être utilisés pour partager le même identifiant. La taille de l'identifiant et le processus de génération doivent être sélectionnés de manière à rendre cela suffisamment improbable dans la pratique. Toute personne peut créer un UUID et l'utiliser pour identifier quelque chose avec une confiance raisonnable selon laquelle le même identifiant ne sera jamais créé de manière involontaire par personne pour identifier autre chose. L'information étiquetée avec les UUID peut donc être combinée plus tard dans une seule base de données sans avoir besoin de résoudre les conflits identifiant (ID).
+Ramsey / uuid est une bibliothèque PHP 5.4+ pour générer et travailler avec RFC 4122 version 1, 3, 4 et 5 identifiants universellement uniques (UUID).
+Un espace de noms Uniform Resource Name 
+pour UUID (identifiant universellement unique), également appelé GUID (globalement.
+Identifiant unique). Un UUID mesure 128 bits et peut garantir
+L'unicité dans l'espace et le temps. Les UUID ont été utilisés à l'origine dans
+Apollo Network Computing System et plus tard dans le logiciel Open
+Environnement de calcul distribué de la Fondation (OSF) (DCE), puis
+Dans les plates-formes Microsoft Windows.
+Voici un exemple de la représentation de chaîne d'un UUID comme
+   Une URN:
+   Urn: uuid: f81d4fae-7dec-11d0-a765-00a0c91e6bf6
+
+>>Installation
+La méthode d'installation préférée est via Packagist et Composer . Exécutez la commande suivante pour installer le package et ajoutez-le comme une exigence pour le projet de votre projet composer.json:
+    composer require ramsey/uuid
+
+>>Que faire si vous voyez un message "rhumsaa / uuid is abandon" ?
+Lorsque vous installez les dépendances de votre projet à l'aide de Composer, vous pouvez voir le message suivant:
+    Package rhumsaa/uuid is abandoned, you should avoid using it. Use ramsey/uuid instead.
+Ne paniquez pas. Exécutez simplement les commandes suivantes avec Composer:
+    composer remove rhumsaa/uuid
+    composer require ramsey/uuid=^2.9
+Après cela, vous aurez le dernier paquet ramsey / uuid dans la série 2.x, et il n'y aura pas besoin de modifier un code; L'espace de noms dans la série 2.x est toujours Rhumsaa.
+
+>>Exemples
+Consultez le livre de recettes sur le wiki pour plus d'exemples et d'approches pour les cas d'utilisation spécifiques.
+
+vendor/ramsey/uuid/README.md
+<?php
+require 'vendor/autoload.php';
+
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
+
+try {
+
+    // Generate a version 1 (time-based) UUID object
+    $uuid1 = Uuid::uuid1();
+    echo $uuid1->toString() . "\n"; // i.e. e4eaaaf2-d142-11e1-b3e4-080027620cdd
+
+    // Generate a version 3 (name-based and hashed with MD5) UUID object
+    $uuid3 = Uuid::uuid3(Uuid::NAMESPACE_DNS, 'php.net');
+    echo $uuid3->toString() . "\n"; // i.e. 11a38b9a-b3da-360f-9353-a5a725514269
+
+    // Generate a version 4 (random) UUID object
+    $uuid4 = Uuid::uuid4();
+    echo $uuid4->toString() . "\n"; // i.e. 25769c6c-d34d-4bfe-ba98-e0ee856f3e7a
+
+    // Generate a version 5 (name-based and hashed with SHA1) UUID object
+    $uuid5 = Uuid::uuid5(Uuid::NAMESPACE_DNS, 'php.net');
+    echo $uuid5->toString() . "\n"; // i.e. c4a760a8-dbcf-5254-a0d9-6a4474bd1b62
+
+} catch (UnsatisfiedDependencyException $e) {
+
+    // Some dependency was not met. Either the method cannot be called on a
+    // 32-bit system, or it can, but it relies on Moontoast\Math to be present.
+    echo 'Caught exception: ' . $e->getMessage() . "\n";
+
+}
+
+Ramsey/Uuid-doctrine
+--------------------
+Le paquet ramsey / uuid-doctrine offre la possibilité d'utiliser [Ramsey / uuid] [ramsey-uuid]comme [type de champ de doctrine] [doctrine-field-type].
+
+>>Installation
+La méthode d'installation préférée est via [Packagist] [] et [Composer] []. Courir
+La commande suivante pour installer le package et l'ajouter comme une exigence pour
+Le compositeur.json de votre projet:
+
+`` `Bash
+Composer require ramsey/uuid-doctrine
 
 
 Structure du projet FishBlock
@@ -422,6 +594,8 @@ Cette route fait appel à la méthode legalAction du controller MainController e
 
 On y accède en rajoutant dans l'URL: /{_locale}/legal ou _locale: /en ou /fr
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+NB: TOUTES CES FONCTIONNALITES RISQUE DE NE PAS ETRE PRESENTE DANS L'APPLICATION !
+
 admin_modifSerie:
     path:     /{_locale}/admin/modifSerie
     defaults:
@@ -487,7 +661,6 @@ Cette route fait appel à la méthode userManagerAction du controller AdminContr
 
 On y accède en rajoutant dans l'URL: /{_locale}/admin/validCritic ou _locale: /en ou /fr
 
-NB: TOUTES CES FONCTIONNALITES RISQUE DE NE PAS ETRE PRESENTE DANS L'APPLICATION !
 
 
 
