@@ -11,11 +11,17 @@ Mise en place du projet Symfony FishBlock
 -----------------------------------------
 
 1-Créer une base de données vide qui s'appelle fishblock
-2-Cloner le répository.
+
+2-Cloner le répository
+
 3-Se placer dans le repertoire Fishblock
+
 4-Faire composer install
+
 5-A la fin de composer install, rentrés les différentes options de configuration demander
+
 6-Faire un php bin/console doctrine:schema:update --force pour créer les tables
+
 7-Créer le jeux de données
 
 NB: Certaine personne auront reçus par mail un jeux de données a importer dans une database fishblock vide qui s'occupe de créer les tables et de les remplir (évite les étapes 6 et 7)
