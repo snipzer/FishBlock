@@ -11,6 +11,8 @@ class MainController extends Controller
 
     public function homeAction(Request $request)
     {
+
+
         $firstName = htmlentities($request->get('firstname'));
         $lastName = htmlentities($request->get('lastname'));
         $userName = htmlentities($request->get('username'));
@@ -147,7 +149,7 @@ class MainController extends Controller
             $FavorisRepo->removeFavoris($favorisId);
         }
 
-        $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
+        $serieSuggest = [];//$this->get("SuggestSerie")->getSuggestion($userId);
         $favoris = $FavorisRepo->getFavorisByUserId($userId);
 
         return $this->render("MainBundle:App:favoris.html.twig", [

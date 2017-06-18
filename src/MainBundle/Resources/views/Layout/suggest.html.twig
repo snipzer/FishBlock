@@ -1,34 +1,94 @@
 <div class="suggestBlock">
     {# récupérer série aimée puis afficher deux autres séries #}
-    <div>
-        <div class="suggestSerie">
-            <p>{{ 'If you like'|trans }} </p>
-            {% if serieSuggest[0].poster == 'undefined' %}
-                <img src="{{ asset('public/img/undefined.jpg') }}">
-            {% else %}
-                <a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSuggest[0].Id.__toString}) }}">
-                    <img class="suggestSerieImage" src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[0].poster }}"/>
-                </a>
-            {% endif %}
-            </br></br></br>
-        </div>
-        <div class="suggestSerie">
-            <p>{{ 'You will enjoy'|trans }} </p>
-            {% if serieSuggest[1].poster == 'undefined' %}
-                <img src="{{ asset('public/img/undefined.jpg') }}">
-            {% else %}
-            <a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSuggest[1].Id.__toString}) }}">
-                <img class="suggestSerieImage" src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[1].poster }}"/>
-            </a>
-            {% endif %}
+    {% if serieSuggest is not empty %}
+        {#<div>#}
+        {#<div class="suggestSerie">#}
+        {#<p>{{ 'If you like'|trans }} </p>#}
+        {#{% if serieSuggest[0].poster == "undefined" %}#}
+        {#<img src="{{ asset('public/img/undefined.jpg') }}">#}
+        {#{% else %}#}
+        {#<a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSuggest[0].Id.__toString}) }}">#}
+        {#<img class="suggestSerieImage"#}
+        {#src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[0].poster }}"/>#}
+        {#</a>#}
+        {#{% endif %}#}
+        {#</br></br></br>#}
+        {#</div>#}
+        {#<div class="suggestSerie">#}
+        {#<p>{{ 'You will enjoy'|trans }} </p>#}
+        {#{% if serieSuggest[1].poster == "undefined" %}#}
+        {#<img src="{{ asset('public/img/undefined.jpg') }}">#}
+        {#{% else %}#}
+        {#<a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSuggest[1].Id.__toString}) }}">#}
+        {#<img class="suggestSerieImage"#}
+        {#src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[1].poster }}"/>#}
+        {#</a>#}
+        {#{% endif %}#}
 
-            {% if serieSuggest[2].poster == 'undefined' %}
-                <img src="{{ asset('public/img/undefined.jpg') }}"/>
-            {% else %}
-            <a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSuggest[2].Id.__toString}) }}">
-                <img class="suggestSerieImage" src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[2].poster }}"/>
-            </a>
-            {% endif %}
+        {#{% if serieSuggest[2].poster == "undefined" %}#}
+        {#<img src="{{ asset('public/img/undefined.jpg') }}"/>#}
+        {#{% else %}#}
+        {#<a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSuggest[2].Id.__toString}) }}">#}
+        {#<img class="suggestSerieImage"#}
+        {#src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSuggest[2].poster }}"/>#}
+        {#</a>#}
+        {#{% endif %}#}
+        {#</div>#}
+        {#</div>#}
+{% set i = 0 %}
+        {% for serieSug in serieSuggest %}
+            <div>
+                <div class="suggestSerie">
+                    {% if serieSuggest|length <0 %}
+                        <p class="error">{{ 'Error'|trans() }}</p>
+                        <img src="{{ asset('public/img/undefined.jpg') }}" width="100%">
+                    {% endif %}
+
+                    {% if i == 0 %}
+                        {% if serieSug == serieSuggest["0"] %}
+                            <p>{{ 'If you like'|trans }} </p>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if serieSuggest|length <1 %}
+                        <p class="error">{{ 'Error'|trans() }}</p>
+                        <img src="{{ asset('public/img/undefined.jpg') }}" width="100%">
+                    {% endif %}
+                    {% if i == 1 %}
+                        {% if serieSug == serieSuggest["1"] %}
+                            <p>{{ 'You will enjoy'|trans }} </p>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if serieSug.poster == "undefined" %}
+                        <img src="{{ asset('public/img/undefined.jpg') }}">
+                    {% else %}
+                        <a href="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serieSug.Id.__toString}) }}">
+                            <img class="suggestSerieImage"
+                                 src="{{ 'http://thetvdb.com/banners/_cache/' ~ serieSug.poster }}"/>
+                        </a>
+                    {% endif %}
+
+                    {% if serieSuggest|length <2 %}
+                        <p class="error">{{ 'Error'|trans() }}</p>
+                        <img src="{{ asset('public/img/undefined.jpg') }}" width="100%">
+                    {% endif %}
+
+                    {% if serieSuggest|length <3 %}
+                        <p class="error">{{ 'Error'|trans() }}</p>
+                        <img src="{{ asset('public/img/undefined.jpg') }}" width="100%">
+                    {% endif %}
+                    </br></br></br>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="suggestSerie">
+            <p class="error">{{ 'Error'|trans() }}</p>
+            <img src="{{ asset('public/img/undefined.jpg') }}" width="100%">
+            <p class="error">{{ 'Error'|trans() }}</p>
+            <img src="{{ asset('public/img/undefined.jpg') }}" width="100%">
+            <img src="{{ asset('public/img/undefined.jpg') }}" width="100%">
         </div>
-    </div>
+    {% endif %}
 </div>
