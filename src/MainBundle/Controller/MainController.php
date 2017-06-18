@@ -176,7 +176,7 @@ class MainController extends Controller
             $FavorisRepo->removeFavoris($favorisId);
         }
 
-        $serieSuggest = [];//$this->get("SuggestSerie")->getSuggestion($userId);
+        $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
         $favoris = $FavorisRepo->getFavorisByUserId($userId);
 
         return $this->render("MainBundle:App:favoris.html.twig", [

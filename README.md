@@ -18,7 +18,7 @@ Mise en place du projet Symfony FishBlock
 6-Faire un php bin/console doctrine:schema:update --force pour créer les tables
 7-Créer le jeux de données
 
-NB: Certaine personne auront reçus par mail un jeux de données qui s'occupe de créer les tables et de les remplir (évite les étapes 1, 6 et 7)
+NB: Certaine personne auront reçus par mail un jeux de données a importer dans une database fishblock vide qui s'occupe de créer les tables et de les remplir (évite les étapes 6 et 7)
 
 Pour la création du jeux de données:
 ---------------------------------------
@@ -28,7 +28,6 @@ Pour la création du jeux de données:
         Puis faire:
         $this->get("SaveSerie")->genDataBase();
         Pour générer des utilisateurs, commentaire, favoris, like de commentaire
-
 
 Bundle utiliser:
 ----------------
