@@ -42,7 +42,8 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
     // Retirer la série des favoris
     public function removeFavoris($favorisId)
     {
-        $fav = $this->findOneBy($favorisId);
+        $fav = $this->findOneBy(["id" => $favorisId]);
+
 
         $this->getEntityManager()->remove($fav);
         $this->getEntityManager()->flush();
@@ -52,21 +53,26 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
     {
         $favs = $this->getFavorisByUserId($userId);
 
-        if(count($favs))
+        if (count($favs))
         {
             $DDArray = [];
 
-            foreach($favs as $fav)
+            foreach ($favs as $fav)
             {
                 $serie = $fav->getSerie();
 
-                $criticInArray = $this->getEntityManager()->getRepository("MainBundle:Critic")->getLastUploadedAndValidatedCriticFromSerie($serie);
+                $infoCritic = $this->getEntityManager()->getRepository("MainBundle:Critic")->getLastUploadedAndValidatedCriticAndNotationFromSerie($serie->getId()->__toString());
 
-                $critic = $criticInArray[0];
+                if (is_null($infoCritic))
+                {
+                    continue;
+                }
+                else
+                {
+                    $array = ["serie" => $serie, "infoCritic" => $infoCritic];
 
-                $array = ["serie" => $serie, "critic" => $critic];
-
-                $DDArray[] = $array;
+                    $DDArray[] = $array;
+                }
             }
 
             return $DDArray;
@@ -92,8 +98,11 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
 
-        if(count($isHereOrNot))
+        if (count($isHereOrNot) > 0)
+        {
             return true;
+        }
+
 
         return false;
     }
@@ -104,16 +113,20 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
 
         $i = 0;
 
-        foreach($series as $serie)
+        foreach ($series as $serie)
         {
             $i++;
 
-            if(rand(0, 100) > 60)
+            if (rand(0, 100) > 60)
             {
-                if($i%2 === 0)
+                if ($i % 2 === 0)
+                {
                     $this->addSerie($userId1, $serie->getId()->__toString());
+                }
                 else
+                {
                     $this->addSerie($userId2, $serie->getId()->__toString());
+                }
             }
         }
     }

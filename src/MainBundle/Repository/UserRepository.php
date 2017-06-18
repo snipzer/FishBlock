@@ -31,8 +31,24 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->setFirstName($firstName)
             ->setPlainPassword($password)
             ->setRoles([$role])
-//            ->setEnabled(true)
+            ->setEnabled(true)
             ->setBirthdate(new \DateTime());
+
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+        return $user;
+    }
+
+    public function changeUserInformation($userId, $email, $userName, $firstName, $lastName)
+    {
+        $user = $this->getUserById($userId);
+
+        $user->setEmail($email)
+            ->setUsernameCanonical($userName)
+            ->setUsername($userName)
+            ->setLastName($lastName)
+            ->setFirstName($firstName);
 
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();

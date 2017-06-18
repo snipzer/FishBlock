@@ -61,12 +61,15 @@ class CriticRepository extends \Doctrine\ORM\EntityRepository
 
     public function getLastUploadedAndValidatedCriticFromSerie($serie)
     {
-        return $this->getEntityManager()->createQuery(
-            'SELECT c
-              FROM MainBundle\Entity\Critic c
-              WHERE c.isValid = true AND c.serie = :serie
-              ORDER BY c.postedThe DESC'
-        )->setParameter(":serie", $serie)->setMaxResults(1)->getResult();
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("c")
+            ->from("MainBundle:Critic", "c")
+            ->where('c.serie = :serie')
+            ->orderBy('c.postedThe', "DESC")
+            ->setParameter(":serie", $serie)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
     }
 
     // Supprime une critique
@@ -94,7 +97,62 @@ class CriticRepository extends \Doctrine\ORM\EntityRepository
     {
         $serie = $this->getEntityManager()->getRepository("MainBundle:Serie")->getSerieWithId($serieId);
 
-        return $this->findBy(["serie" => $serie, "isValid" => true]);
+        return $this->getEntityManager()->createQueryBuilder()
+            ->select("c")
+            ->from("MainBundle:Critic", "c")
+            ->where("c.serie = :serie")
+            ->andWhere("c.isValid = true")
+            ->orderBy("c.postedThe", "DESC")
+            ->setParameter(":serie", $serie)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getLastUploadedAndValidatedCriticAndNotationFromSerie($serieId)
+    {
+        $critic = $this->getLastUploadedAndValidatedCriticFromSerie($serieId);
+
+        $CriticNotationRepo = $this->getEntityManager()->getRepository("MainBundle:CriticNotation");
+
+        if(count($critic) === 0)
+        {
+            return null;
+        }
+        else
+        {
+            $array = [
+                "critic" => $critic,
+                "like" => $CriticNotationRepo->getLikedByCritic($critic[0]),
+                "dislike" => $CriticNotationRepo->getUnLikedByCritic($critic[0])
+            ];
+
+            return $array;
+        }
+    }
+
+    public function getValidatedCriticsAndNotationFromSerie($serieId)
+    {
+        $critics = $this->getValidatedCriticsFromSerie($serieId);
+
+        $CriticNotationRepo = $this->getEntityManager()->getRepository("MainBundle:CriticNotation");
+
+        $array = [];
+
+        foreach($critics as $critic)
+        {
+            $like = $CriticNotationRepo->getLikedByCritic($critic);
+            $dislike = $CriticNotationRepo->getUnLikedByCritic($critic);
+
+            $arr = [
+                "critic" => $critic,
+                "like" => $like,
+                "dislike" => $dislike
+            ];
+
+            $array[] = $arr;
+        }
+
+        return $array;
     }
 
     // Renvois toutes les critiques non valider pour une série

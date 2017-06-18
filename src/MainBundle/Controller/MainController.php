@@ -179,7 +179,7 @@ class MainController extends Controller
         }
 
         $serie = $SerieRepository->getSerieWithId($serieId);
-        $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
+        $critics = $CritiqueRepository->getValidatedCriticsAndNotationFromSerie($serieId);
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
         $actors = $ActorRepository->getActorBySerieId($serieId);
         $types = $TypeRepository->getTypeBySerieId($serieId);
@@ -219,7 +219,7 @@ class MainController extends Controller
 
         $serie = $SerieRepository->getSerieWithId($serieId);
         $episode = $EpisodeRepository->getEpisode($episodeId);
-        $critics = $CritiqueRepository->getValidatedCriticsFromSerie($serieId);
+        $critics = $CritiqueRepository->getValidatedCriticsAndNotationFromSerie($serieId);
         $episodes = $EpisodeRepository->getEpisodesFromSerie($serieId);
         $actors = $ActorRepository->getActorBySerieId($serieId);
         $types = $TypeRepository->getTypeBySerieId($serieId);
@@ -239,9 +239,19 @@ class MainController extends Controller
     public function accountAction(Request $request)
     {
         $userId = $this->getUser()->getId()->__toString();
+        $user = $this->getUser();
+
+        $NewFirstName = htmlentities($request->get('firstname'));
+        $NewLastName = htmlentities($request->get('lastname'));
+        $NewUserName = htmlentities($request->get('username'));
+        $NewEmail = htmlentities($request->get('email'));
+
+        if((isset($NewFirstName) && isset($NewLastName) && isset($NewUserName) && isset($NewEmail)) && ($NewFirstName != "" && $NewLastName != "" && $NewUserName != "" && $NewEmail != ""))
+        {
+            $this->getDoctrine()->getRepository("MainBundle:User")->changeUserInformation($userId, $NewEmail, $NewUserName, $NewFirstName, $NewLastName);
+        }
 
         $serieSuggest = $this->get("SuggestSerie")->getSuggestion($userId);
-        $user = $this->getDoctrine()->getRepository("MainBundle:User")->getUserById($userId);
 
         return $this->render("MainBundle:App:account.html.twig", [
             "user" => $user,

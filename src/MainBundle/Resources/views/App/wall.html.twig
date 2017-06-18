@@ -26,9 +26,11 @@
                         <img src="{{ 'http://thetvdb.com/banners/_cache/' ~ result['serie'].poster }}" alt="">
                     </div>
                     <div>
-                        <h4>{{ "Title"|trans }}: {{ result["critic"].title }}  Note: {{ result["critic"].note }}/10</h4>
-                        <p>{{ result["critic"].content }}</p>
-                        <h5>{{ "Posted by"|trans }} {{ result["critic"].user.username }} {{ "the"|trans }} {{ result["critic"].postedThe|date("d-m-Y") }}</h5>
+                        <h4>{{ "Title"|trans }}: {{ result["infoCritic"]["critic"][0].title }}  Note: {{ result["infoCritic"]["critic"][0].note }}/10</h4>
+                        <p>Like: {{ result["infoCritic"]["like"] }}</p>
+                        <p>Dislike: {{ result["infoCritic"]['dislike'] }}</p>
+                        <p>{{ result["infoCritic"]["critic"][0].content }}</p>
+                        <h5>{{ "Posted by"|trans }} {{ result["infoCritic"]["critic"][0].user.username }} {{ "the"|trans }} {{ result["infoCritic"]["critic"][0].postedThe|date("d-m-Y") }}</h5>
                     </div>
                 </div>
             {% endfor %}

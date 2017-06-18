@@ -34,14 +34,14 @@ main_favoris:
         _locale: en|fr
 
 main_add_favoris:
-   path:     /favoris/{idSerie}
+   path:     /favoris/add/{idSerie}
    defaults:
        _controller: MainBundle:Main:favoris
    requirements:
        _locale: en|fr
 
 main_remove_favoris:
-    path:     /favoris/{idFavoris}
+    path:     /favoris/remove/{idFavoris}
     defaults:
         _controller: MainBundle:Main:favoris
     requirements:
@@ -66,6 +66,20 @@ main_episode:
 
 main_account:
     path:     /account
+    defaults:
+        _controller: MainBundle:Main:account
+    requirements:
+        _locale: en|fr
+
+main_account_change_password:
+    path:     /account/password_change
+    defaults:
+        _controller: MainBundle:Main:account
+    requirements:
+        _locale: en|fr
+
+main_account_change_user_information:
+    path:     /account/change_user_information
     defaults:
         _controller: MainBundle:Main:account
     requirements:
