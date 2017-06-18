@@ -46,7 +46,7 @@ class SuggestSerie extends Controller
                 $result[] = $chosenSerie;
 
 
-                // On récupère les type de la série choisie
+                // On récupère les types de la série choisie
                 $arraySerieTypes = $chosenSerie->getSerieTypes();
 
                 if (count($arraySerieTypes) === 0)
@@ -72,30 +72,42 @@ class SuggestSerie extends Controller
                     // Pour chaque sérieType
                     foreach ($serieTypes as $serieType)
                     {
+                        // Pour ne pas proposer la série de départ
                         if ($serieType->getSerie() !== $chosenSerie)
                         {
-                            if (!$this->manager->getRepository("MainBundle:Favoris")->checkIfSerieIsInFav($serieType->getSerie()->getId()->__toString(), $userId))
+                            $serieInFav = $this->manager->getRepository("MainBundle:Favoris")->checkIfSerieIsInFav($serieType->getSerie()->getId()->__toString(), $userId);
+
+                            // Pour ne pas proposer une série déjà en favoris
+                            if (!$serieInFav)
                             {
-                                array_push($result, $serieType->getSerie());
+                                if(count($result) >= 3)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    $result[] = $serieType->getSerie();
+                                }
                             }
                         }
                     }
 
-
                     $bool = false;
-
                 }
-                if (count($result) <= 3)
+                if (count($result) < 3)
                 {
                     $bool = true;
                 }
             }
 
+            if(empty($result))
+                return [];
+
             return $result;
         }
         else
         {
-            return null;
+            return [];
         }
     }
 }

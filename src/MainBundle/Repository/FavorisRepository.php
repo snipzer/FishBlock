@@ -98,13 +98,13 @@ class FavorisRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getResult();
 
-        if (count($isHereOrNot) > 0)
+        if (count($isHereOrNot) <= 0)
         {
-            return true;
+            return false;
         }
 
 
-        return false;
+        return true;
     }
 
     public function TempFakeFav($userId1, $userId2)
