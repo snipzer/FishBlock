@@ -80,7 +80,14 @@ class SuggestSerie extends Controller
                             // Pour ne pas proposer une série déjà en favoris
                             if (!$serieInFav)
                             {
-                                $result[] = $serieType->getSerie();
+                                if(count($result) >= 3)
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    $result[] = $serieType->getSerie();
+                                }
                             }
                         }
                     }
