@@ -33,23 +33,27 @@
                 <div class="criticDetailSerie">
                     <h4>{{ "Title"|trans }}: {{ array["critic"].title }} Note: {{ array["critic"].note }}/10</h4>
                     {% if array['like'] is not empty %}
-                        <div>
-                            <p>Like: {{ array['like'] }}</p>
-                            <form action="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serie.Id.__toString}) }}" method="post">
-                                <input type="hidden" name="idCriticForNotation" value="{{ array['critic'].id }}">
-                                <input type="hidden" name="like" value="true">
-                                <input type="submit" value="+1" name="submit" class="btn btn-primary">
-                            </form>
+                        <div style="display: flex">
+                            <p style="flex-direction: row; margin-right: 5%">Like: {{ array['like'] }}</p>
+                            <div style="width: 15%; flex-direction: row; margin-left:5%;" >
+                                <form action="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serie.Id.__toString}) }}" method="post">
+                                    <input type="hidden" name="idCriticForNotation" value="{{ array['critic'].id }}">
+                                    <input type="hidden" name="like" value="true">
+                                    <input type="submit" value="+1" name="submit" class="btn btn-primary">
+                                </form>
+                            </div>
                         </div>
                     {% endif %}
                     {% if array["dislike"] is not empty %}
-                        <div>
-                            <p>Dislike: {{ array["dislike"] }}</p>
-                            <form action="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serie.Id.__toString}) }}" method="post">
-                                <input type="hidden" name="idCriticForNotation" value="{{ array['critic'].id }}">
-                                <input type="hidden" name="dislike" value="false">
-                                <input type="submit" value="-1" name="submit" class="btn btn-primary">
-                            </form>
+                        <div style="display: flex" >
+                            <p style="flex-direction: row; margin-right: 5%" >Dislike: {{ array["dislike"] }}</p>
+                            <div style="width: 15%; flex-direction: row; margin-left:5%;" >
+                                <form action="{{ path('main_serie', {'_locale': app.request.attributes.get('_locale'), 'idSerie': serie.Id.__toString}) }}" method="post">
+                                    <input type="hidden" name="idCriticForNotation" value="{{ array['critic'].id }}">
+                                    <input type="hidden" name="dislike" value="false">
+                                    <input type="submit" value="-1" name="submit" class="btn btn-danger">
+                                </form>
+                            </div>
                         </div>
                     {% endif %}
                     <p>{{ array["critic"].content }}</p>

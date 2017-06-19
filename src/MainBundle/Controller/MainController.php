@@ -119,36 +119,55 @@ class MainController extends Controller
     }
 
 
+    // Controleur qui permet d'afficher la page de recherche
     public function searchAction(Request $request)
     {
+        // On récupère le type choisie dans la recherche
         $IdType = $request->get("types");
+        // On récupère l'acteur choisie dans la recherche
         $IdActor = $request->get("actors");
+
+        // On récupère le nom de la série à rechercher
         $SerieName = htmlentities($request->get('serieName'));
 
+        // On récupère l'objet perettant de requêter sur la table série
         $SerieRepo = $this->getDoctrine()->getRepository("MainBundle:Serie");
 
+        // On récupère les séries trier par date d'enregistrement, les plus récentes sorte en premier
         $series = $SerieRepo->getSeriesSortByDate();
+        // Si une recherche est effectuer
         if(isset($SerieName))
         {
+            // On récupère toutes les séries qui corresponde au nom du formulaire
             $series = $SerieRepo->getSerieByName($SerieName);
+
+            // Si on fait une recherche avec l'acteur et le type
             if((isset($IdActor) && isset($IdType)) && ($IdActor != "NULL" && $IdType != "NULL") )
             {
                 $series = $SerieRepo->getSerieByNameAndTypeAndActor($SerieName, $IdActor, $IdType);
             }
+
+            // Si on fait une recherche avec juste l'acteur
             if(isset($IdActor) && $IdActor != "NULL")
             {
                 $series = $SerieRepo->getSerieByNameAndActor($SerieName, $IdActor);
             }
+
+            // Si on fait une recherche avec juste le type
             if(isset($IdType) && $IdType != "NULL")
             {
                 $series = $SerieRepo->getSerieByNameAndType($SerieName, $IdType);
             }
         }
 
+        // On récupère les informations de l'utilisateur connecter
         $user = $this->getUser();
+        // On récupère les acteurs pour les placers dans le formulaire de recherche
         $actors = $this->getDoctrine()->getRepository("MainBundle:Actor")->getActorsOrderByNameASC();
+        // On récupère les types pour les placer dans le formulaire de recherche
         $types = $this->getDoctrine()->getRepository("MainBundle:Type")->getTypesOrderByNameASC();
 
+        // On affiche la page en transmettant toutes les information necessaire
         return $this->render("MainBundle:App:search.html.twig", [
             "series" => $series,
             "user" => $user,
