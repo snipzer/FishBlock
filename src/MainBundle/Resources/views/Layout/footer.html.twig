@@ -6,11 +6,11 @@
 
     <div class="footerBlock">
         <div class="footerLegalNotice">
-            <a href="{{ path('main_legal') }}" >{{ 'Legal Notice'|trans }}</a>
+            <a href="{{ path('main_legal', {_locale: app.request.attributes.get('_locale')}) }}" >{{ 'Legal Notice'|trans }}</a>
         </div>
 
         <div class="footerWebsitePlan">
-            <a>{{ 'Website plan'|trans }}</a>
+            <a href="{{ path("main_pdf", {_locale: app.request.attributes.get('_locale')}) }}">{{ 'Website plan'|trans }}
         </div>
 
         <div class="footerDevWeb">

@@ -64,6 +64,11 @@ main_episode:
         idEpisode: '[a-zA-Z-0-9]{36}'
         _locale: en|fr
 
+main_pdf:
+    path: /userGuide
+    defaults:
+        _controller: MainBundle:Main:pdf
+
 main_account:
     path:     /account
     defaults:

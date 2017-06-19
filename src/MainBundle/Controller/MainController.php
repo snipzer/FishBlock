@@ -347,4 +347,8 @@ class MainController extends Controller
         return $this->render("MainBundle:App:legal.html.twig");
     }
 
+    public function pdfAction()
+    {
+        return $this->render("MainBundle:App:PDF.html.twig");
+    }
 }
