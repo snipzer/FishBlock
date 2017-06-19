@@ -39,6 +39,7 @@ security:
         - { path: ^/(en|fr)/wall, role: ROLE_USER }
         - { path: ^/(en|fr)/search, role: ROLE_USER }
         - { path: ^/(en|fr)/account, role: ROLE_USER }
+        - { path: ^/(en|fr)/userGuide, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(en|fr), role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
