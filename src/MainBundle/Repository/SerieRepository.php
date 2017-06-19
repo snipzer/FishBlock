@@ -49,7 +49,7 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
         return true;
     }
 
-    // Renvois les dernières séries publier
+    // Fonction qui ne prend pas de paramètre et qui renvois les séries de la plus récente à la plus ancienne créer
     public function getSeriesSortByDate()
     {
         return $this->getEntityManager()
@@ -110,6 +110,7 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
         return true;
     }
 
+    // Renvois les séries en fonction du nom de série passé récupéré du formulaire de recherche
     public function getSerieByName($serieName)
     {
         return $this->getEntityManager()->createQueryBuilder()
@@ -121,29 +122,44 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
+    // Renvois les séries en fonction du nom et de l'id de l'acteur récupéré du formulaire de recherche
     public function getSerieByNameAndActor($serieName, $actorId)
     {
+        // On récupère les séries
         $series = $this->getSerieByName($serieName);
+
+        // On récupère le SerieActor repository
         $SerieActorRepository = $this->getEntityManager()->getRepository("MainBundle:SerieActor");
+
+        // Avec l'id de l'acteur on récupère un acteur
         $actor = $this->getEntityManager()->getRepository("MainBundle:Actor")->getActorById($actorId);
 
+        // On prépare le tableau de résultat
         $result = [];
 
+        // Pour chaque série
         foreach($series as $serie)
         {
+            // On recherche les SerieActeur correspondant a la série et l'acteur
             $SerieActors = $SerieActorRepository->findBy(["serie" => $serie, "actor" => $actor]);
+
+            // Si on en trouve
             if(count($SerieActors))
             {
+                // Pour chaque résultat
                 foreach($SerieActors as $serieActor)
                 {
+                    // On stocke la série dans le tableau de résultat
                     $result[] = $serieActor->getSerie();
                 }
             }
         }
 
+        // On renvois le résultat
         return $result;
     }
 
+    // Même chose que getSerieByNameAndActor mais pour le type
     public function getSerieByNameAndType($serieName, $typeId)
     {
         $series = $this->getSerieByName($serieName);
@@ -167,6 +183,7 @@ class SerieRepository extends \Doctrine\ORM\EntityRepository
         return $result;
     }
 
+    // Même principe que les deux précédentes mais en les cumulants
     public function getSerieByNameAndTypeAndActor($serieName, $actorId, $typeId)
     {
         $series = $this->getSerieByName($serieName);
