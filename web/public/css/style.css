@@ -21,12 +21,22 @@ header {
 .headerBlock {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+
 }
 
-.headerBlock >img {
+.logoBlock {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.logoBlock > img {
     height: 150px;
     width: 300px;
+}
+
+.translateButton {
+    width: 150px;
 }
 
 /* header.html.twig -----------------
@@ -190,6 +200,9 @@ header {
 Style pour le 'carousel'
 ----------------------------------------------------------------------------------*/
 
+#myCarousel {
+
+}
 
 
 /*----------------------------------------------------------------------------------
@@ -227,7 +240,7 @@ Style pour le bloc menu du site
     align-items: center;
 
     width: 15%;
-    height: 100vh;
+    height: 66vh;
     min-width: 10em;
 
     background-color: #686868;
@@ -332,6 +345,14 @@ Style pour le bloc menu du site
 
     width: 4em;
     height: 4em;
+
+    background-color: #686868;
+    border: none;
+    border-radius: 10px 0 0 10px;
+}
+
+.material-icons {
+    color: #FFFFFF;
 }
 
 /* Pour la version responsive -----------------
@@ -494,7 +515,7 @@ Style pour le bloc recherche du site
     align-items: stretch;
 
     width: 16%;
-    height: 100vh;
+    height: 66vh;
     min-width: 15em;
 
     background-color: #686868;
@@ -544,11 +565,22 @@ Style pour le bloc recherche du site
     }
 
     .searchBlock form {
-        padding: 10% 0;
+        padding: 5% 0;
     }
 
     .contentBlock {
         align-items: center;
+    }
+
+    .searchButton {
+        margin: 0;
+    }
+
+    #searchActors {
+        max-height: 35px;
+    }
+    #searchType {
+        max-height: 35px;
     }
 }
 

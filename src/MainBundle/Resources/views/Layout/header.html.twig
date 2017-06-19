@@ -1,6 +1,17 @@
 <header>
     <div class="headerBlock">
-        <img src="{{ asset('public/img/logoFishblock.svg') }}">
+        <div class="logoBlock">
+            <img src="{{ asset('public/img/logoFishblock.svg') }}">
+        </div>
+
+        <div class="translateButton">
+            {% if app.request.get('_locale') == 'fr' %}
+                <a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}" class="btn-info btn" >Passer en anglais</a>
+            {% else %}
+                <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}" class="btn-info btn" >Switch to french</a>
+            {% endif %}
+        </div>
+
         <div class="accountBlock">
             <div class="accountName">
                 <p>{{ user }}</p>
@@ -10,14 +21,6 @@
                 <a href="{{ path("main_account", {'_locale': app.request.attributes.get('_locale')}) }}" >{{ "Account"|trans }}</a>
             </div>
         </div>
-    </div>
-
-    <div style="width: 15%;" >
-        {% if app.request.get('_locale') == 'fr' %}
-            <a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}" class="btn-info btn" >Passer en anglais</a>
-        {% else %}
-            <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}" class="btn-info btn" >Switch to french</a>
-        {% endif %}
     </div>
 
     <div class="separationBar separationFat">
