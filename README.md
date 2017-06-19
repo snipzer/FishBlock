@@ -24,7 +24,7 @@ Mise en place du projet Symfony FishBlock
 
 7-Créer le jeux de données
 
-NB: Certaine personne auront reçus par mail un jeux de données a importer dans une database fishblock vide qui s'occupe de créer les tables et de les remplir (évite les étapes 6 et 7)
+NB: Certaines personnes auront reçus par mail un jeux de données a importer dans une database fishblock vide qui s'occupe de créer les tables et de les remplir (évite les étapes 6 et 7)
 
 Pour la création du jeux de données:
 ---------------------------------------
